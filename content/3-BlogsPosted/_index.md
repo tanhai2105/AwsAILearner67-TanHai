@@ -16,6 +16,6 @@ How AWS automates the Windows Server lifecycle with IAM Identity Center, EC2 Ima
 
 A case study of how a university Microsoft platform was modernized to a cloud-native architecture on AWS, and what drove the cost savings.
 
-### [Blog 3 - Amazon CloudWatch: The "Eyes" That Monitor Your Whole System on AWS](3.3-Blog3/)
+### [Blog 3 - Cost Guard: Three Serverless Layers That Stop a Windows Instance to Protect AWS Free Plan Credit](3.3-Blog3/)
 
-A summary of Amazon CloudWatch for new AWS learners: metrics, dashboards, alarms, logs, application monitoring and recent additions such as OpenTelemetry and CloudWatch Omni.
+My own post about my team's project: a scheduled stop, a 5-minute cost meter and an AWS Budgets backstop, with real test results and the monthly cost.

@@ -1,46 +1,54 @@
 ---
 title: "Blog 3"
-date: 2026-11-18
+date: 2026-11-26
 weight: 3
 chapter: false
 pre: " <b> 3.3. </b> "
 ---
 
-### AMAZON CLOUDWATCH: "ĐÔI MẮT" GIÁM SÁT TOÀN BỘ HỆ THỐNG TRÊN AWS
+### COST GUARD: 3 LỚP SERVERLESS TỰ TẮT MÁY WINDOWS ĐỂ GIỮ CREDIT AWS FREE PLAN
 
 **Đăng tại:** AWS Study Group (Facebook)
 
-Triển khai ứng dụng lên Cloud mới chỉ là bước đầu. Sau đó bạn cần biết hệ thống có đang chạy khỏe không, tốt nhất là trước khi người dùng phàn nàn. Mình đang thực tập tại AWS và dành thời gian đọc tài liệu về Amazon CloudWatch. Bài này là bản tóm tắt để bạn nào mới học AWS nắm nhanh bức tranh tổng thể.
+Nhóm mình (AwsAILearner67, FCAJ) làm lab trên một tài khoản AWS Free Plan dùng chung, credit có hạn. Vấn đề hay gặp nhất không nằm ở kỹ thuật mà là con người: học xong quên tắt máy. Một máy Windows `t3.small` chạy 24/7 tốn khoảng **$31.04 mỗi tháng** (EC2 $28.62 + ổ EBS $2.40), vượt luôn ngân sách $20 của cả dự án.
 
-![Amazon CloudWatch: nguồn dữ liệu (EC2, ECS, EKS, Lambda, RDS, ứng dụng OpenTelemetry) đi vào CloudWatch, và đầu ra là dashboard, alarm, SNS, Auto Scaling, Investigations, SLO](../../../images/3-BlogsPosted/3.3-Blog3/cloudwatch-overview.png)
+AWS Budgets gửi được email cảnh báo, nhưng có hai hạn chế: dữ liệu billing chỉ cập nhật vài lần mỗi ngày, và Budgets không tự tắt máy. Nên nhóm làm **Cost Guard**: 3 lớp độc lập cùng canh một máy, lớp này hỏng thì vẫn còn hai lớp kia.
 
-**Các điểm chính cần nắm:**
+![Kiến trúc Cost Guard: EventBridge Scheduler, ba hàm Lambda, AWS Budgets, SNS, DynamoDB, Parameter Store và máy EC2 Windows trong us-east-1](../../../images/3-BlogsPosted/3.3-Blog3/costguard-architecture.png)
 
-- **CloudWatch là gì:** dịch vụ giám sát và observability của AWS. CloudWatch gom metrics, logs và traces từ tài nguyên AWS lẫn ứng dụng của bạn, cho phép quan sát gần thời gian thực, đặt cảnh báo và tự động phản ứng khi có bất thường. Nhiều dịch vụ AWS tự gửi metric cơ bản về CloudWatch mà không cần cấu hình thêm.
-- **Metrics và Dashboards:** metrics là dữ liệu hiệu năng theo thời gian (CPU, độ trễ, số request), dùng metric có sẵn hoặc tự đẩy custom metric qua OpenTelemetry (OTLP) hay API PutMetricData. Dashboards gom biểu đồ metrics và logs vào một màn hình, hỗ trợ nhiều Region và nhiều account.
-- **Alarms:** theo dõi metric so với ngưỡng, rồi gửi thông báo (ví dụ qua SNS) hoặc kích hoạt hành động như Auto Scaling. Composite alarm gộp nhiều alarm thành một để giảm "nhiễu" cảnh báo.
-- **Logs:** lưu theo log group và log stream, truy vấn bằng Logs Insights, có phát hiện bất thường trong log, metric filter (biến log thành metric) và subscription filter (đẩy log sang S3, Firehose).
-- **Giám sát ứng dụng và hạ tầng:** Application Signals tự thu thập số request, độ trễ, lỗi mà không cần sửa code, kèm application map và SLO. Synthetics (canary) và RUM phát hiện sự cố trước khi người dùng gặp và đo trải nghiệm thật. Có thêm Database Insights, Lambda Insights, Container Insights. CloudWatch agent lấy metrics hệ thống, logs và traces từ EC2 và cả server on-premises.
-- **Điểm mới đáng chú ý:** hỗ trợ OpenTelemetry và PromQL (dùng chung bộ instrumentation, không bị khóa vào định dạng riêng); cross-account observability (một account trung tâm xem dữ liệu của nhiều account, liên kết qua AWS Organizations); CloudWatch Omni, trải nghiệm observability có AI hỗ trợ, cho phép hỏi bằng ngôn ngữ tự nhiên để tạo truy vấn và theo dõi chất lượng phản hồi của AI agent; theo dõi được cả workload ngoài AWS.
-- **Lưu ý khi đưa vào thực tế:** bắt đầu từ metric và alarm quan trọng nhất (CPU, lỗi, độ trễ) rồi mở rộng dần; dùng composite alarm để tránh alarm fatigue; chi phí phụ thuộc vào lượng metrics, logs và tính năng bạn dùng, nên cần xem trang giá và hướng dẫn tối ưu chi phí của AWS.
+**3 lớp bảo vệ:**
+
+- **Lớp 1 – Tắt theo lịch:** EventBridge Scheduler gọi Lambda `CostGuard-ScheduleHandler` lúc 22:00 mỗi ngày, theo múi giờ `Asia/Ho_Chi_Minh`. Máy đang chạy thì hàm gọi `StopInstances`, máy đã tắt thì chỉ ghi lại `schedule_noop`. Lớp này không cần dữ liệu billing nên chắc chắn nhất. Nhóm cố ý không tự bật máy: ai cần học thì tự bật, để không tốn tiền lúc không ai dùng.
+- **Lớp 2 – Đồng hồ đo tiền (phần tự làm của nhóm):** cứ 5 phút, Lambda `CostGuard-CostMeter` kiểm tra máy. Máy đang chạy thì hàm cộng chi phí của 5 phút đó ($0.0392/giờ × 5/60 ≈ $0.0033) vào tổng của tháng và lưu một bản ghi vào DynamoDB. Tổng chạm ngưỡng $14 thì tắt máy và gửi email qua SNS. Không phải chờ billing nên phản ứng trong vài phút.
+- **Lớp 3 – Lưới an toàn cuối:** AWS Budgets $20 báo ở mức 80% và 100% chi tiêu thật. Budgets đẩy thông báo vào SNS topic `costguard-budgets`, topic này gọi Lambda `CostGuard-BudgetBackstop` để tắt máy và gửi email xác nhận. Billing chậm nên lớp này chỉ là phương án cuối.
+
+Ngoài ra, CloudWatch alarm canh lỗi của cả 3 hàm Lambda và gửi email qua topic riêng `costguard-errors`. Lớp nào lỗi thì nhóm biết ngay, không đợi tới lúc hết credit.
+
+**Vì sao ngưỡng là $14:** ngưỡng của Lớp 2 đặt khoảng 70% ngân sách. Với $0.0392/giờ, $14 tương đương khoảng 357 giờ chạy, dư xa so với kế hoạch 120 giờ lab mỗi tháng. Khoảng trống $6 còn lại dành cho độ trễ billing của Lớp 3. Đơn giá, ngưỡng và instance ID đều để trong Parameter Store chứ không viết cứng trong code, muốn dùng cho máy khác thì chỉ cần đổi giá trị.
+
+**Kết quả test thật (us-east-1, 22 và 25/11/2026):**
+
+| Lớp | Cách test | Kết quả |
+|---|---|---|
+| 1 | Gọi thẳng hàm khi máy đang chạy | Máy tắt sau 3 giây |
+| 2 | Hạ ngưỡng xuống `0.001` rồi chờ lần chạy kế tiếp | CostMeter tắt máy 3 phút 47 giây sau khi lưu ngưỡng (theo CloudTrail) |
+| 3 | Gửi tin thử lên topic `costguard-budgets` | Máy tắt sau 7 giây |
+
+Cả 3 lần đều có bản ghi trong DynamoDB (`schedule_stop`, `auto_stop`, `budget_stop`) và email về hộp thư nhóm. Test xong nhớ trả ngưỡng về 14.
+
+**Chi phí:** theo AWS Pricing Calculator, với 120 giờ lab mỗi tháng: EC2 $4.70 + EBS $2.40 + Lambda $0.02 = **$7.12/tháng**. Cộng IPv4 công khai, CloudWatch và các dịch vụ khác thì khoảng $8.05. So với $31.04 nếu để máy chạy suốt, Cost Guard tiết kiệm khoảng $23.92 mỗi tháng (~77%). Phần "bảo vệ" (Lambda, DynamoDB on-demand, SNS, Scheduler, Parameter Store) gần như bằng 0.
 
 **Kết luận và cảm nghĩ:**
 
-CloudWatch hữu ích vì nối được ba loại dữ liệu: metrics cho biết hệ thống hoạt động ra sao theo thời gian, logs cho biết vì sao, còn alarm báo khi nào cần xem. Chi phí tăng theo lượng metrics và logs, nên mình sẽ bắt đầu từ vài chỉ số như CPU, lỗi và độ trễ, rồi chỉ thêm khi cần.
+- Bảo vệ chi phí nên có nhiều lớp: một lớp dựa vào giờ giấc, một lớp dựa vào ước tính, một lớp dựa vào bill thật. Lớp này bù cho điểm yếu của lớp kia.
+- Mỗi hàm Lambda có IAM role riêng, quyền `StopInstances` chỉ áp lên đúng máy lab. Lỡ cấu hình sai cũng không tắt nhầm máy của người khác.
+- Máy lab không mở cổng inbound nào và bắt buộc IMDSv2.
+- Toàn bộ nằm trong một CloudFormation template, xoá stack là dọn gần hết. Khi dọn thật, nhóm vẫn phải xoá tay 2 thứ tạo ngoài stack: IAM role do console Scheduler tự tạo và bucket `cf-templates` chứa file template đã upload.
 
-**Tài liệu tham khảo:**
+Workshop đầy đủ (từng bước, ảnh, template): [nguyenducbinh-aws.github.io/AwsAILearner67](https://nguyenducbinh-aws.github.io/AwsAILearner67/)
 
-1. [What is Amazon CloudWatch (User Guide)](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html)
-2. [Trang sản phẩm Amazon CloudWatch](https://aws.amazon.com/cloudwatch/)
-3. [Tính năng CloudWatch](https://aws.amazon.com/cloudwatch/features/)
-4. [Metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/working_with_metrics.html)
-5. [Alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Alarms.html)
-6. [Dashboards](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Dashboards.html)
-7. [Application Signals](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Monitoring-Sections.html)
-8. [Logs Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html)
-9. [Cross-account observability](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Cross-Account-Methods.html)
-10. [OpenTelemetry](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-OpenTelemetry-Sections.html)
-11. [CloudWatch Omni](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-omni.html)
-12. [Bảng giá](https://aws.amazon.com/cloudwatch/pricing/)
+**Tham khảo:**
 
-**Link:** [Bài viết trên AWS Study Group](https://www.facebook.com/groups/awsstudygroupfcj/?multi_permalinks=2341916996573259)
+- [EventBridge Scheduler: schedule types và time zone](https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html)
+- [AWS Budgets](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html)
+- [AWS Pricing Calculator](https://calculator.aws/)

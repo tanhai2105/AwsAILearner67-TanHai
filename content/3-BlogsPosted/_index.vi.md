@@ -16,6 +16,6 @@ Cách AWS tự động hóa vòng đời Windows Server bằng IAM Identity Cent
 
 Ví dụ thực tế về việc hiện đại hóa nền tảng Microsoft của một trường đại học sang kiến trúc Cloud-Native trên AWS, và yếu tố nào giúp giảm chi phí.
 
-### [Blog 3 - Amazon CloudWatch: "Đôi mắt" giám sát toàn bộ hệ thống trên AWS](3.3-Blog3/)
+### [Blog 3 - Cost Guard: 3 lớp serverless tự tắt máy Windows để giữ credit AWS Free Plan](3.3-Blog3/)
 
-Tóm tắt Amazon CloudWatch cho người mới học AWS: metrics, dashboards, alarms, logs, giám sát ứng dụng và các điểm mới như OpenTelemetry và CloudWatch Omni.
+Bài mình tự viết về dự án của nhóm: tắt máy theo lịch, đồng hồ đo tiền 5 phút một lần và lưới an toàn AWS Budgets, kèm kết quả test thật và chi phí mỗi tháng.
