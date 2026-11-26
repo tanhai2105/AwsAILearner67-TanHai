@@ -12,5 +12,5 @@ Những sự kiện mình đã tham dự trong thời gian thực tập FCAJ, v�
 |---|---|---|---|---|
 | 1 | [Buildrathon Kickoff: Code the Future with CMC Global](4.1-event1/) | 26/09/2026 | Văn phòng AWS, tầng 26 Bitexco, TP. Hồ Chí Minh | Người tham dự |
 | 2 | [AWS Cloud & AI Day Vietnam 2026 (Watch Party)](4.2-event2/) | 29/09/2026 | Văn phòng AWS, tầng 26 Bitexco, TP. Hồ Chí Minh | Người tham dự |
-| 3 | [First Cloud AI Journey – Energetic Meet Up](4.3-event3/) | 24/10/2026 | Văn phòng AWS, tầng 26 Bitexco, TP. Hồ Chí Minh | Người tham dự |
+| 3 | [From Prototype to Production với Amazon Bedrock AgentCore](4.3-event3/) | 14/11/2026 | Văn phòng AWS, tầng 26 Bitexco, TP. Hồ Chí Minh | Người tham dự |
 | 4 | [AWS Student Community Day Vietnam 2026](4.4-event4/) | 21/11/2026 | Văn phòng AWS, tầng 26 Bitexco, TP. Hồ Chí Minh | Người tham dự |

@@ -1,41 +1,28 @@
 ---
-title: "First Cloud AI Journey – Energetic Meet Up"
+title: "From Prototype to Production with Amazon Bedrock AgentCore"
 date: 2026-11-26
 weight: 3
 chapter: false
 pre: " <b> 4.3. </b> "
 ---
 
-**Date:** Saturday 24/10/2026, 09:00–12:00 · **Location:** AWS office, Level 26 Bitexco, Ho Chi Minh City · **Role:** Attendee
+**Date:** Saturday 14/11/2026 · **Location:** AWS office, Level 26 Bitexco, Ho Chi Minh City · **Role:** Attendee
 
 ### Event objectives
 
-A three-hour FCAJ meet-up for interns about taking AI and cloud systems from an idea to something that runs for real: voice AI, sharing resources across accounts, security testing, running AI agents in production, and keeping an agent working around the clock.
-
-### Speakers
-
-- Kiet Tran (Revve AI): building a Vietnamese voice-AI contact center on AWS
-- Long Huynh (Styl Solution): AWS Resource Access Manager
-- Thinh Nguyen (Styl Solution): security testing with AWS Security Agent
-- Xuan An (leader of the AWS Student Builder Group HCMUTE): Amazon Bedrock AgentCore
-- Khoa Kieu (ACB) and Nghi Danh (AWS Community Builder): Kiro Crew
+An FCAJ session for interns on taking an AI agent from a prototype to production on AWS with Amazon Bedrock AgentCore, so that it is secure, reliable and scalable from the start.
 
 ### Highlights
 
-| Session | Topic |
-|---|---|
-| 1 | Hear, Think, Speak: a voice-AI contact center on AWS, with a phone-screening demo |
-| 2 | AWS Resource Access Manager: share resources between accounts instead of copying them |
-| 3 | AWS Security Agent: review infrastructure code and run automated tests before release |
-| 4 | Amazon Bedrock AgentCore: from prototype to production |
-| 5 | Kiro Crew: an AI agent that works 24/7, with limits on context, memory and permissions |
+- Why academic AI and enterprise AI are different problems.
+- How AgentCore controls who can call an agent and what the agent can call.
+- Three takeaways for running agents in production.
 
 ### What I learned
 
 - The AgentCore talk opened with "Academic vs Enterprise". Academic AI aims for accuracy on a clean, fixed dataset for a few people. Enterprise AI aims for business value on real, changing data for many users, running all the time.
 - AgentCore keeps inbound and outbound access apart: who may call the agent is one question, and what the agent may call is another, and each gets its own control.
 - The talk ended with three takeaways that I wrote down: build security and scale into the foundation, not as a patch; agents only create value when they reach real systems and live data; if you can't measure it, you can't trust it, so log everything and set targets first.
-- The voice-AI session showed that latency decides the experience: every extra step (speech to text, model, text to speech) adds delay the listener can feel.
 
 ### Applying it to my work / the Cost Guard project
 
