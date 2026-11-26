@@ -1,0 +1,649 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >-
+  Cost Guard for Windows Labs - three protection layers (Schedule Guard, Cost Meter,
+  Budget Backstop) for one Windows EC2 instance. Region: us-east-1.
+
+Parameters:
+  AlertEmail:
+    Type: String
+    Description: Email address that receives cost alerts and error alerts.
+    AllowedPattern: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+  ExistingInstanceId:
+    Type: String
+    Default: ""
+    Description: Leave empty to create a new Windows t3.small lab instance. Or enter the ID of an existing instance to protect.
+    AllowedPattern: "^(i-[0-9a-f]{8,17})?$"
+  WindowsAmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/ami-windows-latest/Windows_Server-2022-English-Full-Base
+    Description: Windows AMI used only when a new instance is created.
+  PricePerHour:
+    Type: Number
+    Default: 0.0392
+    Description: Hourly price of the instance in USD (from the AWS Pricing Calculator).
+  CostThreshold:
+    Type: Number
+    Default: 14
+    Description: Monthly estimated cost in USD at which Layer 2 stops the instance (about 70 percent of the budget).
+  BudgetLimit:
+    Type: Number
+    Default: 20
+    Description: Monthly budget in USD for Layer 3.
+  StopCron:
+    Type: String
+    Default: cron(0 22 * * ? *)
+    Description: Layer 1 daily stop time, evaluated in the time zone below.
+  StopScheduleTimezone:
+    Type: String
+    Default: Asia/Ho_Chi_Minh
+  CostMeterRateMinutes:
+    Type: Number
+    Default: 5
+    AllowedValues: [5, 10, 15]
+    Description: How often Layer 2 runs, in minutes.
+
+Conditions:
+  CreateInstance: !Equals [!Ref ExistingInstanceId, ""]
+
+Resources:
+  # ---------- Lab machine (only when no existing instance is given) ----------
+  LabInstance:
+    Type: AWS::EC2::Instance
+    Condition: CreateInstance
+    Properties:
+      ImageId: !Ref WindowsAmiId
+      InstanceType: t3.small
+      BlockDeviceMappings:
+        - DeviceName: /dev/sda1
+          Ebs:
+            VolumeSize: 30
+            VolumeType: gp3
+            DeleteOnTermination: true
+      Tags:
+        - Key: Name
+          Value: CostGuard-Lab
+        - Key: Project
+          Value: CostGuard
+
+  # ---------- Configuration (Parameter Store) ----------
+  ParamInstanceId:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: /costguard/instance-id
+      Type: String
+      Value: !If [CreateInstance, !Ref LabInstance, !Ref ExistingInstanceId]
+  ParamPrice:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: /costguard/price-per-hour
+      Type: String
+      Value: !Ref PricePerHour
+  ParamThreshold:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: /costguard/cost-threshold
+      Type: String
+      Value: !Ref CostThreshold
+  ParamBudgetLimit:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: /costguard/budget-limit
+      Type: String
+      Value: !Ref BudgetLimit
+
+  # ---------- Data ----------
+  SessionsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: CostGuardSessions
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: instance_id
+          AttributeType: S
+        - AttributeName: timestamp
+          AttributeType: S
+      KeySchema:
+        - AttributeName: instance_id
+          KeyType: HASH
+        - AttributeName: timestamp
+          KeyType: RANGE
+      Tags:
+        - Key: Project
+          Value: CostGuard
+
+  # ---------- Notifications ----------
+  AlertsTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: costguard-alerts
+      Tags:
+        - Key: Project
+          Value: CostGuard
+  ErrorsTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: costguard-errors
+      Tags:
+        - Key: Project
+          Value: CostGuard
+  BudgetsTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: costguard-budgets
+      Tags:
+        - Key: Project
+          Value: CostGuard
+  AlertsSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      TopicArn: !Ref AlertsTopic
+      Protocol: email
+      Endpoint: !Ref AlertEmail
+  ErrorsSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      TopicArn: !Ref ErrorsTopic
+      Protocol: email
+      Endpoint: !Ref AlertEmail
+  BudgetsTopicPolicy:
+    Type: AWS::SNS::TopicPolicy
+    Properties:
+      Topics: [!Ref BudgetsTopic]
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: AllowBudgetsToPublish
+            Effect: Allow
+            Principal:
+              Service: budgets.amazonaws.com
+            Action: sns:Publish
+            Resource: !Ref BudgetsTopic
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+
+  # ---------- Log groups ----------
+  ScheduleHandlerLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/lambda/CostGuard-ScheduleHandler
+      RetentionInDays: 14
+  CostMeterLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/lambda/CostGuard-CostMeter
+      RetentionInDays: 14
+  BudgetBackstopLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/lambda/CostGuard-BudgetBackstop
+      RetentionInDays: 14
+
+  # ---------- IAM roles (one per function, least privilege) ----------
+  ScheduleHandlerRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: ScheduleHandlerPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: ec2:StopInstances
+                Resource: !Sub
+                  - arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:instance/${Id}
+                  - Id: !If [CreateInstance, !Ref LabInstance, !Ref ExistingInstanceId]
+              - Effect: Allow
+                Action: ec2:DescribeInstances
+                Resource: "*"
+              - Effect: Allow
+                Action: ssm:GetParameter
+                Resource: !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/costguard/instance-id
+              - Effect: Allow
+                Action: dynamodb:PutItem
+                Resource: !GetAtt SessionsTable.Arn
+              - Effect: Allow
+                Action: sns:Publish
+                Resource: !Ref ErrorsTopic
+  CostMeterRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: CostMeterPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: ec2:StopInstances
+                Resource: !Sub
+                  - arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:instance/${Id}
+                  - Id: !If [CreateInstance, !Ref LabInstance, !Ref ExistingInstanceId]
+              - Effect: Allow
+                Action: ec2:DescribeInstances
+                Resource: "*"
+              - Effect: Allow
+                Action: ssm:GetParameters
+                Resource: !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/costguard/*
+              - Effect: Allow
+                Action:
+                  - dynamodb:Query
+                  - dynamodb:PutItem
+                Resource: !GetAtt SessionsTable.Arn
+              - Effect: Allow
+                Action: sns:Publish
+                Resource:
+                  - !Ref AlertsTopic
+                  - !Ref ErrorsTopic
+  BudgetBackstopRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: BudgetBackstopPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: ec2:StopInstances
+                Resource: !Sub
+                  - arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:instance/${Id}
+                  - Id: !If [CreateInstance, !Ref LabInstance, !Ref ExistingInstanceId]
+              - Effect: Allow
+                Action: ec2:DescribeInstances
+                Resource: "*"
+              - Effect: Allow
+                Action: ssm:GetParameter
+                Resource: !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/costguard/instance-id
+              - Effect: Allow
+                Action: dynamodb:PutItem
+                Resource: !GetAtt SessionsTable.Arn
+              - Effect: Allow
+                Action: sns:Publish
+                Resource:
+                  - !Ref AlertsTopic
+                  - !Ref ErrorsTopic
+
+  # ---------- Layer 1: Schedule Guard ----------
+  ScheduleHandlerFunction:
+    Type: AWS::Lambda::Function
+    DependsOn: ScheduleHandlerLogs
+    Properties:
+      FunctionName: CostGuard-ScheduleHandler
+      Runtime: python3.12
+      Architectures: [x86_64]
+      Handler: index.lambda_handler
+      MemorySize: 128
+      Timeout: 30
+      Role: !GetAtt ScheduleHandlerRole.Arn
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref SessionsTable
+          ERRORS_TOPIC: !Ref ErrorsTopic
+      Tags:
+        - Key: Project
+          Value: CostGuard
+      Code:
+        ZipFile: |
+          import os
+          import boto3
+          from datetime import datetime, timezone
+
+          ec2 = boto3.client("ec2")
+          ssm = boto3.client("ssm")
+          sns = boto3.client("sns")
+          table = boto3.resource("dynamodb").Table(os.environ["TABLE_NAME"])
+
+
+          def lambda_handler(event, context):
+              try:
+                  iid = ssm.get_parameter(Name="/costguard/instance-id")["Parameter"]["Value"]
+                  inst = ec2.describe_instances(InstanceIds=[iid])["Reservations"][0]["Instances"][0]
+                  state = inst["State"]["Name"]
+                  if state == "running":
+                      ec2.stop_instances(InstanceIds=[iid])
+                      name = "schedule_stop"
+                  else:
+                      name = "schedule_noop"
+                  table.put_item(Item={
+                      "instance_id": iid,
+                      "timestamp": datetime.now(timezone.utc).isoformat(),
+                      "event": name,
+                      "state_before": state,
+                  })
+                  print(name, iid, state)
+                  return {"event": name, "state_before": state}
+              except Exception as exc:
+                  sns.publish(TopicArn=os.environ["ERRORS_TOPIC"],
+                              Subject="CostGuard ScheduleHandler error", Message=str(exc))
+                  raise
+
+  # ---------- Layer 2: Cost Meter ----------
+  CostMeterFunction:
+    Type: AWS::Lambda::Function
+    DependsOn: CostMeterLogs
+    Properties:
+      FunctionName: CostGuard-CostMeter
+      Runtime: python3.12
+      Architectures: [x86_64]
+      Handler: index.lambda_handler
+      MemorySize: 128
+      Timeout: 60
+      Role: !GetAtt CostMeterRole.Arn
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref SessionsTable
+          ERRORS_TOPIC: !Ref ErrorsTopic
+          ALERTS_TOPIC: !Ref AlertsTopic
+          RATE_MINUTES: !Ref CostMeterRateMinutes
+      Tags:
+        - Key: Project
+          Value: CostGuard
+      Code:
+        ZipFile: |
+          import os
+          import boto3
+          from decimal import Decimal
+          from datetime import datetime, timezone
+          from boto3.dynamodb.conditions import Key
+
+          ec2 = boto3.client("ec2")
+          ssm = boto3.client("ssm")
+          sns = boto3.client("sns")
+          table = boto3.resource("dynamodb").Table(os.environ["TABLE_NAME"])
+          Q = Decimal("0.000001")
+
+
+          def lambda_handler(event, context):
+              try:
+                  params = ssm.get_parameters(Names=[
+                      "/costguard/instance-id",
+                      "/costguard/price-per-hour",
+                      "/costguard/cost-threshold"])["Parameters"]
+                  v = {p["Name"].split("/")[-1]: p["Value"] for p in params}
+                  iid = v["instance-id"]
+                  price = Decimal(v["price-per-hour"])
+                  limit = Decimal(v["cost-threshold"])
+                  inst = ec2.describe_instances(InstanceIds=[iid])["Reservations"][0]["Instances"][0]
+                  state = inst["State"]["Name"]
+                  if state != "running":
+                      return {"state": state}
+                  now = datetime.now(timezone.utc)
+                  month = now.strftime("%Y-%m")
+                  total = Decimal(0)
+                  kw = {
+                      "KeyConditionExpression": Key("instance_id").eq(iid) & Key("timestamp").begins_with(month),
+                      "ProjectionExpression": "#e, #c",
+                      "ExpressionAttributeNames": {"#e": "event", "#c": "cost"},
+                  }
+                  while True:
+                      r = table.query(**kw)
+                      for item in r["Items"]:
+                          if item.get("event") == "sample" and "cost" in item:
+                              total += item["cost"]
+                      if "LastEvaluatedKey" not in r:
+                          break
+                      kw["ExclusiveStartKey"] = r["LastEvaluatedKey"]
+                  step = (price * Decimal(os.environ["RATE_MINUTES"]) / Decimal(60)).quantize(Q)
+                  total = (total + step).quantize(Q)
+                  table.put_item(Item={
+                      "instance_id": iid, "timestamp": now.isoformat(),
+                      "event": "sample", "cost": step, "month_total": total})
+                  if total >= limit:
+                      ec2.stop_instances(InstanceIds=[iid])
+                      table.put_item(Item={
+                          "instance_id": iid, "timestamp": datetime.now(timezone.utc).isoformat(),
+                          "event": "auto_stop", "month_total": total})
+                      sns.publish(
+                          TopicArn=os.environ["ALERTS_TOPIC"],
+                          Subject="CostGuard: instance stopped (cost threshold)",
+                          Message="Estimated cost this month is %s USD, threshold is %s USD. "
+                                  "Instance %s was stopped." % (total, limit, iid))
+                      return {"stopped": True, "month_total": str(total)}
+                  return {"stopped": False, "month_total": str(total)}
+              except Exception as exc:
+                  sns.publish(TopicArn=os.environ["ERRORS_TOPIC"],
+                              Subject="CostGuard CostMeter error", Message=str(exc))
+                  raise
+
+  # ---------- Layer 3: Budget Backstop ----------
+  BudgetBackstopFunction:
+    Type: AWS::Lambda::Function
+    DependsOn: BudgetBackstopLogs
+    Properties:
+      FunctionName: CostGuard-BudgetBackstop
+      Runtime: python3.12
+      Architectures: [x86_64]
+      Handler: index.lambda_handler
+      MemorySize: 128
+      Timeout: 30
+      Role: !GetAtt BudgetBackstopRole.Arn
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref SessionsTable
+          ERRORS_TOPIC: !Ref ErrorsTopic
+          ALERTS_TOPIC: !Ref AlertsTopic
+      Tags:
+        - Key: Project
+          Value: CostGuard
+      Code:
+        ZipFile: |
+          import os
+          import boto3
+          from datetime import datetime, timezone
+
+          ec2 = boto3.client("ec2")
+          ssm = boto3.client("ssm")
+          sns = boto3.client("sns")
+          table = boto3.resource("dynamodb").Table(os.environ["TABLE_NAME"])
+
+
+          def lambda_handler(event, context):
+              try:
+                  iid = ssm.get_parameter(Name="/costguard/instance-id")["Parameter"]["Value"]
+                  inst = ec2.describe_instances(InstanceIds=[iid])["Reservations"][0]["Instances"][0]
+                  state = inst["State"]["Name"]
+                  if state == "running":
+                      ec2.stop_instances(InstanceIds=[iid])
+                      name = "budget_stop"
+                  else:
+                      name = "budget_noop"
+                  table.put_item(Item={
+                      "instance_id": iid,
+                      "timestamp": datetime.now(timezone.utc).isoformat(),
+                      "event": name,
+                      "state_before": state,
+                  })
+                  sns.publish(
+                      TopicArn=os.environ["ALERTS_TOPIC"],
+                      Subject="CostGuard: budget notification handled",
+                      Message="A budget notification arrived. Instance %s was %s (state before: %s)."
+                              % (iid, "stopped" if name == "budget_stop" else "left as is", state))
+                  return {"event": name, "state_before": state}
+              except Exception as exc:
+                  sns.publish(TopicArn=os.environ["ERRORS_TOPIC"],
+                              Subject="CostGuard BudgetBackstop error", Message=str(exc))
+                  raise
+  BudgetsToLambdaSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      TopicArn: !Ref BudgetsTopic
+      Protocol: lambda
+      Endpoint: !GetAtt BudgetBackstopFunction.Arn
+  BudgetsInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref BudgetBackstopFunction
+      Action: lambda:InvokeFunction
+      Principal: sns.amazonaws.com
+      SourceArn: !Ref BudgetsTopic
+  CostGuardBudget:
+    Type: AWS::Budgets::Budget
+    DependsOn: BudgetsTopicPolicy
+    Properties:
+      Budget:
+        BudgetName: CostGuard-Budget
+        BudgetType: COST
+        TimeUnit: MONTHLY
+        BudgetLimit:
+          Amount: !Ref BudgetLimit
+          Unit: USD
+      NotificationsWithSubscribers:
+        - Notification:
+            NotificationType: ACTUAL
+            ComparisonOperator: GREATER_THAN
+            Threshold: 80
+            ThresholdType: PERCENTAGE
+          Subscribers:
+            - SubscriptionType: SNS
+              Address: !Ref BudgetsTopic
+            - SubscriptionType: EMAIL
+              Address: !Ref AlertEmail
+        - Notification:
+            NotificationType: ACTUAL
+            ComparisonOperator: GREATER_THAN
+            Threshold: 100
+            ThresholdType: PERCENTAGE
+          Subscribers:
+            - SubscriptionType: SNS
+              Address: !Ref BudgetsTopic
+            - SubscriptionType: EMAIL
+              Address: !Ref AlertEmail
+
+  # ---------- Schedules (EventBridge Scheduler) ----------
+  SchedulerRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: scheduler.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: InvokeCostGuardFunctions
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: lambda:InvokeFunction
+                Resource:
+                  - !GetAtt ScheduleHandlerFunction.Arn
+                  - !GetAtt CostMeterFunction.Arn
+  StopSchedule:
+    Type: AWS::Scheduler::Schedule
+    Properties:
+      Name: costguard-daily-stop
+      Description: Layer 1 - stop the lab instance every day.
+      ScheduleExpression: !Ref StopCron
+      ScheduleExpressionTimezone: !Ref StopScheduleTimezone
+      FlexibleTimeWindow:
+        Mode: "OFF"
+      State: ENABLED
+      Target:
+        Arn: !GetAtt ScheduleHandlerFunction.Arn
+        RoleArn: !GetAtt SchedulerRole.Arn
+        Input: '{"action": "stop"}'
+  CostMeterSchedule:
+    Type: AWS::Scheduler::Schedule
+    Properties:
+      Name: costguard-cost-meter
+      Description: Layer 2 - run the cost meter at a fixed rate.
+      ScheduleExpression: !Sub rate(${CostMeterRateMinutes} minutes)
+      FlexibleTimeWindow:
+        Mode: "OFF"
+      State: ENABLED
+      Target:
+        Arn: !GetAtt CostMeterFunction.Arn
+        RoleArn: !GetAtt SchedulerRole.Arn
+        Input: '{}'
+
+  # ---------- Observability: alarms on Lambda errors ----------
+  ScheduleHandlerErrorsAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: CostGuard-ScheduleHandler-Errors
+      Namespace: AWS/Lambda
+      MetricName: Errors
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref ScheduleHandlerFunction
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 0
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+      AlarmActions: [!Ref ErrorsTopic]
+  CostMeterErrorsAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: CostGuard-CostMeter-Errors
+      Namespace: AWS/Lambda
+      MetricName: Errors
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref CostMeterFunction
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 0
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+      AlarmActions: [!Ref ErrorsTopic]
+  BudgetBackstopErrorsAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: CostGuard-BudgetBackstop-Errors
+      Namespace: AWS/Lambda
+      MetricName: Errors
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref BudgetBackstopFunction
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 0
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+      AlarmActions: [!Ref ErrorsTopic]
+
+Outputs:
+  ProtectedInstanceId:
+    Description: Instance protected by Cost Guard.
+    Value: !If [CreateInstance, !Ref LabInstance, !Ref ExistingInstanceId]
+  AlertsTopicArn:
+    Value: !Ref AlertsTopic
+  ErrorsTopicArn:
+    Value: !Ref ErrorsTopic
+  BudgetsTopicArn:
+    Description: Publish a test message here to test Layer 3.
+    Value: !Ref BudgetsTopic
+  SessionsTable:
+    Value: !Ref SessionsTable
