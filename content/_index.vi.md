@@ -18,7 +18,7 @@ chapter: false
 
 &emsp; **Ngành:** Kỹ thuật phần mềm
 
-&emsp; **Lớp:** FCAJ-FPT-S4
+&emsp; **Lớp:** AWS092026
 
 &emsp; **Công ty thực tập:** Công ty TNHH Amazon Web Services Viet Nam
 
