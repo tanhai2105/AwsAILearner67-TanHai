@@ -25,31 +25,31 @@ pre: " <b> 1.6. </b> "
 
 ### Week 6 Achievements:
 
-* Understood why Auto Scaling matters: unhealthy instances get replaced, capacity grows and shrinks with traffic, the load balancer spreads requests, and quiet hours cost less.
+* Understood why to use Auto Scaling: failed instances are replaced automatically, the number of instances follows traffic, the load balancer distributes requests, and costs drop when few users are online.
 
-* Built the scaling setup around the FCAJ Management app (EC2 web server plus a database):
+* Built the scaling setup for the FCAJ Management app (a web server on EC2 with a database):
 
-  * Launch template with the AMI, instance type, security groups and user data
-  * Application Load Balancer with a target group in front of the instances
-  * Auto Scaling group over 3 public subnets, desired 1, min 1, max 3, using load balancer health checks, CloudWatch group metrics and SNS notifications
+  * A launch template defining the AMI, instance type, security groups and user data
+  * An Application Load Balancer and target group placed in front of the instances
+  * An Auto Scaling group spread over 3 public subnets with desired 1, min 1, max 3, health checks from the load balancer, CloudWatch group metrics and SNS notifications
 
-* What I took from the four scaling types:
+* What I learned about the four scaling types:
 
-  * Manual: I change the desired capacity myself for a one-off event
-  * Scheduled: capacity changes at set times when traffic follows a known pattern
-  * Dynamic: reacts to live metrics such as CPU or request count
-  * Predictive: forecasts the next 48 to 72 hours from history, so it needs metric data collected in advance
+  * Manual: change the desired capacity by hand for an event that happens once
+  * Scheduled: change the number of instances at fixed times when traffic repeats on a pattern
+  * Dynamic: react right away to a metric such as CPU or request count
+  * Predictive: forecast the next 48–72 hours from historical data, so metrics must have been collected beforehand
 
-* Lightsail is the simple option: one monthly price covers the server, SSD, data transfer and a static IP, so I did not have to plan a VPC, security groups or EBS volumes first.
+* Lightsail is the easy route: one monthly price already covers the server, SSD, data transfer and a static IP, so there is no need to plan a VPC, security groups or EBS up front.
 
-* Brought up two apps on Lightsail in the Singapore Region, each with its own static IP so the address stays fixed:
+* Ran two applications on Lightsail in the Singapore Region, each with a static IP so the address stays fixed:
 
-  * WordPress on an Ubuntu 24.04 blueprint, using a Lightsail managed MySQL database
-  * PrestaShop from a ready application blueprint
+  * WordPress on an Ubuntu 24.04 blueprint with a Lightsail-managed MySQL database
+  * PrestaShop built from the ready-made application blueprint
 
-* Operated them like a small production setup:
+* Operated them like a small real-world system:
 
-  * The SSH rule now only allows the Lightsail browser SSH client rather than the whole internet
-  * A Lightsail instance cannot switch plans in place, so I made a snapshot and created a larger instance from it, then pointed the static IP at the new one
-  * The blog kept all its posts after the move because the data lives in the managed database, not on the instance
+  * The SSH rule now admits only the Lightsail browser SSH client instead of the whole internet
+  * A Lightsail instance cannot change plans directly, so I took a snapshot, built a larger machine from it and pointed the static IP at the new machine
+  * The blog kept all its posts after the move, because the data lives in the managed database and not on the instance
   * Added a CPU alarm

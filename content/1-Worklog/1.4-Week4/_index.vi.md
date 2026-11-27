@@ -25,16 +25,16 @@ pre: " <b> 1.4. </b> "
 
 ### Kết quả đạt được tuần 4:
 
-* Hiểu S3 lưu object trong bucket, còn storage class quyết định giá và tốc độ truy cập. Đã tạo bucket và đưa file website lên.
+* Nắm được S3 chứa object trong bucket và storage class ảnh hưởng tới giá lẫn tốc độ truy cập. Mình đã tạo bucket và tải file của website lên.
 
-* Đưa được website tĩnh lên chạy từ S3. Muốn truy cập được thì phải tắt Block public access và mở object bằng ACL, mà cách này chỉ chạy HTTP qua website endpoint.
+* Cho website tĩnh chạy từ S3. Để mở được thì phải tắt Block public access và cấp quyền cho object bằng ACL; kiểu này chỉ chạy HTTP trên website endpoint.
 
-* Sau đó sửa lại cho an toàn: bật lại chặn public và cho CloudFront đọc bucket bằng bucket policy. Qua CloudFront trang tải nhanh hơn, xem được edge location (PoP) nào trả kết quả.
+* Sau đó xử lý cho an toàn hơn: bật lại chặn truy cập public, để CloudFront đọc bucket thông qua bucket policy. Trang tải nhanh hơn khi đi qua CloudFront, và mình xem được edge location (PoP) nào phục vụ request.
 
-* Thấy CloudShell khá tiện: mở trình duyệt là có terminal, AWS CLI đăng nhập sẵn. Mình tập lệnh Linux cơ bản trên đó, dùng CLI liệt kê bucket với instance, và chuyển file qua lại.
+* CloudShell khá tiện vì mở trình duyệt là có sẵn terminal với AWS CLI đã đăng nhập. Mình chạy thử các lệnh Linux cơ bản, dùng CLI để liệt kê bucket và instance, và upload/download file.
 
-* Tập quản lý object:
+* Thực hành quản lý object trong S3:
 
-  * Bật versioning rồi thì index.html bị ghi đè vẫn lấy lại được bản cũ
-  * Chuyển object giữa các bucket
-  * Replication rule tự chép object mới sang bucket ở Region khác, coi như có bản dự phòng
+  * Khi đã bật versioning, file index.html bị ghi đè vẫn khôi phục được về phiên bản trước
+  * Đưa object từ bucket này sang bucket khác
+  * Replication rule tự sao chép object mới sang bucket ở Region khác, tương đương một bản sao lưu

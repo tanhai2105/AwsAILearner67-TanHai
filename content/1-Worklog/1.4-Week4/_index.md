@@ -25,16 +25,16 @@ pre: " <b> 1.4. </b> "
 
 ### Week 4 Achievements:
 
-* Understand that S3 keeps objects inside buckets and that the storage class decides price and access speed. I made a bucket and uploaded the website files into it.
+* Understood that S3 holds objects in buckets and that the storage class affects both price and access speed. I created a bucket and uploaded the website's files.
 
-* Got a static website online from S3. To make it reachable I had to turn off Block public access and open the objects with ACLs, which only works over plain HTTP on the website endpoint.
+* Ran a static website from S3. To open it I had to turn off Block public access and grant access to the objects with ACLs; this setup only serves HTTP on the website endpoint.
 
-* Then fixed the exposure: switched public access off again and let CloudFront read the bucket through a bucket policy. The page loaded faster via CloudFront, and I could see which edge location (PoP) answered the request.
+* Then made it safer: turned the public-access block back on and let CloudFront read the bucket through a bucket policy. The page loaded faster through CloudFront, and I could see which edge location (PoP) served the request.
 
-* CloudShell turned out to be handy: a ready terminal in the browser with the AWS CLI already logged in. I practiced basic Linux commands there, listed my buckets and instances with the CLI, and moved files in and out.
+* CloudShell is convenient because opening the browser gives a ready terminal with the AWS CLI already signed in. I ran basic Linux commands, used the CLI to list buckets and instances, and uploaded and downloaded files.
 
-* Practiced object management:
+* Practiced managing objects in S3:
 
-  * With versioning on, an overwritten index.html could be rolled back to an earlier version
-  * Moved objects between buckets
-  * A replication rule copied new objects to a bucket in another Region on its own, which works as a backup
+  * Once versioning is on, an overwritten index.html can be restored to an earlier version
+  * Moved objects from one bucket to another
+  * A replication rule copies new objects to a bucket in another Region automatically, which acts as a backup

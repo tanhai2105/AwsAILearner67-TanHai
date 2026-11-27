@@ -25,12 +25,12 @@ pre: " <b> 1.3. </b> "
 
 ### Week 3 Achievements:
 
-* Know what goes into launching EC2: choosing an instance type and an AMI, attaching EBS storage and keeping the key pair safe.
+* Know what has to be chosen when launching EC2: the instance type, the AMI, the EBS volume that comes with it, and a key pair that must be stored carefully.
 
-* Can explain the pieces of a VPC: public and private subnets, how route tables send traffic to an internet gateway or a NAT gateway, and how security groups (stateful, per instance) differ from network ACLs (stateless, per subnet).
+* Can explain how a VPC is put together: public and private subnets, route tables that lead traffic to an internet gateway or a NAT gateway, and how a security group (stateful, applied to each instance) differs from a network ACL (stateless, applied to the subnet).
 
-* Built a working VPC myself, put an EC2 instance in it and confirmed that the private side reaches the internet only through the NAT gateway.
+* Finished building a usable VPC on my own, placed an EC2 instance in it and confirmed that an instance in the private subnet reaches the internet only via the NAT gateway.
 
-* Logged in to both a Linux instance and a Windows instance, resized one, took a snapshot and made my own AMI from it.
+* Logged in to one Linux and one Windows instance, resized one of them, took a snapshot and used it to create an AMI of my own.
 
-* Got the AWS User Management application running on EC2, then removed everything so nothing kept charging.
+* Ran the AWS User Management application on EC2 and deleted all the resources afterwards so there were no further charges.

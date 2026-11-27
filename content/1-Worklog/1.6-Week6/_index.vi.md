@@ -25,31 +25,31 @@ pre: " <b> 1.6. </b> "
 
 ### Kết quả đạt được tuần 6:
 
-* Hiểu vì sao cần Auto Scaling: máy lỗi thì tự thay, số máy tăng giảm theo lượng truy cập, load balancer chia request, giờ vắng thì tốn ít tiền hơn.
+* Hiểu lý do dùng Auto Scaling: instance hỏng được thay tự động, số lượng máy co giãn theo lưu lượng, load balancer phân phối request, và lúc ít người dùng thì chi phí thấp hơn.
 
-* Dựng phần scaling cho app FCAJ Management (web server trên EC2 cộng database):
+* Dựng hệ thống scaling cho app FCAJ Management (web server chạy trên EC2 kèm database):
 
-  * Launch template chứa AMI, instance type, security group và user data
-  * Application Load Balancer cùng target group đứng trước các máy
-  * Auto Scaling group trên 3 public subnet, desired 1, min 1, max 3, dùng health check của load balancer, CloudWatch group metrics và thông báo SNS
+  * Launch template khai báo AMI, instance type, security group và user data
+  * Application Load Balancer và target group đặt phía trước các instance
+  * Auto Scaling group trải trên 3 public subnet với desired 1, min 1, max 3, health check theo load balancer, group metrics của CloudWatch và thông báo qua SNS
 
-* Rút ra về bốn kiểu scaling:
+* Điều mình rút ra về bốn kiểu scaling:
 
-  * Manual: tự chỉnh desired capacity khi có sự kiện nhất thời
-  * Scheduled: đổi số máy theo giờ cố định khi lưu lượng có quy luật
-  * Dynamic: phản ứng theo metric trực tiếp như CPU hay số request
-  * Predictive: dự báo 48 đến 72 giờ tới dựa trên lịch sử, nên phải có sẵn dữ liệu metric từ trước
+  * Manual: tự đổi desired capacity khi có một sự kiện chỉ xảy ra một lần
+  * Scheduled: đổi số lượng máy vào giờ định sẵn khi lưu lượng lặp theo quy luật
+  * Dynamic: phản ứng ngay theo metric như CPU hoặc số request
+  * Predictive: dự đoán 48–72 giờ tiếp theo từ dữ liệu lịch sử, vì vậy cần thu thập metric trước đó
 
-* Lightsail là lựa chọn đơn giản: trả một giá mỗi tháng là có máy chủ, ổ SSD, băng thông và static IP, không phải tự lo VPC, security group hay EBS.
+* Lightsail là cách đơn giản: một mức giá mỗi tháng đã gồm máy chủ, SSD, băng thông và static IP, nên không phải tính trước VPC, security group hay EBS.
 
-* Dựng hai app trên Lightsail ở Region Singapore, mỗi máy gắn static IP riêng để địa chỉ không bị đổi:
+* Chạy hai ứng dụng trên Lightsail ở Region Singapore, mỗi máy một static IP để địa chỉ cố định:
 
-  * WordPress trên blueprint Ubuntu 24.04, dùng database MySQL do Lightsail quản lý
-  * PrestaShop từ application blueprint có sẵn
+  * WordPress trên blueprint Ubuntu 24.04 với MySQL do Lightsail quản lý
+  * PrestaShop dựng từ application blueprint sẵn có
 
-* Vận hành như một hệ thống nhỏ thật sự:
+* Vận hành giống một hệ thống nhỏ ngoài thực tế:
 
-  * Rule SSH giờ chỉ cho Lightsail browser SSH client vào, không mở cho cả internet nữa
-  * Instance Lightsail không đổi gói tại chỗ được, nên mình chụp snapshot, tạo máy lớn hơn từ đó rồi chuyển static IP sang máy mới
-  * Blog vẫn đủ bài viết sau khi chuyển vì dữ liệu nằm ở managed database chứ không nằm trên máy
-  * Thêm alarm CPU
+  * Rule SSH chỉ còn cho Lightsail browser SSH client truy cập thay vì cả internet
+  * Instance Lightsail không đổi gói trực tiếp được, nên mình tạo snapshot, dựng máy lớn hơn từ snapshot rồi trỏ static IP sang máy mới
+  * Blog vẫn còn nguyên bài sau khi chuyển, vì dữ liệu nằm ở managed database chứ không ở trên instance
+  * Đã thêm alarm CPU
