@@ -52,3 +52,5 @@ Full workshop (step by step, screenshots, template): [nguyenducbinh-aws.github.i
 - [EventBridge Scheduler: schedule types and time zones](https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html)
 - [AWS Budgets](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html)
 - [AWS Pricing Calculator](https://calculator.aws/)
+
+**Link:** [Post on AWS Study Group](https://www.facebook.com/groups/awsstudygroupfcj/posts/2350545079043784/)
