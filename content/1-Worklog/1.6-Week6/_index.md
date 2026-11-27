@@ -25,20 +25,6 @@ pre: " <b> 1.6. </b> "
 
 ### Week 6 Achievements:
 
-* Lightsail is the simple option: one monthly price covers the server, SSD, data transfer and a static IP, so I did not have to plan a VPC, security groups or EBS volumes first.
-
-* Brought up two apps on Lightsail in the Singapore Region, each with its own static IP so the address stays fixed:
-
-  * WordPress on an Ubuntu 24.04 blueprint, using a Lightsail managed MySQL database
-  * PrestaShop from a ready application blueprint
-
-* Operated them like a small production setup:
-
-  * The SSH rule now only allows the Lightsail browser SSH client rather than the whole internet
-  * A Lightsail instance cannot switch plans in place, so I made a snapshot and created a larger instance from it, then pointed the static IP at the new one
-  * The blog kept all its posts after the move because the data lives in the managed database, not on the instance
-  * Added a CPU alarm
-
 * Understood why Auto Scaling matters: unhealthy instances get replaced, capacity grows and shrinks with traffic, the load balancer spreads requests, and quiet hours cost less.
 
 * Built the scaling setup around the FCAJ Management app (EC2 web server plus a database):
@@ -53,3 +39,17 @@ pre: " <b> 1.6. </b> "
   * Scheduled: capacity changes at set times when traffic follows a known pattern
   * Dynamic: reacts to live metrics such as CPU or request count
   * Predictive: forecasts the next 48 to 72 hours from history, so it needs metric data collected in advance
+
+* Lightsail is the simple option: one monthly price covers the server, SSD, data transfer and a static IP, so I did not have to plan a VPC, security groups or EBS volumes first.
+
+* Brought up two apps on Lightsail in the Singapore Region, each with its own static IP so the address stays fixed:
+
+  * WordPress on an Ubuntu 24.04 blueprint, using a Lightsail managed MySQL database
+  * PrestaShop from a ready application blueprint
+
+* Operated them like a small production setup:
+
+  * The SSH rule now only allows the Lightsail browser SSH client rather than the whole internet
+  * A Lightsail instance cannot switch plans in place, so I made a snapshot and created a larger instance from it, then pointed the static IP at the new one
+  * The blog kept all its posts after the move because the data lives in the managed database, not on the instance
+  * Added a CPU alarm

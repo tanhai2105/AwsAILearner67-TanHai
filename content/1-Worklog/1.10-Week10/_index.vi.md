@@ -25,9 +25,7 @@ pre: " <b> 1.10. </b> "
 
 ### Kết quả đạt được tuần 10:
 
-* Hiểu AWS WAF lọc request HTTP trước khi tới ứng dụng hay API, chặn các kiểu tấn công phổ biến như SQL injection, cross-site scripting, và mình có thể tự viết rule cho phép/chặn.
-
-* Trong lab WAF, mình tạo web ACL với managed rule, thêm rule chặn request có một header nhất định và một advanced custom rule, thấy các request thử bị chặn hiện trên dashboard và sampled requests, rồi bật logging.
+* Với dự án nhóm, mình gom tin nhắn và tài liệu rời rạc thành danh sách việc của bản thân và một kế hoạch 3 phần làm song song; điểm danh trên FCAJ Portal đã kiểm tra xong.
 
 * Hiểu GuardDuty là dịch vụ phát hiện mối đe dọa, quản lý hoàn toàn, chạy theo Region:
 
@@ -41,4 +39,6 @@ pre: " <b> 1.10. </b> "
   * Lộ IAM credential (Recon:IAMUser/MaliciousIPCaller.Custom, UnauthorizedAccess:IAMUser/MaliciousIPCaller.Custom), lần ra ai đang gọi API rồi sửa thủ công
   * Credential của role bị đánh cắp (UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration) xử lý bằng Lambda
 
-* Với dự án nhóm, mình gom tin nhắn và tài liệu rời rạc thành danh sách việc của bản thân và một kế hoạch 3 phần làm song song; điểm danh trên FCAJ Portal đã kiểm tra xong.
+* Hiểu AWS WAF lọc request HTTP trước khi tới ứng dụng hay API, chặn các kiểu tấn công phổ biến như SQL injection, cross-site scripting, và mình có thể tự viết rule cho phép/chặn.
+
+* Trong lab WAF, mình tạo web ACL với managed rule, thêm rule chặn request có một header nhất định và một advanced custom rule, thấy các request thử bị chặn hiện trên dashboard và sampled requests, rồi bật logging.

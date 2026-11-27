@@ -25,11 +25,11 @@ pre: " <b> 1.2. </b> "
 
 ### Kết quả đạt được tuần 2:
 
-* Hiểu rõ hơn chuyện tối ưu chi phí: chọn đúng cỡ tài nguyên, tắt cái không dùng, theo dõi hóa đơn sớm chứ không đợi cuối tháng.
-
 * Biết Cloud Journey sắp xếp ra sao nên tìm hướng dẫn lab và tài liệu cho từng chủ đề nhanh hơn.
 
 * Tự tạo tài khoản AWS dùng Free Tier, phân biệt được Free plan, Paid plan và phần credit đi kèm. Giờ mở dịch vụ trên Console cũng thao tác nhanh hơn.
+
+* Hiểu rõ hơn chuyện tối ưu chi phí: chọn đúng cỡ tài nguyên, tắt cái không dùng, theo dõi hóa đơn sớm chứ không đợi cuối tháng.
 
 * Đặt budget cho tài khoản bằng AWS Budget kèm ngưỡng cảnh báo. Ngoài Cost budget mình dùng thì cũng xem qua các loại khác (Usage, RI, Savings Plans).
 

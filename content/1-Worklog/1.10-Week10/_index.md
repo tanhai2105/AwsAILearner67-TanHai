@@ -25,9 +25,7 @@ pre: " <b> 1.10. </b> "
 
 ### Week 10 Achievements:
 
-* Learned that AWS WAF filters HTTP requests before they reach an application or API, blocking common attacks like SQL injection and cross-site scripting, and that I can write my own allow/block rules.
-
-* In the WAF lab I created a web ACL with managed rules, added a rule that blocks requests carrying a certain header plus an advanced custom rule, watched the blocked test requests show up in the dashboard and sampled requests, and turned on logging.
+* For the team project, turned scattered messages and documents into a list of my own tasks and a plan with 3 parts that can run in parallel; my attendance on the FCAJ Portal is checked.
 
 * Understood GuardDuty as a regional, fully managed detector:
 
@@ -41,4 +39,6 @@ pre: " <b> 1.10. </b> "
   * Compromised IAM credentials (Recon:IAMUser/MaliciousIPCaller.Custom, UnauthorizedAccess:IAMUser/MaliciousIPCaller.Custom), tracking down the caller and fixing it by hand
   * Exfiltrated role credentials (UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration) handled with Lambda
 
-* For the team project, turned scattered messages and documents into a list of my own tasks and a plan with 3 parts that can run in parallel; my attendance on the FCAJ Portal is checked.
+* Learned that AWS WAF filters HTTP requests before they reach an application or API, blocking common attacks like SQL injection and cross-site scripting, and that I can write my own allow/block rules.
+
+* In the WAF lab I created a web ACL with managed rules, added a rule that blocks requests carrying a certain header plus an advanced custom rule, watched the blocked test requests show up in the dashboard and sampled requests, and turned on logging.

@@ -27,13 +27,6 @@ pre: " <b> 1.9. </b> "
 
 * Went through the Microsoft workloads on AWS workshop and noted which tracks and modules fit our Windows Server topic, what each one needs before starting, and what it costs to run.
 
-* Notes from the Windows Server upgrade blog:
-
-  * Windows Server 2012/2012 R2 lost support on October 10, 2023, and extended support for 2016 ends on January 12, 2027, after which no more security patches arrive
-  * The AWSEC2-CloneInstanceAndUpgradeWindows runbook works on a clone, not the original, and outputs a new AMI
-  * Before running it: SSM Agent working, TLS 1.2, 20 GB or more free on the root volume, an instance profile for SSM and outbound access to the SSM endpoints
-  * It does not handle domain controllers, clusters, desktop editions or Remote Desktop Session Host servers, and the application must be tested before going back to production
-
 * Built WordPress on AWS step by step:
 
   * Web server in a public subnet, RDS in a private subnet, each with its own security group
@@ -42,3 +35,10 @@ pre: " <b> 1.9. </b> "
   * Snapshot and restore of the database, then CloudFront for faster delivery
 
 * Saw how CloudFront, Auto Scaling with a load balancer, and RDS Multi-AZ each cover a different part of availability and performance.
+
+* Notes from the Windows Server upgrade blog:
+
+  * Windows Server 2012/2012 R2 lost support on October 10, 2023, and extended support for 2016 ends on January 12, 2027, after which no more security patches arrive
+  * The AWSEC2-CloneInstanceAndUpgradeWindows runbook works on a clone, not the original, and outputs a new AMI
+  * Before running it: SSM Agent working, TLS 1.2, 20 GB or more free on the root volume, an instance profile for SSM and outbound access to the SSM endpoints
+  * It does not handle domain controllers, clusters, desktop editions or Remote Desktop Session Host servers, and the application must be tested before going back to production

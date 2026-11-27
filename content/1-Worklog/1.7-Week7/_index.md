@@ -26,13 +26,6 @@ pre: " <b> 1.7. </b> "
 
 ### Week 7 Achievements:
 
-* CloudWatch now makes sense to me as one place for metrics, logs and alarms:
-
-  * The lab stack gave the agent an IAM role with only the permissions it needs, not AdministratorAccess
-  * I combined metrics with search and math expressions and used dynamic labels to make the graphs readable
-  * Logs Insights let me filter the application logs quickly; my metric filter turned ERROR lines into a metric, and I noticed it only counts events that come in after the filter exists
-  * The alarm on that metric sent me an email through SNS, and the dashboard put everything on one screen
-
 * Built the hybrid DNS lab:
 
   * Network (VPC, public/private subnets, Remote Desktop Gateway) from a CloudFormation template
@@ -40,6 +33,13 @@ pre: " <b> 1.7. </b> "
   * Outbound endpoint for queries going from AWS to on-premises, inbound endpoint for the reverse direction, and a resolver rule choosing which domains to forward
   * Confirmed from the gateway that names resolve with both nslookup and Resolve-DnsName
 
-* Compared four workshop ideas (Rekognition media moderation, Telegram security alerts, serverless REST API, automated backup and DR) against the FCAJ scoring rules, which gave me a clearer view of what a good workshop topic needs.
-
 * Wrote my own S3 notes: a bucket is the container with a globally unique name in one Region, an object is the file plus its metadata, addressed by its key.
+
+* CloudWatch now makes sense to me as one place for metrics, logs and alarms:
+
+  * The lab stack gave the agent an IAM role with only the permissions it needs, not AdministratorAccess
+  * I combined metrics with search and math expressions and used dynamic labels to make the graphs readable
+  * Logs Insights let me filter the application logs quickly; my metric filter turned ERROR lines into a metric, and I noticed it only counts events that come in after the filter exists
+  * The alarm on that metric sent me an email through SNS, and the dashboard put everything on one screen
+
+* Compared four workshop ideas (Rekognition media moderation, Telegram security alerts, serverless REST API, automated backup and DR) against the FCAJ scoring rules, which gave me a clearer view of what a good workshop topic needs.

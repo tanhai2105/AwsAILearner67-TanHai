@@ -27,13 +27,6 @@ pre: " <b> 1.9. </b> "
 
 * Đi qua workshop Microsoft workloads trên AWS, ghi lại track và module nào hợp với chủ đề Windows Server của nhóm, mỗi phần cần chuẩn bị gì và tốn bao nhiêu tiền.
 
-* Ghi chú từ blog nâng cấp Windows Server:
-
-  * Windows Server 2012/2012 R2 hết hỗ trợ từ 10/10/2023, bản 2016 hết hỗ trợ mở rộng ngày 12/01/2027, sau đó sẽ không còn bản vá bảo mật
-  * Runbook AWSEC2-CloneInstanceAndUpgradeWindows nâng cấp trên bản clone chứ không đụng vào máy gốc, kết quả là một AMI mới
-  * Trước khi chạy cần: SSM Agent hoạt động, TLS 1.2, ổ root trống từ 20 GB, instance profile cho SSM và đi ra được các endpoint của SSM
-  * Không áp dụng cho domain controller, cluster, bản desktop hay server có role Remote Desktop Session Host; nâng cấp xong phải test ứng dụng rồi mới đưa lại production
-
 * Dựng WordPress trên AWS từng bước:
 
   * Web server ở public subnet, RDS ở private subnet, mỗi tầng một security group
@@ -42,3 +35,10 @@ pre: " <b> 1.9. </b> "
   * Snapshot rồi restore database, sau đó thêm CloudFront cho tải nhanh hơn
 
 * Thấy rõ CloudFront, Auto Scaling đi kèm load balancer và RDS Multi-AZ mỗi thứ lo một phần khác nhau về tính sẵn sàng và hiệu năng.
+
+* Ghi chú từ blog nâng cấp Windows Server:
+
+  * Windows Server 2012/2012 R2 hết hỗ trợ từ 10/10/2023, bản 2016 hết hỗ trợ mở rộng ngày 12/01/2027, sau đó sẽ không còn bản vá bảo mật
+  * Runbook AWSEC2-CloneInstanceAndUpgradeWindows nâng cấp trên bản clone chứ không đụng vào máy gốc, kết quả là một AMI mới
+  * Trước khi chạy cần: SSM Agent hoạt động, TLS 1.2, ổ root trống từ 20 GB, instance profile cho SSM và đi ra được các endpoint của SSM
+  * Không áp dụng cho domain controller, cluster, bản desktop hay server có role Remote Desktop Session Host; nâng cấp xong phải test ứng dụng rồi mới đưa lại production

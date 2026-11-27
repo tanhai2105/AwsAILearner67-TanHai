@@ -25,13 +25,13 @@ pre: " <b> 1.4. </b> "
 
 ### Kết quả đạt được tuần 4:
 
-* Thấy CloudShell khá tiện: mở trình duyệt là có terminal, AWS CLI đăng nhập sẵn. Mình tập lệnh Linux cơ bản trên đó, dùng CLI liệt kê bucket với instance, và chuyển file qua lại.
-
 * Hiểu S3 lưu object trong bucket, còn storage class quyết định giá và tốc độ truy cập. Đã tạo bucket và đưa file website lên.
 
 * Đưa được website tĩnh lên chạy từ S3. Muốn truy cập được thì phải tắt Block public access và mở object bằng ACL, mà cách này chỉ chạy HTTP qua website endpoint.
 
 * Sau đó sửa lại cho an toàn: bật lại chặn public và cho CloudFront đọc bucket bằng bucket policy. Qua CloudFront trang tải nhanh hơn, xem được edge location (PoP) nào trả kết quả.
+
+* Thấy CloudShell khá tiện: mở trình duyệt là có terminal, AWS CLI đăng nhập sẵn. Mình tập lệnh Linux cơ bản trên đó, dùng CLI liệt kê bucket với instance, và chuyển file qua lại.
 
 * Tập quản lý object:
 

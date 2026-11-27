@@ -25,17 +25,6 @@ pre: " <b> 1.5. </b> "
 
 ### Week 5 Achievements:
 
-* The team now has a short list of first ideas for the proposal and the workshop to keep working on.
-
-* RDS takes over the routine database work (patching, backups, failover). I learned the engines it supports, how Multi-AZ keeps a standby copy in another AZ, and how encryption, the VPC and IAM protect it.
-
-* Ran the full RDS lab:
-
-  * The MySQL instance sits in private subnets picked by the DB subnet group, so only the EC2 instance in the VPC can reach it
-  * From EC2 I used the MySQL client to make a database and a table and add some rows
-  * Deployed an application on top of that database
-  * Took a snapshot and restored it as a new instance to see that the data came back
-
 * Takeaways from the Fleet Manager blog:
 
   * I can RDP into a Windows instance straight from the browser, through Session Manager
@@ -49,3 +38,14 @@ pre: " <b> 1.5. </b> "
   * Latency and error rate do not tell if an answer is good; Omni has 17 built-in evaluators such as coherence, helpfulness and faithfulness for that
   * Playground, Experiments and Prompt Management help compare prompts or settings and go back to an older version
   * It runs in VS Code, Kiro or the web, builds on OpenInference and ADOT, and supports LangChain, CrewAI, Strands and other frameworks
+
+* RDS takes over the routine database work (patching, backups, failover). I learned the engines it supports, how Multi-AZ keeps a standby copy in another AZ, and how encryption, the VPC and IAM protect it.
+
+* Ran the full RDS lab:
+
+  * The MySQL instance sits in private subnets picked by the DB subnet group, so only the EC2 instance in the VPC can reach it
+  * From EC2 I used the MySQL client to make a database and a table and add some rows
+  * Deployed an application on top of that database
+  * Took a snapshot and restored it as a new instance to see that the data came back
+
+* The team now has a short list of first ideas for the proposal and the workshop to keep working on.

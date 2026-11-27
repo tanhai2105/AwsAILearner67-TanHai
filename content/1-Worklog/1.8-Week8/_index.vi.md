@@ -25,6 +25,8 @@ pre: " <b> 1.8. </b> "
 
 ### Kết quả đạt được tuần 8:
 
+* Workshop tiến thêm một bước, đồng thời mình rà lại proposal để chắc kiến trúc và thông tin vẫn khớp nhau.
+
 * Hiểu AWS CLI là công cụ mã nguồn mở gọi cùng bộ API public như console, nên cái gì bấm được trên console thì cũng viết script được.
 
 * Cài đặt CLI cho đúng:
@@ -41,5 +43,3 @@ pre: " <b> 1.8. </b> "
   * Một EC2 trong mạng đó với key pair và security group riêng, SSH vào được rồi terminate
 
 * Rút ra bài học về credential: không bao giờ chia sẻ access key, ưu tiên IAM role, key và key pair không dùng nữa thì xóa.
-
-* Workshop tiến thêm một bước, đồng thời mình rà lại proposal để chắc kiến trúc và thông tin vẫn khớp nhau.

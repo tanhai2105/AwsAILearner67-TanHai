@@ -26,13 +26,6 @@ pre: " <b> 1.7. </b> "
 
 ### Kết quả đạt được tuần 7:
 
-* Giờ mình hiểu CloudWatch là chỗ gom metric, log và alarm:
-
-  * Stack lab cấp cho agent một IAM role chỉ đủ quyền cần dùng, chứ không phải AdministratorAccess
-  * Ghép metric bằng search/math expression, dùng dynamic label cho biểu đồ dễ đọc hơn
-  * Logs Insights lọc log rất nhanh; metric filter biến các dòng ERROR thành metric, và mình để ý là filter chỉ đếm sự kiện đến sau lúc tạo nó
-  * Alarm trên metric đó gửi mail về qua SNS, còn dashboard gom hết lên một màn hình
-
 * Dựng xong lab hybrid DNS:
 
   * Mạng (VPC, public/private subnet, Remote Desktop Gateway) dựng từ CloudFormation template
@@ -40,6 +33,13 @@ pre: " <b> 1.7. </b> "
   * Outbound endpoint cho truy vấn đi từ AWS ra on-premises, inbound endpoint cho chiều ngược lại, resolver rule để chọn domain nào được chuyển tiếp
   * Từ gateway kiểm tra phân giải tên được bằng cả nslookup lẫn Resolve-DnsName
 
-* So bốn ý tưởng workshop (kiểm duyệt media bằng Rekognition, cảnh báo bảo mật qua Telegram, REST API serverless, backup và DR tự động) với tiêu chí chấm của FCAJ, nhờ vậy mình rõ hơn một chủ đề workshop tốt cần gì.
-
 * Tự ghi chú về S3: bucket là "thùng chứa" có tên duy nhất toàn cầu, nằm trong một Region; object là file kèm metadata, được truy cập qua key.
+
+* Giờ mình hiểu CloudWatch là chỗ gom metric, log và alarm:
+
+  * Stack lab cấp cho agent một IAM role chỉ đủ quyền cần dùng, chứ không phải AdministratorAccess
+  * Ghép metric bằng search/math expression, dùng dynamic label cho biểu đồ dễ đọc hơn
+  * Logs Insights lọc log rất nhanh; metric filter biến các dòng ERROR thành metric, và mình để ý là filter chỉ đếm sự kiện đến sau lúc tạo nó
+  * Alarm trên metric đó gửi mail về qua SNS, còn dashboard gom hết lên một màn hình
+
+* So bốn ý tưởng workshop (kiểm duyệt media bằng Rekognition, cảnh báo bảo mật qua Telegram, REST API serverless, backup và DR tự động) với tiêu chí chấm của FCAJ, nhờ vậy mình rõ hơn một chủ đề workshop tốt cần gì.

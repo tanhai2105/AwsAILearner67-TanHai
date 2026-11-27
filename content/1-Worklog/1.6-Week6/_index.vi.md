@@ -25,20 +25,6 @@ pre: " <b> 1.6. </b> "
 
 ### Kết quả đạt được tuần 6:
 
-* Lightsail là lựa chọn đơn giản: trả một giá mỗi tháng là có máy chủ, ổ SSD, băng thông và static IP, không phải tự lo VPC, security group hay EBS.
-
-* Dựng hai app trên Lightsail ở Region Singapore, mỗi máy gắn static IP riêng để địa chỉ không bị đổi:
-
-  * WordPress trên blueprint Ubuntu 24.04, dùng database MySQL do Lightsail quản lý
-  * PrestaShop từ application blueprint có sẵn
-
-* Vận hành như một hệ thống nhỏ thật sự:
-
-  * Rule SSH giờ chỉ cho Lightsail browser SSH client vào, không mở cho cả internet nữa
-  * Instance Lightsail không đổi gói tại chỗ được, nên mình chụp snapshot, tạo máy lớn hơn từ đó rồi chuyển static IP sang máy mới
-  * Blog vẫn đủ bài viết sau khi chuyển vì dữ liệu nằm ở managed database chứ không nằm trên máy
-  * Thêm alarm CPU
-
 * Hiểu vì sao cần Auto Scaling: máy lỗi thì tự thay, số máy tăng giảm theo lượng truy cập, load balancer chia request, giờ vắng thì tốn ít tiền hơn.
 
 * Dựng phần scaling cho app FCAJ Management (web server trên EC2 cộng database):
@@ -53,3 +39,17 @@ pre: " <b> 1.6. </b> "
   * Scheduled: đổi số máy theo giờ cố định khi lưu lượng có quy luật
   * Dynamic: phản ứng theo metric trực tiếp như CPU hay số request
   * Predictive: dự báo 48 đến 72 giờ tới dựa trên lịch sử, nên phải có sẵn dữ liệu metric từ trước
+
+* Lightsail là lựa chọn đơn giản: trả một giá mỗi tháng là có máy chủ, ổ SSD, băng thông và static IP, không phải tự lo VPC, security group hay EBS.
+
+* Dựng hai app trên Lightsail ở Region Singapore, mỗi máy gắn static IP riêng để địa chỉ không bị đổi:
+
+  * WordPress trên blueprint Ubuntu 24.04, dùng database MySQL do Lightsail quản lý
+  * PrestaShop từ application blueprint có sẵn
+
+* Vận hành như một hệ thống nhỏ thật sự:
+
+  * Rule SSH giờ chỉ cho Lightsail browser SSH client vào, không mở cho cả internet nữa
+  * Instance Lightsail không đổi gói tại chỗ được, nên mình chụp snapshot, tạo máy lớn hơn từ đó rồi chuyển static IP sang máy mới
+  * Blog vẫn đủ bài viết sau khi chuyển vì dữ liệu nằm ở managed database chứ không nằm trên máy
+  * Thêm alarm CPU

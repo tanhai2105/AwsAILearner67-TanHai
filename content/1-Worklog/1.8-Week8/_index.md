@@ -25,6 +25,8 @@ pre: " <b> 1.8. </b> "
 
 ### Week 8 Achievements:
 
+* Moved the workshop forward and went back over the proposal to make sure the architecture and the details still match.
+
 * Understood that the AWS CLI is an open-source client calling the same public APIs as the console, so anything I click can also be scripted.
 
 * Set up the CLI properly:
@@ -41,5 +43,3 @@ pre: " <b> 1.8. </b> "
   * An EC2 instance in that network with its own key pair and security group, reached over SSH and then terminated
 
 * Took the credential lessons seriously: access keys are never shared, IAM roles are preferred, and unused keys and key pairs get deleted.
-
-* Moved the workshop forward and went back over the proposal to make sure the architecture and the details still match.

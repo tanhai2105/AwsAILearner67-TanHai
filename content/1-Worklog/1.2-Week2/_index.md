@@ -25,11 +25,11 @@ pre: " <b> 1.2. </b> "
 
 ### Week 2 Achievements:
 
-* Cost optimization now makes more sense to me: pick the right size, turn off what is not used, and watch the bill early instead of at the end of the month.
-
 * Know how Cloud Journey is laid out, so I can find the lab guide and the reading material for each topic quickly.
 
 * Set up my own AWS account on the Free Tier and understood the difference between the Free plan, the Paid plan and the credits that come with them. Moving around the Console to open a service is no longer slow for me.
+
+* Cost optimization now makes more sense to me: pick the right size, turn off what is not used, and watch the bill early instead of at the end of the month.
 
 * Put a budget on the account with AWS Budget and set alert thresholds. I also saw the other budget types (Usage, RI, Savings Plans) besides the Cost budget I used.
 

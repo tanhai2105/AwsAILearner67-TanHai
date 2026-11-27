@@ -25,11 +25,11 @@ pre: " <b> 1.3. </b> "
 
 ### Kết quả đạt được tuần 3:
 
+* Biết khi tạo EC2 cần chọn gì: instance type, AMI, gắn ổ EBS và giữ kỹ key pair.
+
 * Giải thích được các thành phần của VPC: subnet public và private, route table đẩy traffic ra internet gateway hay NAT gateway, và security group (stateful, gắn theo instance) khác network ACL (stateless, gắn theo subnet) chỗ nào.
 
 * Tự dựng một VPC chạy được, đặt EC2 vào và kiểm tra thấy phía private chỉ ra internet qua NAT gateway.
-
-* Biết khi tạo EC2 cần chọn gì: instance type, AMI, gắn ổ EBS và giữ kỹ key pair.
 
 * Đăng nhập được cả máy Linux lẫn Windows, đổi cỡ một máy, chụp snapshot rồi tạo AMI riêng từ đó.
 

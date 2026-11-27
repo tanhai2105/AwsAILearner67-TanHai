@@ -25,17 +25,6 @@ pre: " <b> 1.5. </b> "
 
 ### Kết quả đạt được tuần 5:
 
-* Nhóm đã có vài ý tưởng ban đầu cho proposal và workshop để tiếp tục phát triển.
-
-* RDS lo giúp mấy việc lặp đi lặp lại của database (vá lỗi, backup, failover). Mình nắm được các engine nó hỗ trợ, Multi-AZ giữ bản standby ở AZ khác ra sao, và mã hóa, VPC, IAM bảo vệ database thế nào.
-
-* Làm hết lab RDS:
-
-  * Instance MySQL nằm ở private subnet do DB subnet group chọn, nên chỉ EC2 trong VPC mới vào được
-  * Từ EC2 dùng MySQL client tạo database, tạo bảng và thêm vài dòng dữ liệu
-  * Chạy một ứng dụng dùng database đó
-  * Chụp snapshot rồi restore ra instance mới, kiểm tra thấy dữ liệu vẫn còn
-
 * Rút ra từ blog Fleet Manager:
 
   * RDP vào máy Windows ngay trên trình duyệt, đi qua Session Manager
@@ -49,3 +38,14 @@ pre: " <b> 1.5. </b> "
   * Latency hay tỷ lệ lỗi không nói được câu trả lời tốt hay dở, Omni có sẵn 17 evaluator như coherence, helpfulness, faithfulness để chấm
   * Playground, Experiments và Prompt Management giúp so prompt, so cấu hình và quay về bản cũ
   * Dùng trong VS Code, Kiro hoặc bản web, dựa trên OpenInference và ADOT, hỗ trợ LangChain, CrewAI, Strands và nhiều framework khác
+
+* RDS lo giúp mấy việc lặp đi lặp lại của database (vá lỗi, backup, failover). Mình nắm được các engine nó hỗ trợ, Multi-AZ giữ bản standby ở AZ khác ra sao, và mã hóa, VPC, IAM bảo vệ database thế nào.
+
+* Làm hết lab RDS:
+
+  * Instance MySQL nằm ở private subnet do DB subnet group chọn, nên chỉ EC2 trong VPC mới vào được
+  * Từ EC2 dùng MySQL client tạo database, tạo bảng và thêm vài dòng dữ liệu
+  * Chạy một ứng dụng dùng database đó
+  * Chụp snapshot rồi restore ra instance mới, kiểm tra thấy dữ liệu vẫn còn
+
+* Nhóm đã có vài ý tưởng ban đầu cho proposal và workshop để tiếp tục phát triển.

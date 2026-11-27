@@ -25,11 +25,11 @@ pre: " <b> 1.3. </b> "
 
 ### Week 3 Achievements:
 
+* Know what goes into launching EC2: choosing an instance type and an AMI, attaching EBS storage and keeping the key pair safe.
+
 * Can explain the pieces of a VPC: public and private subnets, how route tables send traffic to an internet gateway or a NAT gateway, and how security groups (stateful, per instance) differ from network ACLs (stateless, per subnet).
 
 * Built a working VPC myself, put an EC2 instance in it and confirmed that the private side reaches the internet only through the NAT gateway.
-
-* Know what goes into launching EC2: choosing an instance type and an AMI, attaching EBS storage and keeping the key pair safe.
 
 * Logged in to both a Linux instance and a Windows instance, resized one, took a snapshot and made my own AMI from it.
 
