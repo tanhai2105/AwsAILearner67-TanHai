@@ -16,11 +16,11 @@ pre: " <b> 1.3. </b> "
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Kiến thức nền EC2: <br>&emsp; + Instance type <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + Key pair <br> - Đọc các bước chuẩn bị của lab EC2 | 21/09/2026 | 21/09/2026 | <https://000004.awsfcaj.com/> |
-| 3 | - Đọc phần VPC trong lab: <br>&emsp; + Subnet, Route Table <br>&emsp; + Internet Gateway, NAT Gateway <br> - Đọc về hai lớp firewall: <br>&emsp; + Security Group <br>&emsp; + Network ACL | 22/09/2026 | 22/09/2026 | <https://000003.awsfcaj.com/> |
-| 4 | - **Thực hành:** <br>&emsp; + Dựng VPC với subnet, Internet Gateway và Route Table <br>&emsp; + Thêm Security Group <br>&emsp; + Tạo EC2 trong VPC rồi thử kết nối <br>&emsp; + Thêm NAT Gateway cho phía private | 23/09/2026 | 23/09/2026 | <https://000003.awsfcaj.com/> |
-| 5 | - Học thêm về EC2: <br>&emsp; + Đổi cỡ instance <br>&emsp; + EBS snapshot <br>&emsp; + Tự tạo AMI <br> - **Thực hành:** <br>&emsp; + Tạo VPC và Security Group cho lab <br>&emsp; + Tạo một máy Linux, một máy Windows và đăng nhập vào cả hai | 24/09/2026 | 24/09/2026 | <https://000004.awsfcaj.com/> |
-| 6 | - Tìm hiểu cách dùng IAM để giới hạn việc tạo EC2 và chi phí <br> - **Thực hành:** <br>&emsp; + Triển khai app AWS User Management trên EC2 <br>&emsp; + Xóa hết tài nguyên của lab | 25/09/2026 | 25/09/2026 | <https://000004.awsfcaj.com/> |
+| 2 | - Đọc lý thuyết EC2: các loại instance, AMI, ổ EBS và cặp key pair <br> - Xem qua phần chuẩn bị của lab EC2 | 21/09/2026 | 21/09/2026 | <https://000004.awsfcaj.com/> |
+| 3 | - Đọc phần mạng của lab VPC: subnet, route table, internet gateway và NAT gateway <br> - Phân biệt hai lớp tường lửa: security group và network ACL | 22/09/2026 | 22/09/2026 | <https://000003.awsfcaj.com/> |
+| 4 | - **Thực hành:** <br>&emsp; + Dựng VPC gồm subnet, internet gateway và route table, rồi thêm security group <br>&emsp; + Đặt một EC2 vào VPC và thử kết nối <br>&emsp; + Gắn NAT gateway để máy ở subnet private ra được internet | 23/09/2026 | 23/09/2026 | <https://000003.awsfcaj.com/> |
+| 5 | - Đọc tiếp về EC2: đổi cỡ instance, chụp EBS snapshot và tự tạo AMI <br> - **Thực hành:** <br>&emsp; + Chuẩn bị VPC và security group cho lab <br>&emsp; + Chạy một máy Linux và một máy Windows, đăng nhập thử cả hai | 24/09/2026 | 24/09/2026 | <https://000004.awsfcaj.com/> |
+| 6 | - Tìm hiểu cách dùng IAM để hạn chế việc tạo EC2, qua đó kiểm soát chi phí <br> - **Thực hành:** <br>&emsp; + Chạy ứng dụng AWS User Management trên EC2 <br>&emsp; + Dọn toàn bộ tài nguyên của lab | 25/09/2026 | 25/09/2026 | <https://000004.awsfcaj.com/> |
 
 
 ### Kết quả đạt được tuần 3:

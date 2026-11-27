@@ -16,11 +16,11 @@ pre: " <b> 1.6. </b> "
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Overview of EC2 Auto Scaling groups and Elastic Load Balancing <br> - **Practice:** <br>&emsp; + Network setup <br>&emsp; + An EC2 instance plus a database instance, with sample data loaded <br>&emsp; + Web server deployment | 10/12/2026 | 10/12/2026 | <https://000006.awsfcaj.com/> |
-| 3 | - **Practice:** <br>&emsp; + Launch template <br>&emsp; + Target group and Application Load Balancer <br>&emsp; + Checked the app through the load balancer <br>&emsp; + Auto Scaling group <br>&emsp; + Metrics prepared for predictive scaling | 10/13/2026 | 10/13/2026 | <https://000006.awsfcaj.com/> |
-| 4 | - **Practice:** <br>&emsp; + Ran manual, scheduled, dynamic and predictive scaling <br>&emsp; + Cleaned up the lab | 10/14/2026 | 10/14/2026 | <https://000006.awsfcaj.com/> |
-| 5 | - Overview of Amazon Lightsail <br> - **Practice:** <br>&emsp; + Created a Lightsail managed MySQL database <br>&emsp; + Set up a WordPress blog on an Ubuntu blueprint, gave it a static IP and finished the WordPress setup <br>&emsp; + Set up a PrestaShop store from its application blueprint with a static IP and a domain | 10/15/2026 | 10/15/2026 | <https://000045.awsfcaj.com/> |
-| 6 | - **Practice:** <br>&emsp; + Tightened the SSH firewall rule <br>&emsp; + Took snapshots <br>&emsp; + Restored WordPress from a snapshot onto a bigger plan <br>&emsp; + Added a CPU alarm <br>&emsp; + Removed the lab resources | 10/16/2026 | 10/16/2026 | <https://000045.awsfcaj.com/> |
+| 2 | - Looked at an overview of EC2 Auto Scaling groups and Elastic Load Balancing <br> - **Practice:** <br>&emsp; + Set up the network <br>&emsp; + Created an EC2 instance and a database instance and loaded sample data <br>&emsp; + Installed and started the web server | 10/12/2026 | 10/12/2026 | <https://000006.awsfcaj.com/> |
+| 3 | - **Practice:** <br>&emsp; + Created a launch template, a target group and an Application Load Balancer <br>&emsp; + Opened the app through the load balancer to check it <br>&emsp; + Created the Auto Scaling group and prepared metrics for predictive scaling | 10/13/2026 | 10/13/2026 | <https://000006.awsfcaj.com/> |
+| 4 | - **Practice:** <br>&emsp; + Tried all four scaling types in turn: manual, scheduled, dynamic and predictive <br>&emsp; + Cleaned up the lab | 10/14/2026 | 10/14/2026 | <https://000006.awsfcaj.com/> |
+| 5 | - Read the Amazon Lightsail overview <br> - **Practice:** <br>&emsp; + Created a managed MySQL database in Lightsail <br>&emsp; + Built a WordPress blog on an Ubuntu blueprint, attached a static IP and then installed WordPress <br>&emsp; + Built a PrestaShop store from its application blueprint, with a static IP and a domain | 10/15/2026 | 10/15/2026 | <https://000045.awsfcaj.com/> |
+| 6 | - **Practice:** <br>&emsp; + Restricted the SSH rule of the firewall <br>&emsp; + Took a snapshot, then recreated WordPress from it on a bigger plan <br>&emsp; + Added a CPU alarm <br>&emsp; + Removed the lab resources | 10/16/2026 | 10/16/2026 | <https://000045.awsfcaj.com/> |
 
 
 ### Week 6 Achievements:

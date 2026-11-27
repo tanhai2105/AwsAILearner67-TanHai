@@ -16,11 +16,11 @@ pre: " <b> 1.6. </b> "
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Tổng quan EC2 Auto Scaling Group và Elastic Load Balancing <br> - **Thực hành:** <br>&emsp; + Dựng mạng <br>&emsp; + Tạo EC2 và database instance, nạp dữ liệu mẫu <br>&emsp; + Triển khai web server | 12/10/2026 | 12/10/2026 | <https://000006.awsfcaj.com/> |
-| 3 | - **Thực hành:** <br>&emsp; + Launch template <br>&emsp; + Target group và Application Load Balancer <br>&emsp; + Vào app qua load balancer để kiểm tra <br>&emsp; + Auto Scaling group <br>&emsp; + Chuẩn bị metric cho predictive scaling | 13/10/2026 | 13/10/2026 | <https://000006.awsfcaj.com/> |
-| 4 | - **Thực hành:** <br>&emsp; + Chạy thử manual, scheduled, dynamic và predictive scaling <br>&emsp; + Dọn lab | 14/10/2026 | 14/10/2026 | <https://000006.awsfcaj.com/> |
-| 5 | - Tổng quan Amazon Lightsail <br> - **Thực hành:** <br>&emsp; + Tạo database MySQL do Lightsail quản lý <br>&emsp; + Dựng blog WordPress trên blueprint Ubuntu, gắn static IP và cài đặt WordPress <br>&emsp; + Dựng shop PrestaShop từ application blueprint, gắn static IP và tên miền | 15/10/2026 | 15/10/2026 | <https://000045.awsfcaj.com/> |
-| 6 | - **Thực hành:** <br>&emsp; + Siết lại rule SSH của firewall <br>&emsp; + Chụp snapshot <br>&emsp; + Tạo lại WordPress từ snapshot trên gói lớn hơn <br>&emsp; + Thêm alarm CPU <br>&emsp; + Xóa tài nguyên lab | 16/10/2026 | 16/10/2026 | <https://000045.awsfcaj.com/> |
+| 2 | - Xem tổng quan EC2 Auto Scaling Group và Elastic Load Balancing <br> - **Thực hành:** <br>&emsp; + Dựng phần mạng <br>&emsp; + Tạo EC2 và database instance, nhập dữ liệu mẫu <br>&emsp; + Cài và chạy web server | 12/10/2026 | 12/10/2026 | <https://000006.awsfcaj.com/> |
+| 3 | - **Thực hành:** <br>&emsp; + Tạo launch template, target group và Application Load Balancer <br>&emsp; + Truy cập app qua load balancer để kiểm tra <br>&emsp; + Tạo Auto Scaling group và chuẩn bị metric cho predictive scaling | 13/10/2026 | 13/10/2026 | <https://000006.awsfcaj.com/> |
+| 4 | - **Thực hành:** <br>&emsp; + Thử lần lượt bốn kiểu scaling: manual, scheduled, dynamic, predictive <br>&emsp; + Dọn lab | 14/10/2026 | 14/10/2026 | <https://000006.awsfcaj.com/> |
+| 5 | - Đọc tổng quan Amazon Lightsail <br> - **Thực hành:** <br>&emsp; + Tạo database MySQL do Lightsail quản lý <br>&emsp; + Dựng blog WordPress trên blueprint Ubuntu, gắn static IP rồi cài WordPress <br>&emsp; + Dựng shop PrestaShop từ application blueprint, gắn static IP và tên miền | 15/10/2026 | 15/10/2026 | <https://000045.awsfcaj.com/> |
+| 6 | - **Thực hành:** <br>&emsp; + Giới hạn lại rule SSH của firewall <br>&emsp; + Chụp snapshot, rồi tạo lại WordPress từ snapshot trên gói lớn hơn <br>&emsp; + Thêm alarm CPU <br>&emsp; + Xóa tài nguyên lab | 16/10/2026 | 16/10/2026 | <https://000045.awsfcaj.com/> |
 
 
 ### Kết quả đạt được tuần 6:
