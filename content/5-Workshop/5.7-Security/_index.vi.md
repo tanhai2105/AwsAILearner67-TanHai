@@ -66,3 +66,5 @@ Các dịch vụ có trong Calculator (EC2, EBS và Lambda) cộng lại **$7.12
 - Giữ ổ gp3 30 GB và không thêm IOPS hay throughput.
 - Không gắn Elastic IP, vì bị tính phí khi đang được cấp phát.
 - Xóa toàn bộ tài nguyên sau workshop (xem 5.8).
+
+Trong phần này, bạn đã rà soát bảo mật của Cost Guard (mỗi hàm một IAM role, `StopInstances` chỉ áp dụng cho một instance, không mở cổng inbound), dự toán khoảng $7.12 mỗi tháng cho 120 giờ lab so với $31.04 nếu chạy 24/7, và các cách giữ chi phí thấp.

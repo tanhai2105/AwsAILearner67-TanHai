@@ -85,3 +85,5 @@ aws cloudformation deploy \
 **Check:** the instance type is `t3.small` and the instance state is **Running**.
 
 **Result:** all resources are present and the instance is running. The instance has now started to cost money, so continue to 5.4 without long pauses.
+
+In this section, you deployed the `CostGuard` stack with CloudFormation. It created the lab machine and everything the three layers share: Parameter Store settings, the DynamoDB table, the SNS topics and the IAM roles. You also confirmed the email subscriptions. The machine is running and already costs money, so move on to the tests in the next sections without a long pause.

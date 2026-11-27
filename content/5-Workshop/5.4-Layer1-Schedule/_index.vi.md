@@ -87,3 +87,5 @@ Nhóm không đổi `StopCron` mà kiểm tra luôn lần chạy 22:00 thật ng
 ![Bản ghi DynamoDB của lần chạy 22:00](../../../images/5-Workshop/5.4-layer1/59-dynamodb-22h-noop-record.png)
 
 **Kiểm tra:** có bản ghi mới với `event = schedule_noop` và `timestamp` trùng giờ chạy của lịch.
+
+Trong phần này, bạn đã xem lịch `costguard-daily-stop` chạy lúc 22:00 giờ Việt Nam bằng EventBridge Scheduler và kiểm thử hàm `CostGuard-ScheduleHandler`. Khi máy đang chạy, hàm dừng máy và ghi `schedule_stop`; khi máy đã tắt, hàm chỉ ghi `schedule_noop`. Lớp 1 tắt máy vào giờ cố định và không cần dữ liệu billing.

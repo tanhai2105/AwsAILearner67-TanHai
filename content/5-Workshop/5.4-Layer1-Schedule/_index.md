@@ -87,3 +87,5 @@ In our own run we did not change `StopCron`; we checked the real 22:00 run on 22
 ![DynamoDB item of the 22:00 run](../../images/5-Workshop/5.4-layer1/59-dynamodb-22h-noop-record.png)
 
 **Check:** there is a new item with `event = schedule_noop` and a `timestamp` that matches the schedule run.
+
+In this section, you looked at the schedule `costguard-daily-stop`, which runs at 22:00 Vietnam time through EventBridge Scheduler, and tested the `CostGuard-ScheduleHandler` function. When the instance was running, the function stopped it and wrote `schedule_stop`; when it was already stopped, the function only wrote `schedule_noop`. Layer 1 stops the machine at a fixed time and needs no billing data.

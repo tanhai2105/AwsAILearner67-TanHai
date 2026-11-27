@@ -90,3 +90,5 @@ Dự án đặt mục tiêu phản ứng dưới 5 phút, tức trong một chu 
 ![Sự kiện StopInstances trong CloudTrail do CostGuard-CostMeter gọi](../../../images/5-Workshop/5.5-layer2/33-cg-l2-cloudtrail-reaction.png)
 
 **Kiểm tra:** sự kiện `StopInstances` do `CostGuard-CostMeter` gọi, và Event time cách giờ lưu ngưỡng không quá 5 phút.
+
+Trong phần này, bạn đã kiểm tra `CostGuard-CostMeter` chạy mỗi 5 phút, hạ ngưỡng xuống `0.001` để ép máy tắt, và đo thời gian phản ứng bằng CloudTrail: 3 phút 47 giây ở lần chạy của nhóm, nằm trong một chu kỳ 5 phút. Lớp 2 phản ứng trong vài phút vì không phải chờ dữ liệu billing.

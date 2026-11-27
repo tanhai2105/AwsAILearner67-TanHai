@@ -85,3 +85,5 @@ aws cloudformation deploy \
 **Kiểm tra:** Instance type là `t3.small` và Instance state là **Running**.
 
 **Kết quả trả về:** đủ mọi tài nguyên và máy đang chạy. Máy đã bắt đầu tính tiền, nên chuyển sang 5.4 luôn, đừng để lâu.
+
+Trong phần này, bạn đã deploy stack `CostGuard` bằng CloudFormation. Stack tạo máy lab và những thành phần ba lớp dùng chung: cấu hình trong Parameter Store, bảng DynamoDB, các SNS topic và IAM role. Bạn cũng đã xác nhận đăng ký email. Máy đang chạy và bắt đầu tính phí, nên hãy chuyển sang các phần kiểm thử tiếp theo ngay, đừng để lâu.

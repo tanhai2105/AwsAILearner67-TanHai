@@ -66,3 +66,5 @@ The services in the Calculator (EC2, EBS and Lambda) add up to **$7.12 per month
 - Keep the 30 GB gp3 volume and add no extra IOPS or throughput.
 - Do not attach an Elastic IP, which is billed while it is allocated.
 - Delete all resources after the workshop (see 5.8).
+
+In this section, you reviewed the security of Cost Guard (one IAM role per function, `StopInstances` allowed on one instance only, no inbound ports), the estimated cost of about $7.12 a month for 120 lab hours compared with $31.04 for running 24/7, and the ways to keep the cost low.

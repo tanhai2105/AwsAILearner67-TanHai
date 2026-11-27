@@ -102,3 +102,5 @@ Không cần chờ hóa đơn thật tăng. Chỉ cần tự gửi một tin nh�
 ![Email ALARM gửi qua costguard-errors (từ lần thử tương tự với ScheduleHandler)](../../../images/5-Workshop/5.6-layer3/46-gmail-alarm.png)
 
 **Kiểm tra:** thư có tiêu đề bắt đầu bằng `ALARM:` và tên alarm bị kích hoạt.
+
+Trong phần này, bạn đã xem AWS Budget `CostGuard-Budget` ($20, cảnh báo ở 80% và 100%), kiểm thử `CostGuard-BudgetBackstop` bằng cách gửi tin lên topic `costguard-budgets`, và thử ba alarm lỗi bằng cách cố tình làm `CostGuard-CostMeter` lỗi. Cả ba lớp giờ đều đã được kiểm thử, và bạn được báo khi một lớp bị hỏng.

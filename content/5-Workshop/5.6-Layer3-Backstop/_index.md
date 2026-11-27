@@ -102,3 +102,5 @@ This test makes `CostGuard-CostMeter` fail on purpose to check that the alarm an
 ![ALARM email sent through costguard-errors (from the same kind of test on ScheduleHandler)](../../images/5-Workshop/5.6-layer3/46-gmail-alarm.png)
 
 **Check:** the email subject starts with `ALARM:` and names the alarm that fired.
+
+In this section, you looked at the AWS Budget `CostGuard-Budget` ($20, alerts at 80% and 100%), tested `CostGuard-BudgetBackstop` by publishing a message to the `costguard-budgets` topic, and checked the three error alarms by making `CostGuard-CostMeter` fail on purpose. All three layers have now been tested, and you are told when one of them breaks.

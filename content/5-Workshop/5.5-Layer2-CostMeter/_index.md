@@ -90,3 +90,5 @@ In our run we saved the threshold at 17:22:53, and CloudTrail recorded `StopInst
 ![CloudTrail StopInstances event from CostGuard-CostMeter](../../images/5-Workshop/5.5-layer2/33-cg-l2-cloudtrail-reaction.png)
 
 **Check:** the `StopInstances` event was called by `CostGuard-CostMeter`, and its event time is no more than 5 minutes after you saved the threshold.
+
+In this section, you checked that `CostGuard-CostMeter` runs every 5 minutes, lowered the threshold to `0.001` to force a stop, and measured the reaction time with CloudTrail: 3 minutes 47 seconds in our run, within one 5-minute cycle. Layer 2 reacts within minutes because it does not wait for billing data.
