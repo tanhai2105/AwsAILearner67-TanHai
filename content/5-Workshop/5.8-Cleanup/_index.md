@@ -8,7 +8,7 @@ pre: " <b> 5.8. </b> "
 
 ## Clean Up
 
-In this section, you will delete everything you created in the workshop so that nothing is billed afterwards. The screenshots below come from our own clean-up on 26/11/2026 in `us-east-1`, done with an IAM user, not the root user.
+You have now completed the whole Cost Guard workshop: the lab machine is protected by three layers, and all three have been tested. Only the final step is left, which is to clean up and delete everything you created so that nothing is billed afterwards. The screenshots below come from our own clean-up on 26/11/2026 in `us-east-1`, done with an IAM user, not the root user.
 
 Order matters: delete the `CostGuard` stack first, then the lab instance, then the few resources that were created outside the stacks.
 
@@ -223,5 +223,3 @@ An IAM user sees Cost Explorer only if the account owner has turned on IAM acces
 
 - **The stack stays in `DELETE_FAILED`:** open the **Events** tab, find the resource that failed, delete it by hand in its console, then delete the stack again.
 - **A resource is left after the stack is gone:** delete it by hand. Resources of this workshop carry the tag `Project=CostGuard` where tags are supported.
-
-In this section, you deleted the `CostGuard` and `costguard-instance` stacks, removed the Scheduler role and the `cf-templates-*` bucket that were created outside the stacks, and checked every service, ending with a CloudShell sweep where each count is 0. Nothing of Cost Guard is left in the account, so nothing more is billed.

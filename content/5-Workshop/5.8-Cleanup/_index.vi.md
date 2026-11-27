@@ -8,7 +8,7 @@ pre: " <b> 5.8. </b> "
 
 ## Dọn dẹp tài nguyên
 
-Trong phần này, bạn sẽ xóa mọi thứ đã tạo trong workshop để không bị tính phí về sau. Ảnh bên dưới chụp từ lần dọn thật của nhóm ngày 26/11/2026 ở `us-east-1`, làm bằng IAM user, không dùng root user.
+Bạn đã hoàn thành toàn bộ workshop Cost Guard: máy lab được bảo vệ bởi ba lớp và cả ba lớp đều đã được kiểm thử. Giờ chỉ còn bước cuối cùng là dọn dẹp, xóa mọi thứ đã tạo để không bị tính phí về sau. Ảnh bên dưới chụp từ lần dọn thật của nhóm ngày 26/11/2026 ở `us-east-1`, làm bằng IAM user, không dùng root user.
 
 Thứ tự quan trọng: xóa stack `CostGuard` trước, sau đó tới máy lab, cuối cùng là vài tài nguyên được tạo ngoài stack.
 
@@ -223,5 +223,3 @@ IAM user chỉ xem được Cost Explorer khi chủ tài khoản đã bật quy�
 
 - **Stack kẹt ở `DELETE_FAILED`:** mở tab **Events**, tìm tài nguyên bị lỗi, xóa tay trong console của nó, rồi xóa stack lại.
 - **Còn tài nguyên sau khi stack đã mất:** xóa tay. Tài nguyên của workshop có tag `Project=CostGuard` ở những loại hỗ trợ tag.
-
-Trong phần này, bạn đã xóa hai stack `CostGuard` và `costguard-instance`, xóa role Scheduler và bucket `cf-templates-*` nằm ngoài stack, rồi kiểm tra từng dịch vụ và chạy lệnh CloudShell để mọi số đếm đều bằng 0. Tài khoản không còn tài nguyên nào của Cost Guard nên không phát sinh thêm phí.
