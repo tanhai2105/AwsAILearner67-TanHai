@@ -20,6 +20,6 @@ Ví dụ thực tế về việc hiện đại hóa nền tảng Microsoft của
 
 Bài mình tự viết về dự án của nhóm: tắt máy theo lịch, đồng hồ đo tiền 5 phút một lần và lưới an toàn AWS Budgets, kèm kết quả test thật và chi phí mỗi tháng.
 
-### [Blog 4 - Tự tắt EC2 lúc 22:00 giờ Việt Nam bằng EventBridge Scheduler + Lambda](3.4-Blog4/)
+### [Blog 4 - Amazon EventBridge Scheduler: lên lịch chạy tác vụ trên AWS mà không cần server](3.4-Blog4/)
 
-Bài mình tự viết về Lớp 1 của Cost Guard, phần mình làm: múi giờ trong Scheduler, hàm Lambda chạy lại không sao, phân quyền vừa đủ, alarm báo lỗi và cách test không cần chờ tới 22:00.
+Tóm tắt tìm hiểu Amazon EventBridge Scheduler: lịch rate, cron và one-time, múi giờ và giờ mùa hè, flexible time window, retry, execution role và hạn mức.

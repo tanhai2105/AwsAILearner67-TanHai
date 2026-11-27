@@ -6,31 +6,31 @@ chapter: false
 pre: " <b> 3.4. </b> "
 ---
 
-### TỰ TẮT EC2 LÚC 22:00 GIỜ VIỆT NAM BẰNG EVENTBRIDGE SCHEDULER + LAMBDA (VÀ MẤY LỖI DỄ DÍNH)
+### AMAZON EVENTBRIDGE SCHEDULER: LÊN LỊCH CHẠY TÁC VỤ TRÊN AWS MÀ KHÔNG CẦN SERVER
 
 **Đăng tại:** AWS Study Group (Facebook)
 
-Đây là phần mình làm trong dự án Cost Guard của nhóm: Lớp 1, tự tắt máy Windows lab mỗi tối. Nghe đơn giản, nhưng có vài chỗ làm sai là máy tắt sai giờ hoặc không tắt luôn. Mình ghi lại cách làm và những điều học được.
+Mình đang thực tập tại AWS và dành thời gian đọc tài liệu về Amazon EventBridge Scheduler. Đây là dịch vụ để hẹn giờ chạy một việc nào đó (gọi Lambda, gửi tin SNS, dừng EC2...) mà không phải tự dựng server hay cron. Bài này là bản tóm tắt để bạn nào mới học AWS nắm nhanh bức tranh tổng thể.
 
-![Lớp 1 – Schedule Guard: EventBridge Scheduler gọi Lambda ScheduleHandler lúc 22:00, hàm đọc instance ID từ Parameter Store, tắt máy EC2 và ghi sự kiện vào DynamoDB](../../../images/3-BlogsPosted/3.4-Blog4/layer1-schedule.png)
+**Các điểm chính cần nắm:**
 
-**Luồng chạy:** EventBridge Scheduler (22:00, `Asia/Ho_Chi_Minh`) → Lambda `CostGuard-ScheduleHandler` → đọc instance ID từ Parameter Store → máy đang chạy thì gọi `StopInstances`, không thì bỏ qua → ghi sự kiện vào DynamoDB → nếu lỗi thì gửi email qua SNS `costguard-errors`.
-
-**Các điểm chính:**
-
-- **Múi giờ: dùng Scheduler, đừng dùng rule cron kiểu cũ.** Cron của rule EventBridge kiểu cũ tính theo UTC. Muốn tắt lúc 22:00 giờ Việt Nam (UTC+7) thì phải viết 15:00 UTC, rất dễ quên và lệch 7 tiếng. EventBridge Scheduler cho chọn múi giờ ngay trên lịch. Nhóm mình dùng biểu thức `cron(0 22 * * ? *)`, time zone `Asia/Ho_Chi_Minh`, và tắt Flexible time window để chạy đúng 22:00.
-- **Hàm Lambda nên "chạy lại bao nhiêu lần cũng được".** Hàm đọc trạng thái máy trước khi tắt: máy running thì gọi `StopInstances` và ghi `schedule_stop`; máy đã tắt thì không làm gì, chỉ ghi `schedule_noop`. Mỗi lần chạy đều ghi một dòng vào DynamoDB kèm trạng thái trước đó, nên test bao nhiêu lần cũng được, và nhìn bảng là biết tối nào máy thật sự bị tắt.
-- **Quyền vừa đủ (least privilege).** Role của hàm chỉ được `StopInstances` trên đúng ARN của một máy lab. `DescribeInstances` không giới hạn theo resource được nên để `*`, nhưng quyền này chỉ đọc. Tài khoản lab dùng chung 3 người, giới hạn ARN giúp hàm không tắt nhầm máy của bạn khác. Scheduler cũng cần một role riêng (`scheduler.amazonaws.com`) chỉ có quyền `lambda:InvokeFunction` trên đúng hàm cần gọi; thiếu role này thì lịch vẫn hiện Enabled nhưng hàm không bao giờ được gọi.
-- **Lỗi thì phải biết.** Khi có lỗi, hàm gửi email qua SNS `costguard-errors` rồi raise lại. Raise để metric Errors của Lambda tăng, CloudWatch alarm mới bắt được; nuốt lỗi thì alarm không bao giờ kêu. Nhóm đã test bằng cách đổi tạm `/costguard/instance-id` thành một ID không tồn tại: khoảng 6 phút sau alarm `CostGuard-CostMeter-Errors` chuyển sang In alarm, trả lại ID thật thì alarm về OK.
-- **Test không cần chờ tới 22:00.** Gọi thẳng hàm với payload giống lịch gửi: `{"action": "stop"}`. Lần test ngày 25/11, máy chuyển từ running sang stopping sau khoảng 3 giây, hàm trả về `{"event": "schedule_stop", "state_before": "running"}`. Gọi lần hai khi máy đã tắt thì kết quả phải là `schedule_noop`. Sau 22:00 mở tab Monitoring của hàm hoặc bảng DynamoDB để chắc lịch thật đã chạy.
+- **EventBridge Scheduler là gì:** dịch vụ lập lịch serverless, cho phép tạo, chạy và quản lý tác vụ từ một nơi duy nhất. Theo tài liệu AWS, một lịch có thể gọi hơn 270 dịch vụ AWS và hơn 6.000 API, và dịch vụ chịu được hàng triệu lịch mà bạn không phải tự quản lý hạ tầng. AWS khuyến nghị dùng Scheduler thay cho rule lên lịch của EventBridge (scheduled rules), vì Scheduler mở rộng tốt hơn và hỗ trợ nhiều API đích hơn.
+- **3 kiểu lịch:**
+  - **Rate:** chạy đều theo chu kỳ, ví dụ `rate(5 minutes)`. Đơn vị là minutes, hours hoặc days.
+  - **Cron:** chạy vào thời điểm cụ thể, gồm 6 trường (phút, giờ, ngày trong tháng, tháng, thứ trong tuần, năm). Ví dụ `cron(0 22 * * ? *)` là 22:00 mỗi ngày. Không dùng `*` ở cả "ngày trong tháng" và "thứ trong tuần", một bên phải là `?`.
+  - **One-time:** chỉ chạy một lần, viết dạng `at(yyyy-mm-ddThh:mm:ss)`. Lịch một lần vẫn tính vào hạn mức tài khoản sau khi chạy xong, nên AWS khuyên xóa đi khi không cần nữa.
+  - Mọi kiểu lịch đều có độ chính xác 60 giây: đặt 1:00 thì target được gọi trong khoảng 1:00:00 đến 1:00:59 (khi không bật flexible time window).
+- **Múi giờ và giờ mùa hè:** với lịch cron và one-time, bạn chọn được múi giờ theo danh sách IANA, ví dụ `Asia/Ho_Chi_Minh`. Đây là điểm khác lớn so với rule kiểu cũ vốn tính theo UTC. Scheduler còn tự xử lý giờ mùa hè: khi đồng hồ chuyển tiến, lần chạy rơi vào giờ không tồn tại sẽ bị bỏ qua; khi đồng hồ lùi, lịch chỉ chạy một lần. Múi giờ không có giờ mùa hè (như Việt Nam) hoặc UTC thì không bị điều chỉnh.
+- **Flexible time window và retry:** flexible time window cho phép rải lần chạy trong một khoảng thời gian thay vì đúng một thời điểm, phù hợp việc không cần chính xác tuyệt đối; tắt (Off) nếu cần chạy đúng giờ. Về retry, Scheduler đảm bảo gửi tác vụ "ít nhất một lần" (at-least-once). Bạn đặt được số lần thử lại và thời gian giữ lại tối đa cho lần gọi lỗi; các lần thử có độ trễ để target kịp sẵn sàng. Vì có thể gọi nhiều hơn một lần, hàm đích nên viết sao cho chạy lại không gây hại.
+- **Target và quyền:** *templated target* là các mẫu dựng sẵn cho SQS, SNS, Lambda, EventBridge; *universal target* gọi bất kỳ API nào trong số hơn 270 dịch vụ. Scheduler cần một **execution role** để thay bạn gọi API đích: tạo lịch trên console thì AWS tự dựng role theo target đã chọn, còn dùng CLI, SDK hay CloudFormation thì bạn phải có sẵn role với đúng quyền cần thiết.
+- **Hạn mức:** mặc định mỗi Region có tối đa 10.000.000 lịch (có thể nâng lên), cùng các giới hạn về số request tạo lịch và số lần gọi mỗi giây. Nên xem trong Service Quotas trước khi dùng ở quy mô lớn.
 
 **Kết luận và cảm nghĩ:**
 
-Cần giờ địa phương thì dùng EventBridge Scheduler kèm time zone. Hàm nên kiểm tra trạng thái trước khi làm và ghi lại mọi lần chạy. Quyền tắt máy giới hạn theo ARN, và lỗi phải raise để alarm thấy. Phần này nhỏ nhưng là lớp bảo vệ chắc nhất của Cost Guard, vì nó không phụ thuộc vào dữ liệu billing.
-
-Workshop đầy đủ của nhóm: [nguyenducbinh-aws.github.io/AwsAILearner67](https://nguyenducbinh-aws.github.io/AwsAILearner67/)
+EventBridge Scheduler thay thế tốt cho việc tự dựng cron: có múi giờ, có retry, có nhiều kiểu lịch và gọi được rất nhiều dịch vụ. Điều mình thấy hữu ích nhất là chọn múi giờ ngay trên lịch và việc phải cấp execution role đúng quyền. Mình sẽ chọn rate cho việc lặp đều, cron khi cần giờ cụ thể, và luôn viết target chạy lại được vì Scheduler gửi "ít nhất một lần".
 
 **Tham khảo:**
 
-- [EventBridge Scheduler: schedule types và time zone](https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html)
-- [EC2 StopInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_StopInstances.html)
+- [Amazon EventBridge Scheduler là gì](https://docs.aws.amazon.com/scheduler/latest/UserGuide/what-is-scheduler.html)
+- [Các kiểu lịch, múi giờ và giờ mùa hè](https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html)
+- [Hạn mức của EventBridge Scheduler](https://docs.aws.amazon.com/scheduler/latest/UserGuide/scheduler-quotas.html)

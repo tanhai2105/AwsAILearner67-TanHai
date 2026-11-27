@@ -6,31 +6,31 @@ chapter: false
 pre: " <b> 3.4. </b> "
 ---
 
-### STOPPING EC2 AT 22:00 VIETNAM TIME WITH EVENTBRIDGE SCHEDULER + LAMBDA (AND THE EASY MISTAKES)
+### AMAZON EVENTBRIDGE SCHEDULER: RUN TASKS ON A SCHEDULE ON AWS WITHOUT A SERVER
 
 **Published on:** AWS Study Group (Facebook)
 
-This is my part of my team's Cost Guard project: Layer 1, which stops the Windows lab instance every night. It sounds simple, but a few mistakes make the instance stop at the wrong time or not at all. Here is how we built it and what I learned.
-
-![Layer 1 – Schedule Guard: EventBridge Scheduler calls the ScheduleHandler Lambda at 22:00, the function reads the instance ID from Parameter Store, stops the EC2 instance and logs the event in DynamoDB](../../images/3-BlogsPosted/3.4-Blog4/layer1-schedule.png)
-
-**Flow:** EventBridge Scheduler (22:00, `Asia/Ho_Chi_Minh`) → Lambda `CostGuard-ScheduleHandler` → read the instance ID from Parameter Store → if the instance is running, call `StopInstances`, otherwise skip → log the event in DynamoDB → on error, send an email through the SNS topic `costguard-errors`.
+I am an intern at AWS and spent time reading the documentation of Amazon EventBridge Scheduler. It is the service for running something at a set time (call a Lambda function, publish to SNS, stop an EC2 instance...) without building your own server or cron. This post is a summary so that anyone new to AWS can get the big picture quickly.
 
 **Key points:**
 
-- **Time zone: use Scheduler, not an old-style cron rule.** Cron in classic EventBridge rules runs in UTC. To stop at 22:00 Vietnam time (UTC+7) you must write 15:00 UTC, which is easy to forget and off by 7 hours. EventBridge Scheduler lets you pick the time zone on the schedule itself. We use the expression `cron(0 22 * * ? *)`, the time zone `Asia/Ho_Chi_Minh`, and Flexible time window turned off so it runs at exactly 22:00.
-- **Make the Lambda safe to run any number of times.** The function checks the instance state before stopping it: if running, it calls `StopInstances` and records `schedule_stop`; if already stopped, it does nothing and only records `schedule_noop`. Every run writes a row to DynamoDB with the previous state, so we can test as often as we like, and the table shows which nights the instance was really stopped.
-- **Least privilege.** The function's role may call `StopInstances` only on the ARN of the one lab instance. `DescribeInstances` cannot be limited by resource, so it uses `*`, but it is read-only. Three people share the lab account, and limiting the ARN keeps the function from stopping a teammate's instance. Scheduler also needs its own role (`scheduler.amazonaws.com`) with only `lambda:InvokeFunction` on the target function; without it the schedule still shows Enabled but the function is never called.
-- **Know when it fails.** On an error, the function emails through SNS `costguard-errors` and then re-raises. Re-raising makes the Lambda Errors metric go up so the CloudWatch alarm can catch it; swallowing the error means the alarm never fires. We tested this by temporarily setting `/costguard/instance-id` to an ID that does not exist: about 6 minutes later the alarm `CostGuard-CostMeter-Errors` went to In alarm, and it returned to OK once the real ID was restored.
-- **Test without waiting until 22:00.** Invoke the function with the same payload the schedule sends: `{"action": "stop"}`. In our test on 25/11, the instance went from running to stopping in about 3 seconds and the function returned `{"event": "schedule_stop", "state_before": "running"}`. A second call while the instance is stopped must return `schedule_noop`. After 22:00, check the function's Monitoring tab or the DynamoDB table to make sure the real schedule ran.
+- **What it is:** a serverless scheduler that lets you create, run and manage tasks from one central service. According to the AWS documentation, a schedule can invoke more than 270 AWS services and more than 6,000 API operations, and the service can handle millions of schedules without you managing infrastructure. AWS recommends Scheduler over EventBridge scheduled rules, because it scales better and supports a wider set of target APIs.
+- **Three schedule types:**
+  - **Rate:** runs at a regular interval, for example `rate(5 minutes)`. The unit is minutes, hours or days.
+  - **Cron:** runs at a specific time, using six fields (minutes, hours, day-of-month, month, day-of-week, year). For example `cron(0 22 * * ? *)` is 22:00 every day. You cannot use `*` in both day-of-month and day-of-week; one of them must be `?`.
+  - **One-time:** runs once, written as `at(yyyy-mm-ddThh:mm:ss)`. A one-time schedule still counts against the account quota after it has run, so AWS recommends deleting it when it is no longer needed.
+  - All types have 60-second precision: if you set 1:00, the target is invoked between 1:00:00 and 1:00:59 (when no flexible time window is set).
+- **Time zones and daylight saving time:** for cron and one-time schedules, you choose a time zone from the IANA database, for example `Asia/Ho_Chi_Minh`. This is a big difference from the old-style rules, which use UTC. Scheduler also handles daylight saving time: when the clock moves forward, a run that falls on a time that does not exist is skipped; when the clock moves back, the schedule runs only once. Time zones without daylight saving time (such as Vietnam) and UTC are not adjusted.
+- **Flexible time window and retries:** a flexible time window spreads the runs over a period of time instead of one exact moment, which suits work that does not need to be precise; turn it Off if it must run on time. For retries, Scheduler delivers tasks "at least once". You can set the number of retries and the maximum retention time for a failed invocation, and retries are delayed so the target has time to become available. Because a call can happen more than once, the target function should be safe to run again.
+- **Targets and permissions:** *templated targets* are ready-made patterns for SQS, SNS, Lambda and EventBridge; *universal targets* call any API of the 270+ services. Scheduler needs an **execution role** to call the target API for you: when you create a schedule in the console, AWS sets up the role from the target you chose, but with the CLI, an SDK or CloudFormation you must already have a role with the required permissions.
+- **Quotas:** by default each Region allows up to 10,000,000 schedules (adjustable), plus limits on create-schedule requests and invocations per second. Check Service Quotas before using it at large scale.
 
 **Conclusion and thoughts:**
 
-For local time, use EventBridge Scheduler with a time zone. Check the state before acting and record every run. Limit the stop permission to the instance ARN, and re-raise errors so the alarm sees them. This layer is small, but it is the most reliable part of Cost Guard because it does not depend on billing data.
-
-My team's full workshop: [nguyenducbinh-aws.github.io/AwsAILearner67](https://nguyenducbinh-aws.github.io/AwsAILearner67/)
+EventBridge Scheduler is a good replacement for running your own cron: it has time zones, retries, several schedule types and can call a great many services. What I find most useful is choosing the time zone on the schedule itself, and having to grant an execution role with the right permissions. I would use rate for steady repetition, cron when a specific time is needed, and always write the target so it can safely run again, because Scheduler delivers "at least once".
 
 **References:**
 
-- [EventBridge Scheduler: schedule types and time zones](https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html)
-- [EC2 StopInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_StopInstances.html)
+- [What is Amazon EventBridge Scheduler?](https://docs.aws.amazon.com/scheduler/latest/UserGuide/what-is-scheduler.html)
+- [Schedule types, time zones and daylight saving time](https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html)
+- [Quotas for EventBridge Scheduler](https://docs.aws.amazon.com/scheduler/latest/UserGuide/scheduler-quotas.html)
