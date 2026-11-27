@@ -10,20 +10,20 @@ Mình thực tập trong chương trình **First Cloud AI Journey** của **Amaz
 
 Tám tuần đầu mình học theo lộ trình của chương trình: IAM, EC2, S3, VPC, CloudWatch và các lab trên AWS Study Group. Tuần 11 mình làm Experience 2 về bảo mật Windows trên AWS (EC2 Image Builder với STIG, AWS Config, EventBridge, Systems Manager); lần build đầu bị lỗi vì loại máy không thuộc Free Tier, mình tìm ra nguyên nhân và build lại thành công. Sau đó nhóm đổi đề tài sang **Cost Guard for Windows Labs**. Phần của mình là stack nền, Lớp 1 tắt máy theo lịch, dự toán chi phí, mục 5.1–5.4 của workshop, sửa proposal và sơ đồ kiến trúc. Cuối kỳ mình test lại cả 3 lớp từ đầu đến cuối, review code CostMeter của bạn cùng nhóm, rồi dọn toàn bộ tài nguyên và viết lại mục 5.8 có ảnh từng bước.
 
-| STT | Tiêu chí                            | Mô tả                                                                                            | Tốt | Khá | Trung bình |
-| --- | ----------------------------------- | ------------------------------------------------------------------------------------------------ | --- | --- | ---------- |
-| 1   | **Kiến thức & kỹ năng chuyên môn**  | Hiểu biết về lĩnh vực, áp dụng kiến thức vào thực tế, thành thạo công cụ, chất lượng công việc | ☐   | ✅   | ☐          |
-| 2   | **Khả năng học hỏi**                | Khả năng tiếp thu kiến thức mới và học nhanh                                                     | ✅   | ☐   | ☐          |
-| 3   | **Tính chủ động**                   | Chủ động tìm kiếm công việc, không chờ hướng dẫn                                                | ✅   | ☐   | ☐          |
-| 4   | **Tinh thần trách nhiệm**           | Hoàn thành công việc đúng hạn và đảm bảo chất lượng                                             | ✅   | ☐   | ☐          |
-| 5   | **Kỷ luật**                         | Tuân thủ lịch làm việc, quy định và quy trình                                                   | ☐   | ✅   | ☐          |
-| 6   | **Tinh thần tiến bộ**               | Sẵn sàng nhận phản hồi và tự cải thiện                                                          | ✅   | ☐   | ☐          |
-| 7   | **Kỹ năng giao tiếp**               | Trình bày ý tưởng và báo cáo công việc rõ ràng                                                  | ☐   | ✅   | ☐          |
-| 8   | **Làm việc nhóm**                   | Làm việc hiệu quả với đồng nghiệp và tham gia nhóm                                              | ✅   | ☐   | ☐          |
-| 9   | **Tác phong chuyên nghiệp**         | Tôn trọng đồng nghiệp, đối tác và môi trường làm việc                                           | ✅   | ☐   | ☐          |
-| 10  | **Kỹ năng giải quyết vấn đề**       | Nhận diện vấn đề, đề xuất giải pháp và sáng tạo                                                 | ☐   | ✅   | ☐          |
-| 11  | **Đóng góp cho dự án/nhóm**         | Hiệu quả công việc, ý tưởng mới, được nhóm ghi nhận                                             | ✅   | ☐   | ☐          |
-| 12  | **Tổng thể**                        | Đánh giá chung toàn bộ quá trình thực tập                                                       | ☐   | ✅   | ☐          |
+| STT | Tiêu chí                            | Mô tả                                                                                            | Tốt | Khá | Trung bình | Nhận xét |
+| --- | ----------------------------------- | ------------------------------------------------------------------------------------------------ | --- | --- | ---------- | --- |
+| 1   | **Kiến thức & kỹ năng chuyên môn**  | Hiểu biết về lĩnh vực, áp dụng kiến thức vào thực tế, thành thạo công cụ, chất lượng công việc | ☐   | ✅   | ☐          | Mình nắm được phần serverless và EC2 ở mức làm được lab và dự án; mạng (VPC, routing) và AI/ML thì còn yếu. |
+| 2   | **Khả năng học hỏi**                | Khả năng tiếp thu kiến thức mới và học nhanh                                                     | ✅   | ☐   | ☐          | Mình cố tự đọc tài liệu AWS khi làm Experience 2 và Cost Guard, chỗ nào chưa biết thì học thêm, như CloudFormation. |
+| 3   | **Tính chủ động**                   | Chủ động tìm kiếm công việc, không chờ hướng dẫn                                                | ✅   | ☐   | ☐          | Mình xin nhận stack nền và Lớp 1, và thử test lại cả 3 lớp trên AWS để chắc chắn hơn. |
+| 4   | **Tinh thần trách nhiệm**           | Hoàn thành công việc đúng hạn và đảm bảo chất lượng                                             | ✅   | ☐   | ☐          | Mình cố làm xong phần được giao và dọn tài nguyên AWS sau khi xong để không phát sinh chi phí. |
+| 5   | **Kỷ luật**                         | Tuân thủ lịch làm việc, quy định và quy trình                                                   | ☐   | ✅   | ☐          | Mình làm theo quy trình của nhóm, nhưng vẫn có lúc quên thông báo và phải hỏi lại. |
+| 6   | **Tinh thần tiến bộ**               | Sẵn sàng nhận phản hồi và tự cải thiện                                                          | ✅   | ☐   | ☐          | Mình sửa workshop, worklog và sơ đồ theo góp ý của trưởng nhóm, nhờ vậy học thêm được nhiều. |
+| 7   | **Kỹ năng giao tiếp**               | Trình bày ý tưởng và báo cáo công việc rõ ràng                                                  | ☐   | ✅   | ☐          | Mình có báo tiến độ trong nhóm, nhưng viết còn dài và chưa rõ ý, nhất là bằng tiếng Anh. |
+| 8   | **Làm việc nhóm**                   | Làm việc hiệu quả với đồng nghiệp và tham gia nhóm                                              | ✅   | ☐   | ☐          | Mình học được nhiều từ các bạn trong nhóm, có xem lại code CostMeter của bạn và góp vài ý nhỏ. |
+| 9   | **Tác phong chuyên nghiệp**         | Tôn trọng đồng nghiệp, đối tác và môi trường làm việc                                           | ✅   | ☐   | ☐          | Mình cố che Account ID và email trên ảnh trước khi đưa lên repo, và hỏi nhóm trước khi sửa phần chung. |
+| 10  | **Kỹ năng giải quyết vấn đề**       | Nhận diện vấn đề, đề xuất giải pháp và sáng tạo                                                 | ☐   | ✅   | ☐          | Mình tìm ra lỗi build Image Builder do loại máy không thuộc Free Tier, nhưng lẽ ra nên đọc giới hạn từ đầu. |
+| 11  | **Đóng góp cho dự án/nhóm**         | Hiệu quả công việc, ý tưởng mới, được nhóm ghi nhận                                             | ✅   | ☐   | ☐          | Mình phụ trách stack nền, Lớp 1, dự toán chi phí và một số mục của workshop; phần lớn kết quả là nhờ cả nhóm. |
+| 12  | **Tổng thể**                        | Đánh giá chung toàn bộ quá trình thực tập                                                       | ☐   | ✅   | ☐          | Mình học được rất nhiều qua kỳ thực tập, nhưng kiến thức còn hẹp, cần học thêm mạng và AI/ML. |
 
 ### Điều mình làm tốt
 
