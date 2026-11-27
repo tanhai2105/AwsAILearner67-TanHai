@@ -16,11 +16,11 @@ pre: " <b> 1.10. </b> "
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Read the AWS WAF introduction <br>- **Practice:** <br>&emsp; + Host a sample web app from an S3 bucket <br>&emsp; + Create a web ACL with managed rules, then a custom rule and an advanced custom rule <br>&emsp; + Send test requests, enable logging, clean up | 11/09/2026 | 11/09/2026 | <https://000026.awsfcaj.com/> |
+| 2 | - Read the team's messages and documents, summarize my own tasks <br>- Build the team plan for the Windows Server on AWS project, splitting the work into 3 parallel parts <br>- Check my attendance on the FCAJ Portal <br>- **Practice:** <br>&emsp; + GuardDuty scenario 1: compromised EC2 instance, auto-response with EventBridge and Lambda | 11/09/2026 | 11/09/2026 | <https://000098.awsfcaj.com/> |
 | 3 | - Read how Amazon GuardDuty works: data sources and findings <br>- **Practice:** <br>&emsp; + Prepare the lab environment from the CloudFormation template | 11/10/2026 | 11/10/2026 | <https://000098.awsfcaj.com/> |
-| 4 | - Read the team's messages and documents, summarize my own tasks <br>- Build the team plan for the Windows Server on AWS project, splitting the work into 3 parallel parts <br>- Check my attendance on the FCAJ Portal <br>- **Practice:** <br>&emsp; + GuardDuty scenario 1: compromised EC2 instance, auto-response with EventBridge and Lambda | 11/11/2026 | 11/11/2026 | <https://000098.awsfcaj.com/> |
-| 5 | - **Practice:** <br>&emsp; + GuardDuty scenario 2: compromised IAM credentials, handled by hand | 11/12/2026 | 11/12/2026 | <https://000098.awsfcaj.com/> |
-| 6 | - **Practice:** <br>&emsp; + GuardDuty scenario 3: IAM role credential exfiltration, handled with Lambda <br>&emsp; + Review the findings and delete the lab resources | 11/13/2026 | 11/13/2026 | <https://000098.awsfcaj.com/> |
+| 4 | - **Practice:** <br>&emsp; + GuardDuty scenario 2: compromised IAM credentials, handled by hand | 11/11/2026 | 11/11/2026 | <https://000098.awsfcaj.com/> |
+| 5 | - **Practice:** <br>&emsp; + GuardDuty scenario 3: IAM role credential exfiltration, handled with Lambda <br>&emsp; + Review the findings and delete the lab resources | 11/12/2026 | 11/12/2026 | <https://000098.awsfcaj.com/> |
+| 6 | - Read the AWS WAF introduction <br>- **Practice:** <br>&emsp; + Host a sample web app from an S3 bucket <br>&emsp; + Create a web ACL with managed rules, then a custom rule and an advanced custom rule <br>&emsp; + Send test requests, enable logging, clean up | 11/13/2026 | 11/13/2026 | <https://000026.awsfcaj.com/> |
 
 
 ### Week 10 Achievements:

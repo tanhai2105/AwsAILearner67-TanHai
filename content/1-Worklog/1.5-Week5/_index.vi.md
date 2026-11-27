@@ -16,11 +16,11 @@ pre: " <b> 1.5. </b> "
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Ngồi cùng nhóm brainstorm chủ đề cho proposal và workshop | 05/10/2026 | 05/10/2026 |  |
-| 3 | - Đọc tài liệu RDS: <br>&emsp; + Các database engine RDS hỗ trợ <br>&emsp; + Multi-AZ và Read Replica <br>&emsp; + Backup tự động và snapshot <br>&emsp; + Bảo mật bằng mã hóa, VPC và IAM | 06/10/2026 | 06/10/2026 | <https://000005.awsfcaj.com/> |
-| 4 | - **Thực hành:** <br>&emsp; + VPC, Security Group và DB subnet group <br>&emsp; + Một instance RDS MySQL <br>&emsp; + EC2 kết nối tới RDS bằng MySQL client <br>&emsp; + Tạo database, tạo bảng, thêm dữ liệu <br>&emsp; + Triển khai app dùng RDS <br>&emsp; + Snapshot và restore <br>&emsp; + Dọn dẹp | 07/10/2026 | 07/10/2026 | <https://000005.awsfcaj.com/> |
-| 5 | - Đọc và ghi chú bài blog giới thiệu Fleet Manager của AWS Systems Manager | 08/10/2026 | 08/10/2026 | <https://aws.amazon.com/vi/blogs/mt/console-based-access-to-windows-instances-using-aws-systems-manager-fleet-manager/> |
-| 6 | - Đọc và ghi chú bài blog ra mắt Amazon CloudWatch Omni | 09/10/2026 | 09/10/2026 | <https://aws.amazon.com/vi/blogs/aws/introducing-amazon-cloudwatch-omni-ai-powered-observability-for-generative-ai-and-agentic-workloads/> |
+| 2 | - Đọc và ghi chú bài blog giới thiệu Fleet Manager của AWS Systems Manager | 05/10/2026 | 05/10/2026 | <https://aws.amazon.com/vi/blogs/mt/console-based-access-to-windows-instances-using-aws-systems-manager-fleet-manager/> |
+| 3 | - Đọc và ghi chú bài blog ra mắt Amazon CloudWatch Omni | 06/10/2026 | 06/10/2026 | <https://aws.amazon.com/vi/blogs/aws/introducing-amazon-cloudwatch-omni-ai-powered-observability-for-generative-ai-and-agentic-workloads/> |
+| 4 | - Đọc tài liệu RDS: <br>&emsp; + Các database engine RDS hỗ trợ <br>&emsp; + Multi-AZ và Read Replica <br>&emsp; + Backup tự động và snapshot <br>&emsp; + Bảo mật bằng mã hóa, VPC và IAM | 07/10/2026 | 07/10/2026 | <https://000005.awsfcaj.com/> |
+| 5 | - **Thực hành:** <br>&emsp; + VPC, Security Group và DB subnet group <br>&emsp; + Một instance RDS MySQL <br>&emsp; + EC2 kết nối tới RDS bằng MySQL client <br>&emsp; + Tạo database, tạo bảng, thêm dữ liệu <br>&emsp; + Triển khai app dùng RDS <br>&emsp; + Snapshot và restore <br>&emsp; + Dọn dẹp | 08/10/2026 | 08/10/2026 | <https://000005.awsfcaj.com/> |
+| 6 | - Ngồi cùng nhóm brainstorm chủ đề cho proposal và workshop | 09/10/2026 | 09/10/2026 |  |
 
 
 ### Kết quả đạt được tuần 5:

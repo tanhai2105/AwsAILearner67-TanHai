@@ -16,11 +16,11 @@ pre: " <b> 1.8. </b> "
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Đọc cách AWS CLI hoạt động: profile, file cấu hình, định dạng output <br>- **Thực hành:** <br>&emsp; + Cài CLI, chạy aws configure cho profile của mình <br>&emsp; + Liệt kê tài nguyên đang có từ terminal | 26/10/2026 | 26/10/2026 | <https://000011.awsfcaj.com/> |
-| 3 | - **Thực hành:** <br>&emsp; + Lệnh S3: tạo bucket, upload và liệt kê object <br>&emsp; + Lệnh SNS: topic và subscription | 27/10/2026 | 27/10/2026 | <https://000011.awsfcaj.com/> |
-| 4 | - **Thực hành:** <br>&emsp; + IAM bằng lệnh: group, user, access key <br>&emsp; + Mạng bằng lệnh: VPC, subnet, internet gateway, route table | 28/10/2026 | 28/10/2026 | <https://000011.awsfcaj.com/> |
-| 5 | - **Thực hành:** <br>&emsp; + Tạo key pair, security group, chạy EC2 từ CLI rồi SSH vào <br>&emsp; + Terminate và xóa sạch tài nguyên còn sót | 29/10/2026 | 29/10/2026 | <https://000011.awsfcaj.com/> |
-| 6 | - Làm tiếp workshop <br>- Đọc lại proposal, đối chiếu với kiến trúc | 30/10/2026 | 30/10/2026 | |
+| 2 | - Làm tiếp workshop <br>- Đọc lại proposal, đối chiếu với kiến trúc | 26/10/2026 | 26/10/2026 | |
+| 3 | - Đọc cách AWS CLI hoạt động: profile, file cấu hình, định dạng output <br>- **Thực hành:** <br>&emsp; + Cài CLI, chạy aws configure cho profile của mình <br>&emsp; + Liệt kê tài nguyên đang có từ terminal | 27/10/2026 | 27/10/2026 | <https://000011.awsfcaj.com/> |
+| 4 | - **Thực hành:** <br>&emsp; + Lệnh S3: tạo bucket, upload và liệt kê object <br>&emsp; + Lệnh SNS: topic và subscription | 28/10/2026 | 28/10/2026 | <https://000011.awsfcaj.com/> |
+| 5 | - **Thực hành:** <br>&emsp; + IAM bằng lệnh: group, user, access key <br>&emsp; + Mạng bằng lệnh: VPC, subnet, internet gateway, route table | 29/10/2026 | 29/10/2026 | <https://000011.awsfcaj.com/> |
+| 6 | - **Thực hành:** <br>&emsp; + Tạo key pair, security group, chạy EC2 từ CLI rồi SSH vào <br>&emsp; + Terminate và xóa sạch tài nguyên còn sót | 30/10/2026 | 30/10/2026 | <https://000011.awsfcaj.com/> |
 
 
 ### Kết quả đạt được tuần 8:

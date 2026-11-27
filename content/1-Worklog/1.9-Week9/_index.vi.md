@@ -16,11 +16,11 @@ pre: " <b> 1.9. </b> "
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Đọc blog tự động nâng cấp Windows Server bằng AWS Systems Manager, ghi lại điều kiện và giới hạn | 02/11/2026 | 02/11/2026 | <https://aws.amazon.com/vi/blogs/modernizing-with-aws/how-to-automate-your-microsoft-windows-server-upgrades-using-aws-systems-manager-update/> |
-| 3 | - Tìm hiểu workshop của AWS về Microsoft workloads trên AWS: các track, module, yêu cầu trước và chi phí <br>- **Thực hành (lab WordPress):** <br>&emsp; + VPC, subnet, security group riêng cho tầng web và tầng database <br>&emsp; + Tạo EC2 và database RDS | 03/11/2026 | 03/11/2026 | <https://catalog.us-east-1.prod.workshops.aws/workshops/6932a032-aeec-4dfd-bad8-7bfbc8dad4c2/en-US> <br> <https://000021.awsfcaj.com/> |
-| 4 | - **Thực hành:** <br>&emsp; + Cài WordPress lên EC2, trỏ vào database RDS | 04/11/2026 | 04/11/2026 | <https://000021.awsfcaj.com/> |
-| 5 | - **Thực hành:** <br>&emsp; + Tạo AMI và launch template từ server đã chạy ổn <br>&emsp; + Thêm target group, load balancer và Auto Scaling group | 05/11/2026 | 05/11/2026 | <https://000021.awsfcaj.com/> |
-| 6 | - **Thực hành:** <br>&emsp; + Chụp snapshot database rồi restore lại <br>&emsp; + Đặt CloudFront trước website <br>&emsp; + Xóa toàn bộ tài nguyên lab | 06/11/2026 | 06/11/2026 | <https://000021.awsfcaj.com/> |
+| 2 | - Tìm hiểu workshop của AWS về Microsoft workloads trên AWS: các track, module, yêu cầu trước và chi phí <br>- **Thực hành (lab WordPress):** <br>&emsp; + VPC, subnet, security group riêng cho tầng web và tầng database <br>&emsp; + Tạo EC2 và database RDS | 02/11/2026 | 02/11/2026 | <https://catalog.us-east-1.prod.workshops.aws/workshops/6932a032-aeec-4dfd-bad8-7bfbc8dad4c2/en-US> <br> <https://000021.awsfcaj.com/> |
+| 3 | - **Thực hành:** <br>&emsp; + Cài WordPress lên EC2, trỏ vào database RDS | 03/11/2026 | 03/11/2026 | <https://000021.awsfcaj.com/> |
+| 4 | - **Thực hành:** <br>&emsp; + Tạo AMI và launch template từ server đã chạy ổn <br>&emsp; + Thêm target group, load balancer và Auto Scaling group | 04/11/2026 | 04/11/2026 | <https://000021.awsfcaj.com/> |
+| 5 | - **Thực hành:** <br>&emsp; + Chụp snapshot database rồi restore lại <br>&emsp; + Đặt CloudFront trước website <br>&emsp; + Xóa toàn bộ tài nguyên lab | 05/11/2026 | 05/11/2026 | <https://000021.awsfcaj.com/> |
+| 6 | - Đọc blog tự động nâng cấp Windows Server bằng AWS Systems Manager, ghi lại điều kiện và giới hạn | 06/11/2026 | 06/11/2026 | <https://aws.amazon.com/vi/blogs/modernizing-with-aws/how-to-automate-your-microsoft-windows-server-upgrades-using-aws-systems-manager-update/> |
 
 
 ### Kết quả đạt được tuần 9:

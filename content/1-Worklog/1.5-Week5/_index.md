@@ -16,11 +16,11 @@ pre: " <b> 1.5. </b> "
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Team brainstorming session for the proposal and the workshop topic | 10/05/2026 | 10/05/2026 |  |
-| 3 | - Read the RDS material: <br>&emsp; + Which database engines RDS supports <br>&emsp; + Multi-AZ and Read Replicas <br>&emsp; + Automated backups and snapshots <br>&emsp; + Security with encryption, VPC and IAM | 10/06/2026 | 10/06/2026 | <https://000005.awsfcaj.com/> |
-| 4 | - **Practice:** <br>&emsp; + VPC, Security Groups and a DB subnet group <br>&emsp; + An RDS MySQL instance <br>&emsp; + An EC2 instance connecting to RDS with the MySQL client <br>&emsp; + Created a database and a table, inserted rows <br>&emsp; + Deployed an app that uses RDS <br>&emsp; + Snapshot and restore <br>&emsp; + Cleanup | 10/07/2026 | 10/07/2026 | <https://000005.awsfcaj.com/> |
-| 5 | - Read the blog on AWS Systems Manager Fleet Manager | 10/08/2026 | 10/08/2026 | <https://aws.amazon.com/vi/blogs/mt/console-based-access-to-windows-instances-using-aws-systems-manager-fleet-manager/> |
-| 6 | - Read the blog on Amazon CloudWatch Omni | 10/09/2026 | 10/09/2026 | <https://aws.amazon.com/vi/blogs/aws/introducing-amazon-cloudwatch-omni-ai-powered-observability-for-generative-ai-and-agentic-workloads/> |
+| 2 | - Read the blog on AWS Systems Manager Fleet Manager | 10/05/2026 | 10/05/2026 | <https://aws.amazon.com/vi/blogs/mt/console-based-access-to-windows-instances-using-aws-systems-manager-fleet-manager/> |
+| 3 | - Read the blog on Amazon CloudWatch Omni | 10/06/2026 | 10/06/2026 | <https://aws.amazon.com/vi/blogs/aws/introducing-amazon-cloudwatch-omni-ai-powered-observability-for-generative-ai-and-agentic-workloads/> |
+| 4 | - Read the RDS material: <br>&emsp; + Which database engines RDS supports <br>&emsp; + Multi-AZ and Read Replicas <br>&emsp; + Automated backups and snapshots <br>&emsp; + Security with encryption, VPC and IAM | 10/07/2026 | 10/07/2026 | <https://000005.awsfcaj.com/> |
+| 5 | - **Practice:** <br>&emsp; + VPC, Security Groups and a DB subnet group <br>&emsp; + An RDS MySQL instance <br>&emsp; + An EC2 instance connecting to RDS with the MySQL client <br>&emsp; + Created a database and a table, inserted rows <br>&emsp; + Deployed an app that uses RDS <br>&emsp; + Snapshot and restore <br>&emsp; + Cleanup | 10/08/2026 | 10/08/2026 | <https://000005.awsfcaj.com/> |
+| 6 | - Team brainstorming session for the proposal and the workshop topic | 10/09/2026 | 10/09/2026 |  |
 
 
 ### Week 5 Achievements:

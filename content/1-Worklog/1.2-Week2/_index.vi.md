@@ -16,9 +16,9 @@ pre: " <b> 1.2. </b> "
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Module 01-04 - Cost optimization on AWS: những cách chính để giảm chi phí | 14/09/2026 | 14/09/2026 | <https://youtu.be/UIw8UxGZCHA> |
-| 3 | - Lướt trang Cloud Journey để xem các bài lab và tài liệu được sắp xếp thế nào | 15/09/2026 | 15/09/2026 | <https://cloudjourney.awsfcaj.com/> |
-| 4 | - Bắt đầu Module 1 - Explore trên Cloud Journey <br> - Lab AWS Free Tier 2026: các gói Free Tier và cách tạo tài khoản AWS | 16/09/2026 | 16/09/2026 | <https://cloudjourney.awsfcaj.com/1-explore/> <br> <https://000001.awsfcaj.com/> |
+| 2 | - Lướt trang Cloud Journey để xem các bài lab và tài liệu được sắp xếp thế nào | 14/09/2026 | 14/09/2026 | <https://cloudjourney.awsfcaj.com/> |
+| 3 | - Bắt đầu Module 1 - Explore trên Cloud Journey <br> - Lab AWS Free Tier 2026: các gói Free Tier và cách tạo tài khoản AWS | 15/09/2026 | 15/09/2026 | <https://cloudjourney.awsfcaj.com/1-explore/> <br> <https://000001.awsfcaj.com/> |
+| 4 | - Module 01-04 - Cost optimization on AWS: những cách chính để giảm chi phí | 16/09/2026 | 16/09/2026 | <https://youtu.be/UIw8UxGZCHA> |
 | 5 | - Lab Cost Management with AWS Budget: các loại budget và cảnh báo chi phí <br> - Lab AWS Support Request: các gói support và cách mở một case | 17/09/2026 | 17/09/2026 | <https://000007.awsfcaj.com/> <br> <https://000009.awsfcaj.com/> |
 | 6 | - Lab Access Management with AWS IAM: group, user, role và switch role | 18/09/2026 | 18/09/2026 | <https://000002.awsfcaj.com/> |
 

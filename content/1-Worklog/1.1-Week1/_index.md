@@ -18,8 +18,8 @@ pre: " <b> 1.1. </b> "
 | --- | --- | --- | --- | --- |
 | 2 | - First day at the program: introductions with the FCAJ members <br> - Went through the AWS office rules and wrote down the points I wanted to ask the mentors about | 09/07/2026 | 09/07/2026 | <https://hcm-rules.awsfcaj.com/instructions> |
 | 3 | - Signed up on the FCAJ Portal <br> - Checked how to book a day working at the office <br> - Checked how the uniform registration works | 09/08/2026 | 09/08/2026 | <https://hcm-rules.awsfcaj.com/instructions/portal> |
-| 4 | - Opened the FCAJ Workforce Bootcamp 2026 playlist on the AWS Study Group YouTube channel <br> - Watched the opening video, Prologue - Know before you join First Cloud AI Journey | 09/09/2026 | 09/09/2026 | <https://youtube.com/playlist?list=PLahN4TLWtox3TSYFbN1DNX7NZgTVXNj3x> <br> <https://youtu.be/Gz56QzLQ_Yo> |
-| 5 | - Module 01-01 - Introduction to AWS: what cloud computing is and how AWS infrastructure is spread around the world <br> - Module 01-02 - Management Console: root user versus IAM user, and the different ways to talk to AWS | 09/10/2026 | 09/10/2026 | <https://youtu.be/qVCF7UjYC5s> <br> <https://youtu.be/95quNuhvMT0> |
+| 4 | - Module 01-01 - Introduction to AWS: what cloud computing is and how AWS infrastructure is spread around the world <br> - Module 01-02 - Management Console: root user versus IAM user, and the different ways to talk to AWS | 09/09/2026 | 09/09/2026 | <https://youtu.be/qVCF7UjYC5s> <br> <https://youtu.be/95quNuhvMT0> |
+| 5 | - Opened the FCAJ Workforce Bootcamp 2026 playlist on the AWS Study Group YouTube channel <br> - Watched the opening video, Prologue - Know before you join First Cloud AI Journey | 09/10/2026 | 09/10/2026 | <https://youtube.com/playlist?list=PLahN4TLWtox3TSYFbN1DNX7NZgTVXNj3x> <br> <https://youtu.be/Gz56QzLQ_Yo> |
 | 6 | - Module 01-03 - Gen AI on AWS - Kiro: an intro to agentic AI and the Kiro tool <br> - **Practice:** set up Kiro IDE and Kiro CLI on my machine | 09/11/2026 | 09/11/2026 | <https://youtu.be/uAQCm4sm_1c> |
 
 

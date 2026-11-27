@@ -16,11 +16,11 @@ pre: " <b> 1.9. </b> "
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Read the blog on automating Windows Server upgrades with AWS Systems Manager and note the prerequisites and limits | 11/02/2026 | 11/02/2026 | <https://aws.amazon.com/vi/blogs/modernizing-with-aws/how-to-automate-your-microsoft-windows-server-upgrades-using-aws-systems-manager-update/> |
-| 3 | - Study the AWS workshop for Microsoft workloads on AWS: its tracks, modules, prerequisites and cost <br>- **Practice (WordPress lab):** <br>&emsp; + VPC, subnets and separate security groups for the web and database tiers <br>&emsp; + EC2 instance and RDS database | 11/03/2026 | 11/03/2026 | <https://catalog.us-east-1.prod.workshops.aws/workshops/6932a032-aeec-4dfd-bad8-7bfbc8dad4c2/en-US> <br> <https://000021.awsfcaj.com/> |
-| 4 | - **Practice:** <br>&emsp; + Install WordPress on EC2 and point it at the RDS database | 11/04/2026 | 11/04/2026 | <https://000021.awsfcaj.com/> |
-| 5 | - **Practice:** <br>&emsp; + Make an AMI and a launch template from the working server <br>&emsp; + Add a target group, a load balancer and an Auto Scaling group | 11/05/2026 | 11/05/2026 | <https://000021.awsfcaj.com/> |
-| 6 | - **Practice:** <br>&emsp; + Take a database snapshot and restore it <br>&emsp; + Put CloudFront in front of the site <br>&emsp; + Delete all lab resources | 11/06/2026 | 11/06/2026 | <https://000021.awsfcaj.com/> |
+| 2 | - Study the AWS workshop for Microsoft workloads on AWS: its tracks, modules, prerequisites and cost <br>- **Practice (WordPress lab):** <br>&emsp; + VPC, subnets and separate security groups for the web and database tiers <br>&emsp; + EC2 instance and RDS database | 11/02/2026 | 11/02/2026 | <https://catalog.us-east-1.prod.workshops.aws/workshops/6932a032-aeec-4dfd-bad8-7bfbc8dad4c2/en-US> <br> <https://000021.awsfcaj.com/> |
+| 3 | - **Practice:** <br>&emsp; + Install WordPress on EC2 and point it at the RDS database | 11/03/2026 | 11/03/2026 | <https://000021.awsfcaj.com/> |
+| 4 | - **Practice:** <br>&emsp; + Make an AMI and a launch template from the working server <br>&emsp; + Add a target group, a load balancer and an Auto Scaling group | 11/04/2026 | 11/04/2026 | <https://000021.awsfcaj.com/> |
+| 5 | - **Practice:** <br>&emsp; + Take a database snapshot and restore it <br>&emsp; + Put CloudFront in front of the site <br>&emsp; + Delete all lab resources | 11/05/2026 | 11/05/2026 | <https://000021.awsfcaj.com/> |
+| 6 | - Read the blog on automating Windows Server upgrades with AWS Systems Manager and note the prerequisites and limits | 11/06/2026 | 11/06/2026 | <https://aws.amazon.com/vi/blogs/modernizing-with-aws/how-to-automate-your-microsoft-windows-server-upgrades-using-aws-systems-manager-update/> |
 
 
 ### Week 9 Achievements:

@@ -17,11 +17,11 @@ pre: " <b> 1.7. </b> "
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Xem phần giới thiệu CloudWatch <br>- **Thực hành:** <br>&emsp; + Dựng stack lab (ba EC2 chạy CloudWatch agent) bằng CloudFormation <br>&emsp; + Xem metric, thử search expression, math expression và dynamic label | 19/10/2026 | 19/10/2026 | <https://000008.awsfcaj.com/> |
-| 3 | - **Thực hành:** <br>&emsp; + Lọc log ứng dụng bằng CloudWatch Logs Insights <br>&emsp; + Thêm metric filter cho các dòng lỗi <br>&emsp; + Đặt alarm gửi mail cho mình qua Amazon SNS | 20/10/2026 | 20/10/2026 | <https://000008.awsfcaj.com/> |
-| 4 | - **Thực hành:** <br>&emsp; + Làm CloudWatch dashboard rồi xóa tài nguyên lab <br>- So sánh bốn chủ đề workshop theo tiêu chí chấm điểm FCAJ: kiểm duyệt media bằng Rekognition, gửi cảnh báo bảo mật về Telegram, REST API serverless, backup và DR tự động | 21/10/2026 | 21/10/2026 | <https://000008.awsfcaj.com/> |
-| 5 | - Đọc về hybrid DNS và Route 53 Resolver <br>- **Thực hành:** <br>&emsp; + Tạo key pair, dựng stack mạng <br>&emsp; + Mở security group, vào Remote Desktop Gateway <br>&emsp; + Cài AWS Managed Microsoft AD đóng vai DNS "on-premises" | 22/10/2026 | 22/10/2026 | <https://000010.awsfcaj.com/> |
-| 6 | - **Thực hành:** <br>&emsp; + Thêm outbound endpoint, resolver rule và inbound endpoint <br>&emsp; + Kiểm tra phân giải bằng nslookup và Resolve-DnsName, xong thì dọn tài nguyên <br>- Học lab "Getting started with Amazon S3", ghi chú phân biệt bucket và object | 23/10/2026 | 23/10/2026 | <https://000010.awsfcaj.com/> <br> <https://000057.awsstudygroup.com/> |
+| 2 | - Đọc về hybrid DNS và Route 53 Resolver <br>- **Thực hành:** <br>&emsp; + Tạo key pair, dựng stack mạng <br>&emsp; + Mở security group, vào Remote Desktop Gateway <br>&emsp; + Cài AWS Managed Microsoft AD đóng vai DNS "on-premises" | 19/10/2026 | 19/10/2026 | <https://000010.awsfcaj.com/> |
+| 3 | - **Thực hành:** <br>&emsp; + Thêm outbound endpoint, resolver rule và inbound endpoint <br>&emsp; + Kiểm tra phân giải bằng nslookup và Resolve-DnsName, xong thì dọn tài nguyên <br>- Học lab "Getting started with Amazon S3", ghi chú phân biệt bucket và object | 20/10/2026 | 20/10/2026 | <https://000010.awsfcaj.com/> <br> <https://000057.awsstudygroup.com/> |
+| 4 | - Xem phần giới thiệu CloudWatch <br>- **Thực hành:** <br>&emsp; + Dựng stack lab (ba EC2 chạy CloudWatch agent) bằng CloudFormation <br>&emsp; + Xem metric, thử search expression, math expression và dynamic label | 21/10/2026 | 21/10/2026 | <https://000008.awsfcaj.com/> |
+| 5 | - **Thực hành:** <br>&emsp; + Lọc log ứng dụng bằng CloudWatch Logs Insights <br>&emsp; + Thêm metric filter cho các dòng lỗi <br>&emsp; + Đặt alarm gửi mail cho mình qua Amazon SNS | 22/10/2026 | 22/10/2026 | <https://000008.awsfcaj.com/> |
+| 6 | - **Thực hành:** <br>&emsp; + Làm CloudWatch dashboard rồi xóa tài nguyên lab <br>- So sánh bốn chủ đề workshop theo tiêu chí chấm điểm FCAJ: kiểm duyệt media bằng Rekognition, gửi cảnh báo bảo mật về Telegram, REST API serverless, backup và DR tự động | 23/10/2026 | 23/10/2026 | <https://000008.awsfcaj.com/> |
 
 
 ### Kết quả đạt được tuần 7:

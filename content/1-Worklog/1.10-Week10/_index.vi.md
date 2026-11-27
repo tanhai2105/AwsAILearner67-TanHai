@@ -16,11 +16,11 @@ pre: " <b> 1.10. </b> "
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Đọc giới thiệu AWS WAF <br>- **Thực hành:** <br>&emsp; + Host web app mẫu trên S3 bucket <br>&emsp; + Tạo web ACL với managed rule, thêm custom rule và advanced custom rule <br>&emsp; + Gửi request thử, bật logging, dọn tài nguyên | 09/11/2026 | 09/11/2026 | <https://000026.awsfcaj.com/> |
+| 2 | - Đọc tin nhắn và tài liệu của nhóm, tóm lại các việc của mình <br>- Lập kế hoạch nhóm cho dự án Windows Server trên AWS, chia việc thành 3 phần chạy song song <br>- Kiểm tra điểm danh trên FCAJ Portal <br>- **Thực hành:** <br>&emsp; + Kịch bản 1 của GuardDuty: EC2 bị xâm nhập, xử lý tự động bằng EventBridge và Lambda | 09/11/2026 | 09/11/2026 | <https://000098.awsfcaj.com/> |
 | 3 | - Đọc cách Amazon GuardDuty hoạt động: nguồn dữ liệu và finding <br>- **Thực hành:** <br>&emsp; + Chuẩn bị môi trường lab bằng CloudFormation template | 10/11/2026 | 10/11/2026 | <https://000098.awsfcaj.com/> |
-| 4 | - Đọc tin nhắn và tài liệu của nhóm, tóm lại các việc của mình <br>- Lập kế hoạch nhóm cho dự án Windows Server trên AWS, chia việc thành 3 phần chạy song song <br>- Kiểm tra điểm danh trên FCAJ Portal <br>- **Thực hành:** <br>&emsp; + Kịch bản 1 của GuardDuty: EC2 bị xâm nhập, xử lý tự động bằng EventBridge và Lambda | 11/11/2026 | 11/11/2026 | <https://000098.awsfcaj.com/> |
-| 5 | - **Thực hành:** <br>&emsp; + Kịch bản 2: lộ IAM credential, xử lý thủ công | 12/11/2026 | 12/11/2026 | <https://000098.awsfcaj.com/> |
-| 6 | - **Thực hành:** <br>&emsp; + Kịch bản 3: credential của IAM role bị đánh cắp, xử lý bằng Lambda <br>&emsp; + Xem lại các finding và xóa tài nguyên lab | 13/11/2026 | 13/11/2026 | <https://000098.awsfcaj.com/> |
+| 4 | - **Thực hành:** <br>&emsp; + Kịch bản 2: lộ IAM credential, xử lý thủ công | 11/11/2026 | 11/11/2026 | <https://000098.awsfcaj.com/> |
+| 5 | - **Thực hành:** <br>&emsp; + Kịch bản 3: credential của IAM role bị đánh cắp, xử lý bằng Lambda <br>&emsp; + Xem lại các finding và xóa tài nguyên lab | 12/11/2026 | 12/11/2026 | <https://000098.awsfcaj.com/> |
+| 6 | - Đọc giới thiệu AWS WAF <br>- **Thực hành:** <br>&emsp; + Host web app mẫu trên S3 bucket <br>&emsp; + Tạo web ACL với managed rule, thêm custom rule và advanced custom rule <br>&emsp; + Gửi request thử, bật logging, dọn tài nguyên | 13/11/2026 | 13/11/2026 | <https://000026.awsfcaj.com/> |
 
 
 ### Kết quả đạt được tuần 10:

@@ -16,9 +16,9 @@ pre: " <b> 1.2. </b> "
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Module 01-04 - Cost optimization on AWS: the main levers for cutting cost | 09/14/2026 | 09/14/2026 | <https://youtu.be/UIw8UxGZCHA> |
-| 3 | - Explored the Cloud Journey website to see how its labs and guides are organized | 09/15/2026 | 09/15/2026 | <https://cloudjourney.awsfcaj.com/> |
-| 4 | - Began Module 1 - Explore on Cloud Journey <br> - Lab AWS Free Tier 2026: how the Free Tier plans work and setting up an AWS account | 09/16/2026 | 09/16/2026 | <https://cloudjourney.awsfcaj.com/1-explore/> <br> <https://000001.awsfcaj.com/> |
+| 2 | - Explored the Cloud Journey website to see how its labs and guides are organized | 09/14/2026 | 09/14/2026 | <https://cloudjourney.awsfcaj.com/> |
+| 3 | - Began Module 1 - Explore on Cloud Journey <br> - Lab AWS Free Tier 2026: how the Free Tier plans work and setting up an AWS account | 09/15/2026 | 09/15/2026 | <https://cloudjourney.awsfcaj.com/1-explore/> <br> <https://000001.awsfcaj.com/> |
+| 4 | - Module 01-04 - Cost optimization on AWS: the main levers for cutting cost | 09/16/2026 | 09/16/2026 | <https://youtu.be/UIw8UxGZCHA> |
 | 5 | - Lab Cost Management with AWS Budget: budget types and cost alerts <br> - Lab AWS Support Request: the support plans and how a case is opened | 09/17/2026 | 09/17/2026 | <https://000007.awsfcaj.com/> <br> <https://000009.awsfcaj.com/> |
 | 6 | - Lab Access Management with AWS IAM: groups, users, roles and role switching | 09/18/2026 | 09/18/2026 | <https://000002.awsfcaj.com/> |
 
