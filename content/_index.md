@@ -24,7 +24,7 @@ chapter: false
 
 &emsp; **Internship Position:** Intern - First Cloud AI Journey
 
-&emsp; **Internship Duration:** From 07/09/2026 to 14/12/2026
+&emsp; **Internship Duration:** From 14/09/2026 to 14/12/2026
 
 ![Profile picture](images/avatar.png)
 

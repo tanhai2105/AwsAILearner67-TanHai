@@ -1,43 +1,28 @@
 ---
 title: "Week 12 Worklog"
-date: 2026-11-23
+date: 2026-11-27
 weight: 12
 chapter: false
 pre: " <b> 1.12. </b> "
 ---
 
 
-### Week 12 Objectives:
+### Week 12 Objectives (plan):
 
-* Polish the Cost Guard workshop: screenshots, check lines, Vietnamese wording, alert email and architecture diagram.
-* Re-test all 3 layers end to end on AWS and review the latest code change.
-* Prepare the team files for FCAJ Submission.
-* Write my personal sections, do the final check of the site and submit the workshop link on the FCAJ Portal before 11/30.
+* Submit the workshop link on the FCAJ Portal (submitted on 11/29/2026, before the 11/30 deadline) and follow the review result.
+* Clean up what is left in the lab account and change the passwords that were shared in the team.
+* Study the two areas where I am still weak: networking on AWS and AI/ML.
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Add AWS Budgets screenshots to 5.6, and the missing screenshots plus a "Check" line under every image of 5.3–5.7 <br>- Rewrite the Vietnamese wording of the workshop <br>- Change the alert email to the team email (two stack updates, because the budget has a fixed name) <br>- Redraw the architecture diagram in draw.io with the official AWS icon package (07/2026) | 11/23/2026 | 11/23/2026 | |
-| 3 | - Review a teammate's change to the Cost Meter Lambda (cost computed from the instance LaunchTime) <br>- Start re-testing all 3 layers end to end on AWS | 11/24/2026 | 11/25/2026 | |
-| 4 | - Finish the end-to-end test, compare the deployed code with the template and post the review <br>- Draft the team summary .md and the architecture .xml for FCAJ Submission | 11/25/2026 | 11/25/2026 | |
-| 5 | - Write the personal sections: events, self-evaluation, feedback | 11/26/2026 | 11/26/2026 | |
-| 6 | - Final check of the whole site <br>- Submit the workshop link on the FCAJ Portal (deadline 11/30) | 11/27/2026 | 11/27/2026 | |
+| 2 | - Follow the submission status on the FCAJ Portal (Pending review, Approved or Reject); if it is rejected, fix it based on the feedback and update the submission | 11/30/2026 | 11/30/2026 | <https://hcm-rules.awsfcaj.com/instructions/workshop> |
+| 3 | - Review the lab account: clean up what is left from Experience 2 (the policy that lets EventBridge call SNS, the Image Builder log groups with the `exp2-` prefix) once the team agrees <br> - Change the password of the IAM user that was shared in the team chat | 12/01/2026 | 12/01/2026 | <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_admin-change-user.html> |
+| 4 | - Study networking: review VPC, subnets, route tables and NAT gateways | 12/02/2026 | 12/02/2026 | <https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html> |
+| 5 | - Study AI/ML: read the getting-started part of Amazon Bedrock | 12/03/2026 | 12/03/2026 | <https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html> |
+| 6 | - Read AWS Well-Architected (Security and Cost Optimization pillars) and compare it with the Cost Guard architecture <br> - Wrap up the project with the team | 12/04/2026 | 12/04/2026 | <https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html> |
 
 
 ### Week 12 Achievements:
 
-* Workshop sections 5.3–5.7 now have every screenshot they need with a "Check" line under each image, and 5.6 includes the AWS Budgets screenshots; the Vietnamese text reads more naturally.
-
-* Alerts now go to the team email. It took two stack updates because the budget uses a fixed name, which is something to remember when designing templates.
-
-* The architecture diagram is redrawn in draw.io with the official AWS icon package (07/2026).
-
-* Reviewed the Cost Meter Lambda change that computes cost from the instance LaunchTime, then re-tested all 3 layers on AWS:
-
-  * Layer 2 stopped the instance 3 min 54 s after I lowered the threshold
-  * Layer 3 stopped it in 7 s
-  * The deployed code was not the same as the template; I wrote this up in the review I posted
-
-* Drafted the team summary .md and the architecture .xml for FCAJ Submission.
-
-* Still to do on 11/26–11/27: personal sections, final site check and submitting the workshop link on the FCAJ Portal before 11/30.
+* This week has not happened yet (worklog updated on 11/29/2026); the tasks above are the plan. Results will be added later.

@@ -1,6 +1,6 @@
 ---
 title: "Week 5 Worklog"
-date: 2026-10-05
+date: 2026-10-12
 weight: 5
 chapter: false
 pre: " <b> 1.5. </b> "
@@ -9,43 +9,47 @@ pre: " <b> 1.5. </b> "
 
 ### Week 5 Objectives:
 
-* Brainstorm with my team what our proposal and workshop could be about.
-* Learn Amazon RDS and run a MySQL database on it end to end.
-* Read two AWS blogs: Fleet Manager for Windows access and CloudWatch Omni for watching AI agents.
+* Deploy two real applications on Amazon Lightsail and keep them safe, backed up and right-sized.
+* Put an EC2 application behind Elastic Load Balancing and an Auto Scaling group.
+* Try the four scaling approaches and see when each one fits.
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Read the blog on AWS Systems Manager Fleet Manager | 10/05/2026 | 10/05/2026 | <https://aws.amazon.com/vi/blogs/mt/console-based-access-to-windows-instances-using-aws-systems-manager-fleet-manager/> |
-| 3 | - Read the blog on Amazon CloudWatch Omni | 10/06/2026 | 10/06/2026 | <https://aws.amazon.com/vi/blogs/aws/introducing-amazon-cloudwatch-omni-ai-powered-observability-for-generative-ai-and-agentic-workloads/> |
-| 4 | - Read the RDS material: <br>&emsp; + Which database engines RDS supports <br>&emsp; + Multi-AZ and Read Replicas <br>&emsp; + Automated backups and snapshots <br>&emsp; + Security with encryption, VPC and IAM | 10/07/2026 | 10/07/2026 | <https://000005.awsfcaj.com/> |
-| 5 | - **Practice:** <br>&emsp; + VPC, Security Groups and a DB subnet group <br>&emsp; + An RDS MySQL instance <br>&emsp; + An EC2 instance connecting to RDS with the MySQL client <br>&emsp; + Created a database and a table, inserted rows <br>&emsp; + Deployed an app that uses RDS <br>&emsp; + Snapshot and restore <br>&emsp; + Cleanup | 10/08/2026 | 10/08/2026 | <https://000005.awsfcaj.com/> |
-| 6 | - Team brainstorming session for the proposal and the workshop topic | 10/09/2026 | 10/09/2026 |  |
+| 2 | - Looked at an overview of EC2 Auto Scaling groups and Elastic Load Balancing <br> - **Practice:** <br>&emsp; + Set up the network <br>&emsp; + Created an EC2 instance and a database instance and loaded sample data <br>&emsp; + Installed and started the web server | 10/12/2026 | 10/12/2026 | <https://000006.awsfcaj.com/> |
+| 3 | - **Practice:** <br>&emsp; + Created a launch template, a target group and an Application Load Balancer <br>&emsp; + Opened the app through the load balancer to check it <br>&emsp; + Created the Auto Scaling group and prepared metrics for predictive scaling | 10/13/2026 | 10/13/2026 | <https://000006.awsfcaj.com/> |
+| 4 | - **Practice:** <br>&emsp; + Tried all four scaling types in turn: manual, scheduled, dynamic and predictive <br>&emsp; + Cleaned up the lab | 10/14/2026 | 10/14/2026 | <https://000006.awsfcaj.com/> |
+| 5 | - Read the Amazon Lightsail overview <br> - **Practice:** <br>&emsp; + Created a managed MySQL database in Lightsail <br>&emsp; + Built a WordPress blog on an Ubuntu blueprint, attached a static IP and then installed WordPress <br>&emsp; + Built a PrestaShop store from its application blueprint, with a static IP and a domain | 10/15/2026 | 10/15/2026 | <https://000045.awsfcaj.com/> |
+| 6 | - **Practice:** <br>&emsp; + Restricted the SSH rule of the firewall <br>&emsp; + Took a snapshot, then recreated WordPress from it on a bigger plan <br>&emsp; + Added a CPU alarm <br>&emsp; + Removed the lab resources | 10/16/2026 | 10/16/2026 | <https://000045.awsfcaj.com/> |
 
 
 ### Week 5 Achievements:
 
-* Takeaways from the Fleet Manager blog:
+* Understood why to use Auto Scaling: failed instances are replaced automatically, the number of instances follows traffic, the load balancer distributes requests, and costs drop when few users are online.
 
-  * I can RDP into a Windows instance straight from the browser, through Session Manager
-  * No open RDP port, public IP or bastion host is needed, which shrinks the attack surface
-  * Login works with an EC2 key pair or Windows credentials, and up to 4 instances can be shown side by side
-  * The instance needs the SSM Agent, an instance profile with Systems Manager permissions and a path to the SSM endpoint
+* Built the scaling setup for the FCAJ Management app (a web server on EC2 with a database):
 
-* Takeaways from the CloudWatch Omni blog:
+  * A launch template defining the AMI, instance type, security groups and user data
+  * An Application Load Balancer and target group placed in front of the instances
+  * An Auto Scaling group spread over 3 public subnets with desired 1, min 1, max 3, health checks from the load balancer, CloudWatch group metrics and SNS notifications
 
-  * AI agents can take a different path on each run, so tracing every LLM call and tool call is how you find the step that failed
-  * Latency and error rate do not tell if an answer is good; Omni has 17 built-in evaluators such as coherence, helpfulness and faithfulness for that
-  * Playground, Experiments and Prompt Management help compare prompts or settings and go back to an older version
-  * It runs in VS Code, Kiro or the web, builds on OpenInference and ADOT, and supports LangChain, CrewAI, Strands and other frameworks
+* What I learned about the four scaling types:
 
-* RDS takes over the routine database work (patching, backups, failover). I learned the engines it supports, how Multi-AZ keeps a standby copy in another AZ, and how encryption, the VPC and IAM protect it.
+  * Manual: change the desired capacity by hand for an event that happens once
+  * Scheduled: change the number of instances at fixed times when traffic repeats on a pattern
+  * Dynamic: react right away to a metric such as CPU or request count
+  * Predictive: forecast the next 48–72 hours from historical data, so metrics must have been collected beforehand
 
-* Ran the full RDS lab:
+* Lightsail is the easy route: one monthly price already covers the server, SSD, data transfer and a static IP, so there is no need to plan a VPC, security groups or EBS up front.
 
-  * The MySQL instance sits in private subnets picked by the DB subnet group, so only the EC2 instance in the VPC can reach it
-  * From EC2 I used the MySQL client to make a database and a table and add some rows
-  * Deployed an application on top of that database
-  * Took a snapshot and restored it as a new instance to see that the data came back
+* Ran two applications on Lightsail in the Singapore Region, each with a static IP so the address stays fixed:
 
-* The team now has a short list of first ideas for the proposal and the workshop to keep working on.
+  * WordPress on an Ubuntu 24.04 blueprint with a Lightsail-managed MySQL database
+  * PrestaShop built from the ready-made application blueprint
+
+* Operated them like a small real-world system:
+
+  * The SSH rule now admits only the Lightsail browser SSH client instead of the whole internet
+  * A Lightsail instance cannot change plans directly, so I took a snapshot, built a larger machine from it and pointed the static IP at the new machine
+  * The blog kept all its posts after the move, because the data lives in the managed database and not on the instance
+  * Added a CPU alarm

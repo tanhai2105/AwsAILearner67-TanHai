@@ -1,6 +1,6 @@
 ---
 title: "Week 8 Worklog"
-date: 2026-10-26
+date: 2026-11-02
 weight: 8
 chapter: false
 pre: " <b> 1.8. </b> "
@@ -9,37 +9,36 @@ pre: " <b> 1.8. </b> "
 
 ### Week 8 Objectives:
 
-* Work with AWS from the terminal using the AWS CLI instead of the console.
-* Create S3, SNS, IAM, network and EC2 resources entirely by command.
-* Keep the workshop moving and re-check the proposal's architecture and details.
+* Learn how Windows Server workloads run on AWS, since our team topic is Windows Server on AWS.
+* Understand how AWS Systems Manager Automation upgrades Windows Server in place.
+* Deploy WordPress on AWS with a public web tier, a private database, scaling and a CDN.
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Keep working on the workshop <br>- Re-read the proposal and check the architecture against it | 10/26/2026 | 10/26/2026 | |
-| 3 | - Read how the AWS CLI works: profiles, config files, output formats <br>- **Practice:** <br>&emsp; + Install the CLI and run aws configure for my profile <br>&emsp; + List my existing resources from the terminal | 10/27/2026 | 10/27/2026 | <https://000011.awsfcaj.com/> |
-| 4 | - **Practice:** <br>&emsp; + S3 commands: create a bucket, upload and list objects <br>&emsp; + SNS commands: topic and subscription | 10/28/2026 | 10/28/2026 | <https://000011.awsfcaj.com/> |
-| 5 | - **Practice:** <br>&emsp; + IAM by command: group, user, access key <br>&emsp; + Networking by command: VPC, subnets, internet gateway, route table | 10/29/2026 | 10/29/2026 | <https://000011.awsfcaj.com/> |
-| 6 | - **Practice:** <br>&emsp; + Key pair, security group and an EC2 instance launched from the CLI, then SSH in <br>&emsp; + Terminate everything and remove leftover resources | 10/30/2026 | 10/30/2026 | <https://000011.awsfcaj.com/> |
+| 2 | - Study the AWS workshop for Microsoft workloads on AWS: its tracks, modules, prerequisites and cost <br>- **Practice (WordPress lab):** <br>&emsp; + VPC, subnets and separate security groups for the web and database tiers <br>&emsp; + EC2 instance and RDS database | 11/02/2026 | 11/02/2026 | <https://catalog.us-east-1.prod.workshops.aws/workshops/6932a032-aeec-4dfd-bad8-7bfbc8dad4c2/en-US> <br> <https://000021.awsfcaj.com/> |
+| 3 | - **Practice:** <br>&emsp; + Install WordPress on EC2 and point it at the RDS database | 11/03/2026 | 11/03/2026 | <https://000021.awsfcaj.com/> |
+| 4 | - **Practice:** <br>&emsp; + Make an AMI and a launch template from the working server <br>&emsp; + Add a target group, a load balancer and an Auto Scaling group | 11/04/2026 | 11/04/2026 | <https://000021.awsfcaj.com/> |
+| 5 | - **Practice:** <br>&emsp; + Take a database snapshot and restore it <br>&emsp; + Put CloudFront in front of the site <br>&emsp; + Delete all lab resources | 11/05/2026 | 11/05/2026 | <https://000021.awsfcaj.com/> |
+| 6 | - Read the blog on automating Windows Server upgrades with AWS Systems Manager and note the prerequisites and limits | 11/06/2026 | 11/06/2026 | <https://aws.amazon.com/vi/blogs/modernizing-with-aws/how-to-automate-your-microsoft-windows-server-upgrades-using-aws-systems-manager-update/> |
 
 
 ### Week 8 Achievements:
 
-* Moved the workshop forward and went back over the proposal to make sure the architecture and the details still match.
+* Went through the Microsoft workloads on AWS workshop and noted which tracks and modules fit our Windows Server topic, what each one needs before starting, and what it costs to run.
 
-* Understood that the AWS CLI is an open-source client calling the same public APIs as the console, so anything I click can also be scripted.
+* Built WordPress on AWS step by step:
 
-* Set up the CLI properly:
+  * Web server in a public subnet, RDS in a private subnet, each with its own security group
+  * WordPress installed and connected to the database
+  * AMI, launch template, target group, load balancer and Auto Scaling group so the site can grow and share traffic
+  * Snapshot and restore of the database, then CloudFront for faster delivery
 
-  * aws configure stores the access key, secret key, default Region and output format; extra named profiles are picked with --profile
-  * json and yaml suit scripts, table and text are easier for me to read by eye
-  * The auto-prompt feature helped a lot while I was still learning the syntax
+* Saw how CloudFront, Auto Scaling with a load balancer, and RDS Multi-AZ each cover a different part of availability and performance.
 
-* Created resources only from the terminal:
+* Notes from the Windows Server upgrade blog:
 
-  * An S3 bucket with objects and an SNS topic with a subscription
-  * An IAM group, a user and an access key
-  * A full small network: VPC, subnets, internet gateway, route table
-  * An EC2 instance in that network with its own key pair and security group, reached over SSH and then terminated
-
-* Took the credential lessons seriously: access keys are never shared, IAM roles are preferred, and unused keys and key pairs get deleted.
+  * Windows Server 2012/2012 R2 lost support on October 10, 2023, and extended support for 2016 ends on January 12, 2027, after which no more security patches arrive
+  * The AWSEC2-CloneInstanceAndUpgradeWindows runbook works on a clone, not the original, and outputs a new AMI
+  * Before running it: SSM Agent working, TLS 1.2, 20 GB or more free on the root volume, an instance profile for SSM and outbound access to the SSM endpoints
+  * It does not handle domain controllers, clusters, desktop editions or Remote Desktop Session Host servers, and the application must be tested before going back to production

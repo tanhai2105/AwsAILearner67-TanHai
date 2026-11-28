@@ -1,6 +1,6 @@
 ---
 title: "Worklog Tuần 9"
-date: 2026-11-02
+date: 2026-11-09
 weight: 9
 chapter: false
 pre: " <b> 1.9. </b> "
@@ -9,36 +9,36 @@ pre: " <b> 1.9. </b> "
 
 ### Mục tiêu tuần 9:
 
-* Tìm hiểu cách chạy workload Windows Server trên AWS, vì chủ đề của nhóm là Windows Server trên AWS.
-* Hiểu cách AWS Systems Manager Automation nâng cấp Windows Server tại chỗ.
-* Triển khai WordPress trên AWS với tầng web public, database private, có scaling và CDN.
+* Bảo vệ ứng dụng web bằng AWS WAF.
+* Dùng Amazon GuardDuty để phát hiện và xử lý mối đe dọa, kể cả xử lý tự động bằng Amazon EventBridge và AWS Lambda.
+* Lên kế hoạch cho phần việc của mình trong dự án Windows Server trên AWS của nhóm.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Tìm hiểu workshop của AWS về Microsoft workloads trên AWS: các track, module, yêu cầu trước và chi phí <br>- **Thực hành (lab WordPress):** <br>&emsp; + VPC, subnet, security group riêng cho tầng web và tầng database <br>&emsp; + Tạo EC2 và database RDS | 02/11/2026 | 02/11/2026 | <https://catalog.us-east-1.prod.workshops.aws/workshops/6932a032-aeec-4dfd-bad8-7bfbc8dad4c2/en-US> <br> <https://000021.awsfcaj.com/> |
-| 3 | - **Thực hành:** <br>&emsp; + Cài WordPress lên EC2, trỏ vào database RDS | 03/11/2026 | 03/11/2026 | <https://000021.awsfcaj.com/> |
-| 4 | - **Thực hành:** <br>&emsp; + Tạo AMI và launch template từ server đã chạy ổn <br>&emsp; + Thêm target group, load balancer và Auto Scaling group | 04/11/2026 | 04/11/2026 | <https://000021.awsfcaj.com/> |
-| 5 | - **Thực hành:** <br>&emsp; + Chụp snapshot database rồi restore lại <br>&emsp; + Đặt CloudFront trước website <br>&emsp; + Xóa toàn bộ tài nguyên lab | 05/11/2026 | 05/11/2026 | <https://000021.awsfcaj.com/> |
-| 6 | - Đọc blog tự động nâng cấp Windows Server bằng AWS Systems Manager, ghi lại điều kiện và giới hạn | 06/11/2026 | 06/11/2026 | <https://aws.amazon.com/vi/blogs/modernizing-with-aws/how-to-automate-your-microsoft-windows-server-upgrades-using-aws-systems-manager-update/> |
+| 2 | - Đọc tin nhắn và tài liệu của nhóm, tóm lại các việc của mình <br>- Lập kế hoạch nhóm cho dự án Windows Server trên AWS, chia việc thành 3 phần chạy song song <br>- Kiểm tra điểm danh trên FCAJ Portal <br>- **Thực hành:** <br>&emsp; + Kịch bản 1 của GuardDuty: EC2 bị xâm nhập, xử lý tự động bằng EventBridge và Lambda | 09/11/2026 | 09/11/2026 | <https://000098.awsfcaj.com/> |
+| 3 | - Đọc cách Amazon GuardDuty hoạt động: nguồn dữ liệu và finding <br>- **Thực hành:** <br>&emsp; + Chuẩn bị môi trường lab bằng CloudFormation template | 10/11/2026 | 10/11/2026 | <https://000098.awsfcaj.com/> |
+| 4 | - **Thực hành:** <br>&emsp; + Kịch bản 2: lộ IAM credential, xử lý thủ công | 11/11/2026 | 11/11/2026 | <https://000098.awsfcaj.com/> |
+| 5 | - **Thực hành:** <br>&emsp; + Kịch bản 3: credential của IAM role bị đánh cắp, xử lý bằng Lambda <br>&emsp; + Xem lại các finding và xóa tài nguyên lab | 12/11/2026 | 12/11/2026 | <https://000098.awsfcaj.com/> |
+| 6 | - Đọc giới thiệu AWS WAF <br>- **Thực hành:** <br>&emsp; + Host web app mẫu trên S3 bucket <br>&emsp; + Tạo web ACL với managed rule, thêm custom rule và advanced custom rule <br>&emsp; + Gửi request thử, bật logging, dọn tài nguyên | 13/11/2026 | 13/11/2026 | <https://000026.awsfcaj.com/> |
 
 
 ### Kết quả đạt được tuần 9:
 
-* Đi qua workshop Microsoft workloads trên AWS, ghi lại track và module nào hợp với chủ đề Windows Server của nhóm, mỗi phần cần chuẩn bị gì và tốn bao nhiêu tiền.
+* Với dự án nhóm, mình gom tin nhắn và tài liệu rời rạc thành danh sách việc của bản thân và một kế hoạch 3 phần làm song song; điểm danh trên FCAJ Portal đã kiểm tra xong.
 
-* Dựng WordPress trên AWS từng bước:
+* Hiểu GuardDuty là dịch vụ phát hiện mối đe dọa, quản lý hoàn toàn, chạy theo Region:
 
-  * Web server ở public subnet, RDS ở private subnet, mỗi tầng một security group
-  * Cài WordPress và kết nối được với database
-  * AMI, launch template, target group, load balancer và Auto Scaling group để website mở rộng và chia tải
-  * Snapshot rồi restore database, sau đó thêm CloudFront cho tải nhanh hơn
+  * Đọc VPC Flow Logs, CloudTrail và DNS log mà không ảnh hưởng tài nguyên đang giám sát
+  * Mỗi finding có tên loại dễ đọc và có thông báo khi finding thay đổi
+  * Chi phí tính theo số sự kiện CloudTrail và lượng flow log/DNS log, mỗi Region có 30 ngày dùng thử
 
-* Thấy rõ CloudFront, Auto Scaling đi kèm load balancer và RDS Multi-AZ mỗi thứ lo một phần khác nhau về tính sẵn sàng và hiệu năng.
+* Làm qua ba kịch bản tấn công:
 
-* Ghi chú từ blog nâng cấp Windows Server:
+  * EC2 bị xâm nhập (UnauthorizedAccess:EC2/MaliciousIPCaller.Custom) được EventBridge và Lambda xử lý tự động
+  * Lộ IAM credential (Recon:IAMUser/MaliciousIPCaller.Custom, UnauthorizedAccess:IAMUser/MaliciousIPCaller.Custom), lần ra ai đang gọi API rồi sửa thủ công
+  * Credential của role bị đánh cắp (UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration) xử lý bằng Lambda
 
-  * Windows Server 2012/2012 R2 hết hỗ trợ từ 10/10/2023, bản 2016 hết hỗ trợ mở rộng ngày 12/01/2027, sau đó sẽ không còn bản vá bảo mật
-  * Runbook AWSEC2-CloneInstanceAndUpgradeWindows nâng cấp trên bản clone chứ không đụng vào máy gốc, kết quả là một AMI mới
-  * Trước khi chạy cần: SSM Agent hoạt động, TLS 1.2, ổ root trống từ 20 GB, instance profile cho SSM và đi ra được các endpoint của SSM
-  * Không áp dụng cho domain controller, cluster, bản desktop hay server có role Remote Desktop Session Host; nâng cấp xong phải test ứng dụng rồi mới đưa lại production
+* Hiểu AWS WAF lọc request HTTP trước khi tới ứng dụng hay API, chặn các kiểu tấn công phổ biến như SQL injection, cross-site scripting, và mình có thể tự viết rule cho phép/chặn.
+
+* Trong lab WAF, mình tạo web ACL với managed rule, thêm rule chặn request có một header nhất định và một advanced custom rule, thấy các request thử bị chặn hiện trên dashboard và sampled requests, rồi bật logging.

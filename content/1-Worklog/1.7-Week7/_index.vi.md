@@ -1,6 +1,6 @@
 ---
 title: "Worklog Tuần 7"
-date: 2026-10-19
+date: 2026-10-26
 weight: 7
 chapter: false
 pre: " <b> 1.7. </b> "
@@ -9,37 +9,37 @@ pre: " <b> 1.7. </b> "
 
 ### Mục tiêu tuần 7:
 
-* Làm quen với việc giám sát trên AWS qua Amazon CloudWatch (metric, log, alarm, dashboard).
-* Hiểu hybrid DNS với Route 53 Resolver bằng cách tự dựng lab từ đầu đến cuối.
-* Chọn chủ đề workshop bằng cách so sánh vài ý tưởng theo tiêu chí chấm điểm của FCAJ.
-* Ôn lại Amazon S3 và tự ghi chú.
+* Thao tác với AWS từ terminal bằng AWS CLI thay vì console.
+* Tạo tài nguyên S3, SNS, IAM, mạng và EC2 hoàn toàn bằng lệnh.
+* Tiếp tục làm workshop và soát lại kiến trúc, thông tin trong proposal.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Đọc về hybrid DNS và Route 53 Resolver <br>- **Thực hành:** <br>&emsp; + Tạo key pair, dựng stack mạng <br>&emsp; + Mở security group, vào Remote Desktop Gateway <br>&emsp; + Cài AWS Managed Microsoft AD đóng vai DNS "on-premises" | 19/10/2026 | 19/10/2026 | <https://000010.awsfcaj.com/> |
-| 3 | - **Thực hành:** <br>&emsp; + Thêm outbound endpoint, resolver rule và inbound endpoint <br>&emsp; + Kiểm tra phân giải bằng nslookup và Resolve-DnsName, xong thì dọn tài nguyên <br>- Học lab "Getting started with Amazon S3", ghi chú phân biệt bucket và object | 20/10/2026 | 20/10/2026 | <https://000010.awsfcaj.com/> <br> <https://000057.awsstudygroup.com/> |
-| 4 | - Xem phần giới thiệu CloudWatch <br>- **Thực hành:** <br>&emsp; + Dựng stack lab (ba EC2 chạy CloudWatch agent) bằng CloudFormation <br>&emsp; + Xem metric, thử search expression, math expression và dynamic label | 21/10/2026 | 21/10/2026 | <https://000008.awsfcaj.com/> |
-| 5 | - **Thực hành:** <br>&emsp; + Lọc log ứng dụng bằng CloudWatch Logs Insights <br>&emsp; + Thêm metric filter cho các dòng lỗi <br>&emsp; + Đặt alarm gửi mail cho mình qua Amazon SNS | 22/10/2026 | 22/10/2026 | <https://000008.awsfcaj.com/> |
-| 6 | - **Thực hành:** <br>&emsp; + Làm CloudWatch dashboard rồi xóa tài nguyên lab <br>- So sánh bốn chủ đề workshop theo tiêu chí chấm điểm FCAJ: kiểm duyệt media bằng Rekognition, gửi cảnh báo bảo mật về Telegram, REST API serverless, backup và DR tự động | 23/10/2026 | 23/10/2026 | <https://000008.awsfcaj.com/> |
+| 2 | - Làm tiếp workshop <br>- Đọc lại proposal, đối chiếu với kiến trúc | 26/10/2026 | 26/10/2026 | |
+| 3 | - Đọc cách AWS CLI hoạt động: profile, file cấu hình, định dạng output <br>- **Thực hành:** <br>&emsp; + Cài CLI, chạy aws configure cho profile của mình <br>&emsp; + Liệt kê tài nguyên đang có từ terminal | 27/10/2026 | 27/10/2026 | <https://000011.awsfcaj.com/> |
+| 4 | - **Thực hành:** <br>&emsp; + Lệnh S3: tạo bucket, upload và liệt kê object <br>&emsp; + Lệnh SNS: topic và subscription | 28/10/2026 | 28/10/2026 | <https://000011.awsfcaj.com/> |
+| 5 | - **Thực hành:** <br>&emsp; + IAM bằng lệnh: group, user, access key <br>&emsp; + Mạng bằng lệnh: VPC, subnet, internet gateway, route table | 29/10/2026 | 29/10/2026 | <https://000011.awsfcaj.com/> |
+| 6 | - **Thực hành:** <br>&emsp; + Tạo key pair, security group, chạy EC2 từ CLI rồi SSH vào <br>&emsp; + Terminate và xóa sạch tài nguyên còn sót | 30/10/2026 | 30/10/2026 | <https://000011.awsfcaj.com/> |
 
 
 ### Kết quả đạt được tuần 7:
 
-* Dựng xong lab hybrid DNS:
+* Workshop tiến thêm một bước, đồng thời mình rà lại proposal để chắc kiến trúc và thông tin vẫn khớp nhau.
 
-  * Mạng (VPC, public/private subnet, Remote Desktop Gateway) dựng từ CloudFormation template
-  * AWS Managed Microsoft AD với domain onprem.example.com đóng vai DNS on-premises
-  * Outbound endpoint cho truy vấn đi từ AWS ra on-premises, inbound endpoint cho chiều ngược lại, resolver rule để chọn domain nào được chuyển tiếp
-  * Từ gateway kiểm tra phân giải tên được bằng cả nslookup lẫn Resolve-DnsName
+* Hiểu AWS CLI là công cụ mã nguồn mở gọi cùng bộ API public như console, nên cái gì bấm được trên console thì cũng viết script được.
 
-* Tự ghi chú về S3: bucket là "thùng chứa" có tên duy nhất toàn cầu, nằm trong một Region; object là file kèm metadata, được truy cập qua key.
+* Cài đặt CLI cho đúng:
 
-* Giờ mình hiểu CloudWatch là chỗ gom metric, log và alarm:
+  * aws configure lưu access key, secret key, Region mặc định và định dạng output; muốn dùng profile khác thì thêm --profile
+  * json với yaml hợp cho script, còn table và text thì mình đọc bằng mắt dễ hơn
+  * Tính năng auto-prompt giúp nhiều lúc mình chưa thuộc cú pháp
 
-  * Stack lab cấp cho agent một IAM role chỉ đủ quyền cần dùng, chứ không phải AdministratorAccess
-  * Ghép metric bằng search/math expression, dùng dynamic label cho biểu đồ dễ đọc hơn
-  * Logs Insights lọc log rất nhanh; metric filter biến các dòng ERROR thành metric, và mình để ý là filter chỉ đếm sự kiện đến sau lúc tạo nó
-  * Alarm trên metric đó gửi mail về qua SNS, còn dashboard gom hết lên một màn hình
+* Tạo tài nguyên chỉ bằng terminal:
 
-* So bốn ý tưởng workshop (kiểm duyệt media bằng Rekognition, cảnh báo bảo mật qua Telegram, REST API serverless, backup và DR tự động) với tiêu chí chấm của FCAJ, nhờ vậy mình rõ hơn một chủ đề workshop tốt cần gì.
+  * Bucket S3 kèm object, topic SNS kèm subscription
+  * IAM group, user và access key
+  * Một mạng nhỏ đầy đủ: VPC, subnet, internet gateway, route table
+  * Một EC2 trong mạng đó với key pair và security group riêng, SSH vào được rồi terminate
+
+* Rút ra bài học về credential: không bao giờ chia sẻ access key, ưu tiên IAM role, key và key pair không dùng nữa thì xóa.

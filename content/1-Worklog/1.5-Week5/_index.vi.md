@@ -1,6 +1,6 @@
 ---
 title: "Worklog Tuần 5"
-date: 2026-10-05
+date: 2026-10-12
 weight: 5
 chapter: false
 pre: " <b> 1.5. </b> "
@@ -9,43 +9,47 @@ pre: " <b> 1.5. </b> "
 
 ### Mục tiêu tuần 5:
 
-* Cùng nhóm bàn ý tưởng cho proposal và workshop.
-* Học Amazon RDS và dựng trọn một database MySQL trên đó.
-* Đọc hai blog AWS: Fleet Manager để truy cập Windows và CloudWatch Omni để theo dõi AI agent.
+* Triển khai hai ứng dụng thật trên Amazon Lightsail, giữ an toàn, có backup và đúng cỡ.
+* Đặt ứng dụng EC2 sau Elastic Load Balancing và Auto Scaling group.
+* Thử bốn cách scaling và xem lúc nào nên dùng cách nào.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Đọc và ghi chú bài blog giới thiệu Fleet Manager của AWS Systems Manager | 05/10/2026 | 05/10/2026 | <https://aws.amazon.com/vi/blogs/mt/console-based-access-to-windows-instances-using-aws-systems-manager-fleet-manager/> |
-| 3 | - Đọc và ghi chú bài blog ra mắt Amazon CloudWatch Omni | 06/10/2026 | 06/10/2026 | <https://aws.amazon.com/vi/blogs/aws/introducing-amazon-cloudwatch-omni-ai-powered-observability-for-generative-ai-and-agentic-workloads/> |
-| 4 | - Đọc tài liệu RDS: <br>&emsp; + Các database engine RDS hỗ trợ <br>&emsp; + Multi-AZ và Read Replica <br>&emsp; + Backup tự động và snapshot <br>&emsp; + Bảo mật bằng mã hóa, VPC và IAM | 07/10/2026 | 07/10/2026 | <https://000005.awsfcaj.com/> |
-| 5 | - **Thực hành:** <br>&emsp; + VPC, Security Group và DB subnet group <br>&emsp; + Một instance RDS MySQL <br>&emsp; + EC2 kết nối tới RDS bằng MySQL client <br>&emsp; + Tạo database, tạo bảng, thêm dữ liệu <br>&emsp; + Triển khai app dùng RDS <br>&emsp; + Snapshot và restore <br>&emsp; + Dọn dẹp | 08/10/2026 | 08/10/2026 | <https://000005.awsfcaj.com/> |
-| 6 | - Ngồi cùng nhóm brainstorm chủ đề cho proposal và workshop | 09/10/2026 | 09/10/2026 |  |
+| 2 | - Xem tổng quan EC2 Auto Scaling Group và Elastic Load Balancing <br> - **Thực hành:** <br>&emsp; + Dựng phần mạng <br>&emsp; + Tạo EC2 và database instance, nhập dữ liệu mẫu <br>&emsp; + Cài và chạy web server | 12/10/2026 | 12/10/2026 | <https://000006.awsfcaj.com/> |
+| 3 | - **Thực hành:** <br>&emsp; + Tạo launch template, target group và Application Load Balancer <br>&emsp; + Truy cập app qua load balancer để kiểm tra <br>&emsp; + Tạo Auto Scaling group và chuẩn bị metric cho predictive scaling | 13/10/2026 | 13/10/2026 | <https://000006.awsfcaj.com/> |
+| 4 | - **Thực hành:** <br>&emsp; + Thử lần lượt bốn kiểu scaling: manual, scheduled, dynamic, predictive <br>&emsp; + Dọn lab | 14/10/2026 | 14/10/2026 | <https://000006.awsfcaj.com/> |
+| 5 | - Đọc tổng quan Amazon Lightsail <br> - **Thực hành:** <br>&emsp; + Tạo database MySQL do Lightsail quản lý <br>&emsp; + Dựng blog WordPress trên blueprint Ubuntu, gắn static IP rồi cài WordPress <br>&emsp; + Dựng shop PrestaShop từ application blueprint, gắn static IP và tên miền | 15/10/2026 | 15/10/2026 | <https://000045.awsfcaj.com/> |
+| 6 | - **Thực hành:** <br>&emsp; + Giới hạn lại rule SSH của firewall <br>&emsp; + Chụp snapshot, rồi tạo lại WordPress từ snapshot trên gói lớn hơn <br>&emsp; + Thêm alarm CPU <br>&emsp; + Xóa tài nguyên lab | 16/10/2026 | 16/10/2026 | <https://000045.awsfcaj.com/> |
 
 
 ### Kết quả đạt được tuần 5:
 
-* Rút ra từ blog Fleet Manager:
+* Hiểu lý do dùng Auto Scaling: instance hỏng được thay tự động, số lượng máy co giãn theo lưu lượng, load balancer phân phối request, và lúc ít người dùng thì chi phí thấp hơn.
 
-  * RDP vào máy Windows ngay trên trình duyệt, đi qua Session Manager
-  * Không phải mở cổng RDP, không cần public IP hay bastion host, nên ít chỗ bị tấn công hơn
-  * Đăng nhập bằng key pair EC2 hoặc tài khoản Windows, xem được tối đa 4 máy cùng lúc
-  * Máy cần có SSM Agent, instance profile có quyền Systems Manager và đường kết nối tới SSM endpoint
+* Dựng hệ thống scaling cho app FCAJ Management (web server chạy trên EC2 kèm database):
 
-* Rút ra từ blog CloudWatch Omni:
+  * Launch template khai báo AMI, instance type, security group và user data
+  * Application Load Balancer và target group đặt phía trước các instance
+  * Auto Scaling group trải trên 3 public subnet với desired 1, min 1, max 3, health check theo load balancer, group metrics của CloudWatch và thông báo qua SNS
 
-  * AI agent mỗi lần chạy có thể đi một hướng khác, nên phải trace từng lần gọi LLM và gọi tool mới tìm ra bước bị lỗi
-  * Latency hay tỷ lệ lỗi không nói được câu trả lời tốt hay dở, Omni có sẵn 17 evaluator như coherence, helpfulness, faithfulness để chấm
-  * Playground, Experiments và Prompt Management giúp so prompt, so cấu hình và quay về bản cũ
-  * Dùng trong VS Code, Kiro hoặc bản web, dựa trên OpenInference và ADOT, hỗ trợ LangChain, CrewAI, Strands và nhiều framework khác
+* Điều mình rút ra về bốn kiểu scaling:
 
-* RDS lo giúp mấy việc lặp đi lặp lại của database (vá lỗi, backup, failover). Mình nắm được các engine nó hỗ trợ, Multi-AZ giữ bản standby ở AZ khác ra sao, và mã hóa, VPC, IAM bảo vệ database thế nào.
+  * Manual: tự đổi desired capacity khi có một sự kiện chỉ xảy ra một lần
+  * Scheduled: đổi số lượng máy vào giờ định sẵn khi lưu lượng lặp theo quy luật
+  * Dynamic: phản ứng ngay theo metric như CPU hoặc số request
+  * Predictive: dự đoán 48–72 giờ tiếp theo từ dữ liệu lịch sử, vì vậy cần thu thập metric trước đó
 
-* Làm hết lab RDS:
+* Lightsail là cách đơn giản: một mức giá mỗi tháng đã gồm máy chủ, SSD, băng thông và static IP, nên không phải tính trước VPC, security group hay EBS.
 
-  * Instance MySQL nằm ở private subnet do DB subnet group chọn, nên chỉ EC2 trong VPC mới vào được
-  * Từ EC2 dùng MySQL client tạo database, tạo bảng và thêm vài dòng dữ liệu
-  * Chạy một ứng dụng dùng database đó
-  * Chụp snapshot rồi restore ra instance mới, kiểm tra thấy dữ liệu vẫn còn
+* Chạy hai ứng dụng trên Lightsail ở Region Singapore, mỗi máy một static IP để địa chỉ cố định:
 
-* Nhóm đã có vài ý tưởng ban đầu cho proposal và workshop để tiếp tục phát triển.
+  * WordPress trên blueprint Ubuntu 24.04 với MySQL do Lightsail quản lý
+  * PrestaShop dựng từ application blueprint sẵn có
+
+* Vận hành giống một hệ thống nhỏ ngoài thực tế:
+
+  * Rule SSH chỉ còn cho Lightsail browser SSH client truy cập thay vì cả internet
+  * Instance Lightsail không đổi gói trực tiếp được, nên mình tạo snapshot, dựng máy lớn hơn từ snapshot rồi trỏ static IP sang máy mới
+  * Blog vẫn còn nguyên bài sau khi chuyển, vì dữ liệu nằm ở managed database chứ không ở trên instance
+  * Đã thêm alarm CPU

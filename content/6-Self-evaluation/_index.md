@@ -6,9 +6,9 @@ chapter: false
 pre: " <b> 6. </b> "
 ---
 
-I did my internship in the **First Cloud AI Journey** program of **Amazon Web Services Viet Nam Company Limited** from **07/09/2026** to **14/12/2026**, as an **Intern - First Cloud AI Journey**.
+I did my internship in the **First Cloud AI Journey** program of **Amazon Web Services Viet Nam Company Limited** from **14/09/2026** to **14/12/2026**, as an **Intern - First Cloud AI Journey**.
 
-In the first eight weeks I followed the program's learning path: IAM, EC2, S3, VPC, CloudWatch and the AWS Study Group labs. In week 11 I did Experience 2 on Windows security on AWS (EC2 Image Builder with STIG, AWS Config, EventBridge, Systems Manager); my first build failed because the instance type was not Free Tier eligible, and I fixed it. Then the team switched the topic to **Cost Guard for Windows Labs**. My part was the foundation stack, Layer 1 (scheduled stop), the cost estimate, workshop sections 5.1–5.4, and fixes to the proposal and the architecture diagram. At the end I re-tested all three layers end to end, reviewed a teammate's CostMeter code, cleaned up every resource, and rewrote section 5.8 with a screenshot for each step.
+In the first seven weeks I followed the program's learning path: IAM, EC2, S3, VPC, CloudWatch and the AWS Study Group labs. In week 10 I did Experience 2 on Windows security on AWS (EC2 Image Builder with STIG, AWS Config, EventBridge, Systems Manager); my first build failed because the instance type was not Free Tier eligible, and I fixed it. Then the team switched the topic to **Cost Guard for Windows Labs**. My part was the foundation stack, Layer 1 (scheduled stop), the cost estimate, workshop sections 5.1–5.4, and fixes to the proposal and the architecture diagram. At the end I re-tested all three layers end to end, reviewed a teammate's CostMeter code, cleaned up every resource, and rewrote section 5.8 with a screenshot for each step.
 
 | No. | Criteria                            | Description                                                                                      | Good | Fair | Average | Comment |
 | --- | ----------------------------------- | ------------------------------------------------------------------------------------------------ | ---- | ---- | ------- | --- |

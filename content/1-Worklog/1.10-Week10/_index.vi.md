@@ -1,6 +1,6 @@
 ---
 title: "Worklog Tuần 10"
-date: 2026-11-09
+date: 2026-11-16
 weight: 10
 chapter: false
 pre: " <b> 1.10. </b> "
@@ -9,36 +9,32 @@ pre: " <b> 1.10. </b> "
 
 ### Mục tiêu tuần 10:
 
-* Bảo vệ ứng dụng web bằng AWS WAF.
-* Dùng Amazon GuardDuty để phát hiện và xử lý mối đe dọa, kể cả xử lý tự động bằng Amazon EventBridge và AWS Lambda.
-* Lên kế hoạch cho phần việc của mình trong dự án Windows Server trên AWS của nhóm.
+* Làm xong Experience 2 (bảo mật Windows trên AWS) trong tài khoản lab chung và viết lại thành bản nháp blog.
+* Bắt đầu chủ đề mới của nhóm "Cost Guard for Windows Labs" và hoàn thành phần của mình: foundation, Layer 1 (tắt máy theo lịch), tính giá, workshop 5.1–5.4 và sửa proposal.
+* Chuyển phần mình làm sang CloudFormation template chung của nhóm.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Đọc tin nhắn và tài liệu của nhóm, tóm lại các việc của mình <br>- Lập kế hoạch nhóm cho dự án Windows Server trên AWS, chia việc thành 3 phần chạy song song <br>- Kiểm tra điểm danh trên FCAJ Portal <br>- **Thực hành:** <br>&emsp; + Kịch bản 1 của GuardDuty: EC2 bị xâm nhập, xử lý tự động bằng EventBridge và Lambda | 09/11/2026 | 09/11/2026 | <https://000098.awsfcaj.com/> |
-| 3 | - Đọc cách Amazon GuardDuty hoạt động: nguồn dữ liệu và finding <br>- **Thực hành:** <br>&emsp; + Chuẩn bị môi trường lab bằng CloudFormation template | 10/11/2026 | 10/11/2026 | <https://000098.awsfcaj.com/> |
-| 4 | - **Thực hành:** <br>&emsp; + Kịch bản 2: lộ IAM credential, xử lý thủ công | 11/11/2026 | 11/11/2026 | <https://000098.awsfcaj.com/> |
-| 5 | - **Thực hành:** <br>&emsp; + Kịch bản 3: credential của IAM role bị đánh cắp, xử lý bằng Lambda <br>&emsp; + Xem lại các finding và xóa tài nguyên lab | 12/11/2026 | 12/11/2026 | <https://000098.awsfcaj.com/> |
-| 6 | - Đọc giới thiệu AWS WAF <br>- **Thực hành:** <br>&emsp; + Host web app mẫu trên S3 bucket <br>&emsp; + Tạo web ACL với managed rule, thêm custom rule và advanced custom rule <br>&emsp; + Gửi request thử, bật logging, dọn tài nguyên | 13/11/2026 | 13/11/2026 | <https://000026.awsfcaj.com/> |
+| 2 | - Experience 2 trong tài khoản lab chung (us-east-1, tài nguyên có tiền tố `exp2-`): <br>&emsp; + Đặt budget, tạo IAM role cho instance, SNS topic kèm subscription email <br>&emsp; + Recipe EC2 Image Builder có component STIG và pipeline (lần build đầu lỗi vì loại instance build không thuộc Free Tier, lần hai ra được AMI) <br>&emsp; + Bật AWS Config với rule `required-tags` và `approved-amis-by-id` <br>&emsp; + Rule EventBridge đẩy kết quả NON_COMPLIANT của Config sang SNS, test bằng 2 EC2 | 16/11/2026 | 17/11/2026 | |
+| 3 | - Làm tiếp Experience 2: <br>&emsp; + Vào instance bằng Session Manager để kiểm tra IMDSv2 <br>&emsp; + Amazon Inspector bị chặn ở gói Free nên thay bằng scan của SSM Patch Manager <br>&emsp; + RDP qua Fleet Manager <br>&emsp; + Viết CloudFormation template và IAM policy least privilege <br>&emsp; + Dọn sạch tài nguyên <br>- Viết 3 bản nháp blog | 17/11/2026 | 17/11/2026 | |
+| 4 | - Nhóm đổi chủ đề sang "Cost Guard for Windows Labs" (3 lớp serverless tự tắt Windows EC2 để giữ credit) <br>- Nhận phần của mình: foundation, Layer 1 (tắt theo lịch), tính giá, workshop 5.1–5.4, sửa proposal | 18/11/2026 | 18/11/2026 | |
+| 5 | - Deploy stack foundation (IAM role, SNS, DynamoDB, Parameter Store) và instance Windows EC2 cho lab <br>- Deploy Layer 1: EventBridge Scheduler lúc 22:00 Asia/Ho_Chi_Minh gọi Lambda ScheduleHandler <br>- Test tắt máy theo lịch | 19/11/2026 | 19/11/2026 | |
+| 6 | - Chuyển sang template chung `cost-guard.yaml` của nhóm <br>- Đổi instance sang t3.small, EBS từ gp2 sang gp3, tính lại giá bằng AWS Pricing Calculator <br>- Kiểm tra lịch 22:00 của stack mới <br>- Đẩy phần sửa và ảnh chụp lên repo nhóm, sửa sơ đồ kiến trúc | 20/11/2026 | 22/11/2026 | |
 
 
 ### Kết quả đạt được tuần 10:
 
-* Với dự án nhóm, mình gom tin nhắn và tài liệu rời rạc thành danh sách việc của bản thân và một kế hoạch 3 phần làm song song; điểm danh trên FCAJ Portal đã kiểm tra xong.
+* Làm trọn Experience 2 và dọn hết tài nguyên `exp2-` sau đó:
 
-* Hiểu GuardDuty là dịch vụ phát hiện mối đe dọa, quản lý hoàn toàn, chạy theo Region:
+  * Image Builder cho mình một bài học thực tế: lần build đầu hỏng chỉ vì loại instance build không thuộc Free Tier, đổi lại thì lần hai ra được AMI đã hardening theo STIG
+  * AWS Config (`required-tags`, `approved-amis-by-id`) cộng rule EventBridge đã đẩy được kết quả NON_COMPLIANT sang SNS, test với 2 EC2 cho kết quả đúng
+  * Kiểm tra IMDSv2 qua Session Manager và vào máy bằng Fleet Manager RDP, không cần mở cổng RDP ra internet
+  * Inspector không dùng được ở gói Free nên mình chuyển sang scan bằng SSM Patch Manager
+  * Gói toàn bộ cấu hình vào một CloudFormation template kèm IAM policy least privilege
 
-  * Đọc VPC Flow Logs, CloudTrail và DNS log mà không ảnh hưởng tài nguyên đang giám sát
-  * Mỗi finding có tên loại dễ đọc và có thông báo khi finding thay đổi
-  * Chi phí tính theo số sự kiện CloudTrail và lượng flow log/DNS log, mỗi Region có 30 ngày dùng thử
+* Viết 3 bản nháp blog: Image Builder trên Free Tier; cảnh báo bằng AWS Config + EventBridge + SNS; quản lý Windows bằng SSM mà không mở RDP, theo least privilege.
 
-* Làm qua ba kịch bản tấn công:
+* Deploy xong phần Cost Guard của mình: stack foundation (IAM role, SNS, DynamoDB, Parameter Store), instance Windows EC2 cho lab và Layer 1 (EventBridge Scheduler lúc 22:00 Asia/Ho_Chi_Minh → Lambda ScheduleHandler); test tắt máy theo lịch chạy đúng.
 
-  * EC2 bị xâm nhập (UnauthorizedAccess:EC2/MaliciousIPCaller.Custom) được EventBridge và Lambda xử lý tự động
-  * Lộ IAM credential (Recon:IAMUser/MaliciousIPCaller.Custom, UnauthorizedAccess:IAMUser/MaliciousIPCaller.Custom), lần ra ai đang gọi API rồi sửa thủ công
-  * Credential của role bị đánh cắp (UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration) xử lý bằng Lambda
-
-* Hiểu AWS WAF lọc request HTTP trước khi tới ứng dụng hay API, chặn các kiểu tấn công phổ biến như SQL injection, cross-site scripting, và mình có thể tự viết rule cho phép/chặn.
-
-* Trong lab WAF, mình tạo web ACL với managed rule, thêm rule chặn request có một header nhất định và một advanced custom rule, thấy các request thử bị chặn hiện trên dashboard và sampled requests, rồi bật logging.
+* Ngày 22/11 chuyển sang `cost-guard.yaml` chung: instance giờ là t3.small, ổ gp3 thay cho gp2, giá mới là $7.12/tháng cho 120 giờ lab so với $31.04 nếu chạy 24/7, lịch 22:00 của stack mới đã kiểm tra. Phần sửa, ảnh chụp và sơ đồ kiến trúc đã sửa đều nằm trên repo nhóm.

@@ -1,6 +1,6 @@
 ---
 title: "Week 7 Worklog"
-date: 2026-10-19
+date: 2026-10-26
 weight: 7
 chapter: false
 pre: " <b> 1.7. </b> "
@@ -9,37 +9,37 @@ pre: " <b> 1.7. </b> "
 
 ### Week 7 Objectives:
 
-* Get comfortable with monitoring on AWS through Amazon CloudWatch (metrics, logs, alarms, dashboards).
-* Understand hybrid DNS with Route 53 Resolver by building the lab end to end.
-* Pick a workshop topic by comparing several ideas against the FCAJ scoring rules.
-* Review Amazon S3 basics and keep my own notes.
+* Work with AWS from the terminal using the AWS CLI instead of the console.
+* Create S3, SNS, IAM, network and EC2 resources entirely by command.
+* Keep the workshop moving and re-check the proposal's architecture and details.
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Read about hybrid DNS and Route 53 Resolver <br>- **Practice:** <br>&emsp; + Create a key pair and launch the network stack <br>&emsp; + Open the security groups and log in through the Remote Desktop Gateway <br>&emsp; + Set up AWS Managed Microsoft AD as the "on-premises" DNS | 10/19/2026 | 10/19/2026 | <https://000010.awsfcaj.com/> |
-| 3 | - **Practice:** <br>&emsp; + Add the outbound endpoint, the resolver rule and the inbound endpoint <br>&emsp; + Check resolution with nslookup and Resolve-DnsName, then clean up <br>- Study the lab "Getting started with Amazon S3" and write notes on buckets vs objects | 10/20/2026 | 10/20/2026 | <https://000010.awsfcaj.com/> <br> <https://000057.awsstudygroup.com/> |
-| 4 | - Go through the CloudWatch introduction <br>- **Practice:** <br>&emsp; + Launch the lab stack (three EC2 instances running the CloudWatch agent) with CloudFormation <br>&emsp; + Look at the metrics and try search expressions, math expressions and dynamic labels | 10/21/2026 | 10/21/2026 | <https://000008.awsfcaj.com/> |
-| 5 | - **Practice:** <br>&emsp; + Query the application logs in CloudWatch Logs Insights <br>&emsp; + Add a metric filter for error lines <br>&emsp; + Set an alarm that emails me via Amazon SNS | 10/22/2026 | 10/22/2026 | <https://000008.awsfcaj.com/> |
-| 6 | - **Practice:** <br>&emsp; + Build a CloudWatch dashboard, then delete the lab resources <br>- Compare four possible workshop topics against the FCAJ scoring rules: media moderation with Rekognition, security alerts to Telegram, a serverless REST API, automated backup and DR | 10/23/2026 | 10/23/2026 | <https://000008.awsfcaj.com/> |
+| 2 | - Keep working on the workshop <br>- Re-read the proposal and check the architecture against it | 10/26/2026 | 10/26/2026 | |
+| 3 | - Read how the AWS CLI works: profiles, config files, output formats <br>- **Practice:** <br>&emsp; + Install the CLI and run aws configure for my profile <br>&emsp; + List my existing resources from the terminal | 10/27/2026 | 10/27/2026 | <https://000011.awsfcaj.com/> |
+| 4 | - **Practice:** <br>&emsp; + S3 commands: create a bucket, upload and list objects <br>&emsp; + SNS commands: topic and subscription | 10/28/2026 | 10/28/2026 | <https://000011.awsfcaj.com/> |
+| 5 | - **Practice:** <br>&emsp; + IAM by command: group, user, access key <br>&emsp; + Networking by command: VPC, subnets, internet gateway, route table | 10/29/2026 | 10/29/2026 | <https://000011.awsfcaj.com/> |
+| 6 | - **Practice:** <br>&emsp; + Key pair, security group and an EC2 instance launched from the CLI, then SSH in <br>&emsp; + Terminate everything and remove leftover resources | 10/30/2026 | 10/30/2026 | <https://000011.awsfcaj.com/> |
 
 
 ### Week 7 Achievements:
 
-* Built the hybrid DNS lab:
+* Moved the workshop forward and went back over the proposal to make sure the architecture and the details still match.
 
-  * Network (VPC, public/private subnets, Remote Desktop Gateway) from a CloudFormation template
-  * AWS Managed Microsoft AD with the domain onprem.example.com playing the on-premises DNS
-  * Outbound endpoint for queries going from AWS to on-premises, inbound endpoint for the reverse direction, and a resolver rule choosing which domains to forward
-  * Confirmed from the gateway that names resolve with both nslookup and Resolve-DnsName
+* Understood that the AWS CLI is an open-source client calling the same public APIs as the console, so anything I click can also be scripted.
 
-* Wrote my own S3 notes: a bucket is the container with a globally unique name in one Region, an object is the file plus its metadata, addressed by its key.
+* Set up the CLI properly:
 
-* CloudWatch now makes sense to me as one place for metrics, logs and alarms:
+  * aws configure stores the access key, secret key, default Region and output format; extra named profiles are picked with --profile
+  * json and yaml suit scripts, table and text are easier for me to read by eye
+  * The auto-prompt feature helped a lot while I was still learning the syntax
 
-  * The lab stack gave the agent an IAM role with only the permissions it needs, not AdministratorAccess
-  * I combined metrics with search and math expressions and used dynamic labels to make the graphs readable
-  * Logs Insights let me filter the application logs quickly; my metric filter turned ERROR lines into a metric, and I noticed it only counts events that come in after the filter exists
-  * The alarm on that metric sent me an email through SNS, and the dashboard put everything on one screen
+* Created resources only from the terminal:
 
-* Compared four workshop ideas (Rekognition media moderation, Telegram security alerts, serverless REST API, automated backup and DR) against the FCAJ scoring rules, which gave me a clearer view of what a good workshop topic needs.
+  * An S3 bucket with objects and an SNS topic with a subscription
+  * An IAM group, a user and an access key
+  * A full small network: VPC, subnets, internet gateway, route table
+  * An EC2 instance in that network with its own key pair and security group, reached over SSH and then terminated
+
+* Took the credential lessons seriously: access keys are never shared, IAM roles are preferred, and unused keys and key pairs get deleted.

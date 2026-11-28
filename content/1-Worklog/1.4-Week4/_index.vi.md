@@ -1,6 +1,6 @@
 ---
 title: "Worklog Tuần 4"
-date: 2026-09-28
+date: 2026-10-05
 weight: 4
 chapter: false
 pre: " <b> 1.4. </b> "
@@ -9,32 +9,43 @@ pre: " <b> 1.4. </b> "
 
 ### Mục tiêu tuần 4:
 
-* Làm việc trên terminal với AWS CloudShell và AWS CLI.
-* Hiểu Amazon S3 lưu dữ liệu ra sao và Amazon CloudFront phân phối thế nào.
-* Host trang tĩnh trên S3, đặt CloudFront phía trước và tập quản lý object.
+* Cùng nhóm bàn ý tưởng cho proposal và workshop.
+* Học Amazon RDS và dựng trọn một database MySQL trên đó.
+* Đọc hai blog AWS: Fleet Manager để truy cập Windows và CloudWatch Omni để theo dõi AI agent.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Học cơ bản về S3: bucket với object, các storage class, versioning và replication <br> - **Thực hành:** <br>&emsp; + Tạo một bucket <br>&emsp; + Tải file website mẫu lên | 28/09/2026 | 28/09/2026 | <https://000057.awsfcaj.com/> |
-| 3 | - **Thực hành:** <br>&emsp; + Bật static website hosting với index.html làm trang chủ <br>&emsp; + Tắt Block public access và đặt object ở chế độ public bằng ACL <br>&emsp; + Truy cập site qua website endpoint, ghi lại thời gian tải | 29/09/2026 | 29/09/2026 | <https://000057.awsfcaj.com/> |
-| 4 | - Đọc về Amazon CloudFront <br> - **Thực hành:** <br>&emsp; + Bật lại Block all public access cho bucket <br>&emsp; + Tạo CloudFront distribution với bucket là origin và cập nhật bucket policy <br>&emsp; + Mở site qua CloudFront, so thời gian tải với website endpoint của S3 | 30/09/2026 | 30/09/2026 | <https://000057.awsfcaj.com/> |
-| 5 | - Xem tổng quan AWS CloudShell <br> - **Thực hành:** <br>&emsp; + Mở CloudShell và chạy thử vài lệnh Linux (pwd, ls -la, mkdir, touch, vi, cat) <br>&emsp; + Dùng AWS CLI: xem version, liệt kê bucket S3 và EC2 instance <br>&emsp; + Upload file lên CloudShell rồi download về máy <br>&emsp; + Xóa môi trường CloudShell | 01/10/2026 | 01/10/2026 | <https://000049.awsfcaj.com/> |
-| 6 | - Quản lý object trên S3: versioning, di chuyển object, replication sang Region khác <br> - **Thực hành:** <br>&emsp; + Bật versioning, sửa index.html và upload lại, xem các phiên bản <br>&emsp; + Đưa object sang bucket thứ hai <br>&emsp; + Tạo replication rule sang bucket ở N. Virginia <br>&emsp; + Dọn tài nguyên lab | 02/10/2026 | 02/10/2026 | <https://000057.awsfcaj.com/> |
+| 2 | - Đọc và ghi chú bài blog giới thiệu Fleet Manager của AWS Systems Manager | 05/10/2026 | 05/10/2026 | <https://aws.amazon.com/vi/blogs/mt/console-based-access-to-windows-instances-using-aws-systems-manager-fleet-manager/> |
+| 3 | - Đọc và ghi chú bài blog ra mắt Amazon CloudWatch Omni | 06/10/2026 | 06/10/2026 | <https://aws.amazon.com/vi/blogs/aws/introducing-amazon-cloudwatch-omni-ai-powered-observability-for-generative-ai-and-agentic-workloads/> |
+| 4 | - Đọc tài liệu RDS: <br>&emsp; + Các database engine RDS hỗ trợ <br>&emsp; + Multi-AZ và Read Replica <br>&emsp; + Backup tự động và snapshot <br>&emsp; + Bảo mật bằng mã hóa, VPC và IAM | 07/10/2026 | 07/10/2026 | <https://000005.awsfcaj.com/> |
+| 5 | - **Thực hành:** <br>&emsp; + VPC, Security Group và DB subnet group <br>&emsp; + Một instance RDS MySQL <br>&emsp; + EC2 kết nối tới RDS bằng MySQL client <br>&emsp; + Tạo database, tạo bảng, thêm dữ liệu <br>&emsp; + Triển khai app dùng RDS <br>&emsp; + Snapshot và restore <br>&emsp; + Dọn dẹp | 08/10/2026 | 08/10/2026 | <https://000005.awsfcaj.com/> |
+| 6 | - Ngồi cùng nhóm brainstorm chủ đề cho proposal và workshop | 09/10/2026 | 09/10/2026 |  |
 
 
 ### Kết quả đạt được tuần 4:
 
-* Nắm được S3 chứa object trong bucket và storage class ảnh hưởng tới giá lẫn tốc độ truy cập. Mình đã tạo bucket và tải file của website lên.
+* Rút ra từ blog Fleet Manager:
 
-* Cho website tĩnh chạy từ S3. Để mở được thì phải tắt Block public access và cấp quyền cho object bằng ACL; kiểu này chỉ chạy HTTP trên website endpoint.
+  * RDP vào máy Windows ngay trên trình duyệt, đi qua Session Manager
+  * Không phải mở cổng RDP, không cần public IP hay bastion host, nên ít chỗ bị tấn công hơn
+  * Đăng nhập bằng key pair EC2 hoặc tài khoản Windows, xem được tối đa 4 máy cùng lúc
+  * Máy cần có SSM Agent, instance profile có quyền Systems Manager và đường kết nối tới SSM endpoint
 
-* Sau đó xử lý cho an toàn hơn: bật lại chặn truy cập public, để CloudFront đọc bucket thông qua bucket policy. Trang tải nhanh hơn khi đi qua CloudFront, và mình xem được edge location (PoP) nào phục vụ request.
+* Rút ra từ blog CloudWatch Omni:
 
-* CloudShell khá tiện vì mở trình duyệt là có sẵn terminal với AWS CLI đã đăng nhập. Mình chạy thử các lệnh Linux cơ bản, dùng CLI để liệt kê bucket và instance, và upload/download file.
+  * AI agent mỗi lần chạy có thể đi một hướng khác, nên phải trace từng lần gọi LLM và gọi tool mới tìm ra bước bị lỗi
+  * Latency hay tỷ lệ lỗi không nói được câu trả lời tốt hay dở, Omni có sẵn 17 evaluator như coherence, helpfulness, faithfulness để chấm
+  * Playground, Experiments và Prompt Management giúp so prompt, so cấu hình và quay về bản cũ
+  * Dùng trong VS Code, Kiro hoặc bản web, dựa trên OpenInference và ADOT, hỗ trợ LangChain, CrewAI, Strands và nhiều framework khác
 
-* Thực hành quản lý object trong S3:
+* RDS lo giúp mấy việc lặp đi lặp lại của database (vá lỗi, backup, failover). Mình nắm được các engine nó hỗ trợ, Multi-AZ giữ bản standby ở AZ khác ra sao, và mã hóa, VPC, IAM bảo vệ database thế nào.
 
-  * Khi đã bật versioning, file index.html bị ghi đè vẫn khôi phục được về phiên bản trước
-  * Đưa object từ bucket này sang bucket khác
-  * Replication rule tự sao chép object mới sang bucket ở Region khác, tương đương một bản sao lưu
+* Làm hết lab RDS:
+
+  * Instance MySQL nằm ở private subnet do DB subnet group chọn, nên chỉ EC2 trong VPC mới vào được
+  * Từ EC2 dùng MySQL client tạo database, tạo bảng và thêm vài dòng dữ liệu
+  * Chạy một ứng dụng dùng database đó
+  * Chụp snapshot rồi restore ra instance mới, kiểm tra thấy dữ liệu vẫn còn
+
+* Nhóm đã có vài ý tưởng ban đầu cho proposal và workshop để tiếp tục phát triển.

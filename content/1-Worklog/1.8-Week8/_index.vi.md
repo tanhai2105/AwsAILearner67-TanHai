@@ -1,6 +1,6 @@
 ---
 title: "Worklog Tuần 8"
-date: 2026-10-26
+date: 2026-11-02
 weight: 8
 chapter: false
 pre: " <b> 1.8. </b> "
@@ -9,37 +9,36 @@ pre: " <b> 1.8. </b> "
 
 ### Mục tiêu tuần 8:
 
-* Thao tác với AWS từ terminal bằng AWS CLI thay vì console.
-* Tạo tài nguyên S3, SNS, IAM, mạng và EC2 hoàn toàn bằng lệnh.
-* Tiếp tục làm workshop và soát lại kiến trúc, thông tin trong proposal.
+* Tìm hiểu cách chạy workload Windows Server trên AWS, vì chủ đề của nhóm là Windows Server trên AWS.
+* Hiểu cách AWS Systems Manager Automation nâng cấp Windows Server tại chỗ.
+* Triển khai WordPress trên AWS với tầng web public, database private, có scaling và CDN.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Làm tiếp workshop <br>- Đọc lại proposal, đối chiếu với kiến trúc | 26/10/2026 | 26/10/2026 | |
-| 3 | - Đọc cách AWS CLI hoạt động: profile, file cấu hình, định dạng output <br>- **Thực hành:** <br>&emsp; + Cài CLI, chạy aws configure cho profile của mình <br>&emsp; + Liệt kê tài nguyên đang có từ terminal | 27/10/2026 | 27/10/2026 | <https://000011.awsfcaj.com/> |
-| 4 | - **Thực hành:** <br>&emsp; + Lệnh S3: tạo bucket, upload và liệt kê object <br>&emsp; + Lệnh SNS: topic và subscription | 28/10/2026 | 28/10/2026 | <https://000011.awsfcaj.com/> |
-| 5 | - **Thực hành:** <br>&emsp; + IAM bằng lệnh: group, user, access key <br>&emsp; + Mạng bằng lệnh: VPC, subnet, internet gateway, route table | 29/10/2026 | 29/10/2026 | <https://000011.awsfcaj.com/> |
-| 6 | - **Thực hành:** <br>&emsp; + Tạo key pair, security group, chạy EC2 từ CLI rồi SSH vào <br>&emsp; + Terminate và xóa sạch tài nguyên còn sót | 30/10/2026 | 30/10/2026 | <https://000011.awsfcaj.com/> |
+| 2 | - Tìm hiểu workshop của AWS về Microsoft workloads trên AWS: các track, module, yêu cầu trước và chi phí <br>- **Thực hành (lab WordPress):** <br>&emsp; + VPC, subnet, security group riêng cho tầng web và tầng database <br>&emsp; + Tạo EC2 và database RDS | 02/11/2026 | 02/11/2026 | <https://catalog.us-east-1.prod.workshops.aws/workshops/6932a032-aeec-4dfd-bad8-7bfbc8dad4c2/en-US> <br> <https://000021.awsfcaj.com/> |
+| 3 | - **Thực hành:** <br>&emsp; + Cài WordPress lên EC2, trỏ vào database RDS | 03/11/2026 | 03/11/2026 | <https://000021.awsfcaj.com/> |
+| 4 | - **Thực hành:** <br>&emsp; + Tạo AMI và launch template từ server đã chạy ổn <br>&emsp; + Thêm target group, load balancer và Auto Scaling group | 04/11/2026 | 04/11/2026 | <https://000021.awsfcaj.com/> |
+| 5 | - **Thực hành:** <br>&emsp; + Chụp snapshot database rồi restore lại <br>&emsp; + Đặt CloudFront trước website <br>&emsp; + Xóa toàn bộ tài nguyên lab | 05/11/2026 | 05/11/2026 | <https://000021.awsfcaj.com/> |
+| 6 | - Đọc blog tự động nâng cấp Windows Server bằng AWS Systems Manager, ghi lại điều kiện và giới hạn | 06/11/2026 | 06/11/2026 | <https://aws.amazon.com/vi/blogs/modernizing-with-aws/how-to-automate-your-microsoft-windows-server-upgrades-using-aws-systems-manager-update/> |
 
 
 ### Kết quả đạt được tuần 8:
 
-* Workshop tiến thêm một bước, đồng thời mình rà lại proposal để chắc kiến trúc và thông tin vẫn khớp nhau.
+* Đi qua workshop Microsoft workloads trên AWS, ghi lại track và module nào hợp với chủ đề Windows Server của nhóm, mỗi phần cần chuẩn bị gì và tốn bao nhiêu tiền.
 
-* Hiểu AWS CLI là công cụ mã nguồn mở gọi cùng bộ API public như console, nên cái gì bấm được trên console thì cũng viết script được.
+* Dựng WordPress trên AWS từng bước:
 
-* Cài đặt CLI cho đúng:
+  * Web server ở public subnet, RDS ở private subnet, mỗi tầng một security group
+  * Cài WordPress và kết nối được với database
+  * AMI, launch template, target group, load balancer và Auto Scaling group để website mở rộng và chia tải
+  * Snapshot rồi restore database, sau đó thêm CloudFront cho tải nhanh hơn
 
-  * aws configure lưu access key, secret key, Region mặc định và định dạng output; muốn dùng profile khác thì thêm --profile
-  * json với yaml hợp cho script, còn table và text thì mình đọc bằng mắt dễ hơn
-  * Tính năng auto-prompt giúp nhiều lúc mình chưa thuộc cú pháp
+* Thấy rõ CloudFront, Auto Scaling đi kèm load balancer và RDS Multi-AZ mỗi thứ lo một phần khác nhau về tính sẵn sàng và hiệu năng.
 
-* Tạo tài nguyên chỉ bằng terminal:
+* Ghi chú từ blog nâng cấp Windows Server:
 
-  * Bucket S3 kèm object, topic SNS kèm subscription
-  * IAM group, user và access key
-  * Một mạng nhỏ đầy đủ: VPC, subnet, internet gateway, route table
-  * Một EC2 trong mạng đó với key pair và security group riêng, SSH vào được rồi terminate
-
-* Rút ra bài học về credential: không bao giờ chia sẻ access key, ưu tiên IAM role, key và key pair không dùng nữa thì xóa.
+  * Windows Server 2012/2012 R2 hết hỗ trợ từ 10/10/2023, bản 2016 hết hỗ trợ mở rộng ngày 12/01/2027, sau đó sẽ không còn bản vá bảo mật
+  * Runbook AWSEC2-CloneInstanceAndUpgradeWindows nâng cấp trên bản clone chứ không đụng vào máy gốc, kết quả là một AMI mới
+  * Trước khi chạy cần: SSM Agent hoạt động, TLS 1.2, ổ root trống từ 20 GB, instance profile cho SSM và đi ra được các endpoint của SSM
+  * Không áp dụng cho domain controller, cluster, bản desktop hay server có role Remote Desktop Session Host; nâng cấp xong phải test ứng dụng rồi mới đưa lại production

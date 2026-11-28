@@ -1,6 +1,6 @@
 ---
 title: "Worklog Tuần 2"
-date: 2026-09-14
+date: 2026-09-21
 weight: 2
 chapter: false
 pre: " <b> 1.2. </b> "
@@ -9,34 +9,28 @@ pre: " <b> 1.2. </b> "
 
 ### Mục tiêu tuần 2:
 
-* Biết các cách giữ chi phí AWS ở mức thấp và đặt budget có cảnh báo cho tài khoản của mình.
-* Làm quen trang Cloud Journey và hệ thống bài lab đánh số.
-* Làm các lab Explore đầu tiên: Free Tier, AWS Support và IAM.
+* Hiểu cách dựng mạng trên AWS bằng Amazon VPC.
+* Thực hành Amazon EC2: tạo, kết nối và thay đổi instance.
+* Chạy một ứng dụng mẫu trên EC2 nằm trong VPC tự tạo.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Lướt trang Cloud Journey để xem các bài lab và tài liệu được sắp xếp thế nào | 14/09/2026 | 14/09/2026 | <https://cloudjourney.awsfcaj.com/> |
-| 3 | - Bắt đầu Module 1 - Explore trên Cloud Journey <br> - Lab AWS Free Tier 2026: các gói Free Tier và cách tạo tài khoản AWS | 15/09/2026 | 15/09/2026 | <https://cloudjourney.awsfcaj.com/1-explore/> <br> <https://000001.awsfcaj.com/> |
-| 4 | - Module 01-04 - Cost optimization on AWS: những cách chính để giảm chi phí | 16/09/2026 | 16/09/2026 | <https://youtu.be/UIw8UxGZCHA> |
-| 5 | - Lab Cost Management with AWS Budget: các loại budget và cảnh báo chi phí <br> - Lab AWS Support Request: các gói support và cách mở một case | 17/09/2026 | 17/09/2026 | <https://000007.awsfcaj.com/> <br> <https://000009.awsfcaj.com/> |
-| 6 | - Lab Access Management with AWS IAM: group, user, role và switch role | 18/09/2026 | 18/09/2026 | <https://000002.awsfcaj.com/> |
+| 2 | - Đọc lý thuyết EC2: các loại instance, AMI, ổ EBS và cặp key pair <br> - Xem qua phần chuẩn bị của lab EC2 | 21/09/2026 | 21/09/2026 | <https://000004.awsfcaj.com/> |
+| 3 | - Đọc phần mạng của lab VPC: subnet, route table, internet gateway và NAT gateway <br> - Phân biệt hai lớp tường lửa: security group và network ACL | 22/09/2026 | 22/09/2026 | <https://000003.awsfcaj.com/> |
+| 4 | - **Thực hành:** <br>&emsp; + Dựng VPC gồm subnet, internet gateway và route table, rồi thêm security group <br>&emsp; + Đặt một EC2 vào VPC và thử kết nối <br>&emsp; + Gắn NAT gateway để máy ở subnet private ra được internet | 23/09/2026 | 23/09/2026 | <https://000003.awsfcaj.com/> |
+| 5 | - Đọc tiếp về EC2: đổi cỡ instance, chụp EBS snapshot và tự tạo AMI <br> - **Thực hành:** <br>&emsp; + Chuẩn bị VPC và security group cho lab <br>&emsp; + Chạy một máy Linux và một máy Windows, đăng nhập thử cả hai | 24/09/2026 | 24/09/2026 | <https://000004.awsfcaj.com/> |
+| 6 | - Tìm hiểu cách dùng IAM để hạn chế việc tạo EC2, qua đó kiểm soát chi phí <br> - **Thực hành:** <br>&emsp; + Chạy ứng dụng AWS User Management trên EC2 <br>&emsp; + Dọn toàn bộ tài nguyên của lab | 25/09/2026 | 25/09/2026 | <https://000004.awsfcaj.com/> |
 
 
 ### Kết quả đạt được tuần 2:
 
-* Biết Cloud Journey sắp xếp ra sao nên tìm hướng dẫn lab và tài liệu cho từng chủ đề nhanh hơn.
+* Nắm được lúc khởi tạo EC2 phải chọn những gì: loại instance, AMI, ổ EBS đi kèm, và cặp key pair thì phải cất cẩn thận.
 
-* Tự tạo tài khoản AWS dùng Free Tier, phân biệt được Free plan, Paid plan và phần credit đi kèm. Giờ mở dịch vụ trên Console cũng thao tác nhanh hơn.
+* Giải thích được cách VPC được ghép từ các phần: subnet public/private, route table dẫn traffic tới internet gateway hoặc NAT gateway, và sự khác nhau giữa security group (stateful, áp lên từng instance) với network ACL (stateless, áp lên subnet).
 
-* Hiểu rõ hơn chuyện tối ưu chi phí: chọn đúng cỡ tài nguyên, tắt cái không dùng, theo dõi hóa đơn sớm chứ không đợi cuối tháng.
+* Tự dựng xong một VPC dùng được, đưa EC2 vào và xác nhận máy ở subnet private chỉ ra internet được thông qua NAT gateway.
 
-* Đặt budget cho tài khoản bằng AWS Budget kèm ngưỡng cảnh báo. Ngoài Cost budget mình dùng thì cũng xem qua các loại khác (Usage, RI, Savings Plans).
+* Đã đăng nhập vào cả một máy Linux và một máy Windows, đổi cỡ một máy, chụp snapshot rồi dùng nó tạo AMI của riêng mình.
 
-* Làm thử với AWS Support: mỗi gói support có gì và các bước mở một request.
-
-* Thực hành IAM:
-
-  * Tạo group, thêm user vào rồi gán policy cho group chứ không gán lẻ từng user
-  * Tạo role và switch role để lấy quyền tạm thời
-  * Cố gắng chỉ cấp đúng quyền cần dùng (least privilege)
+* Chạy được ứng dụng AWS User Management trên EC2 và dọn hết tài nguyên sau đó để khỏi bị tính phí tiếp.
