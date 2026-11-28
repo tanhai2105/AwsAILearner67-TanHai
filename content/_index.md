@@ -18,7 +18,7 @@ chapter: false
 
 &emsp; **Major:** Software Engineering
 
-&emsp; **Class:** AWS092026
+&emsp; **Class:** FCAJ - FPT - Season 4
 
 &emsp; **Internship Company:** Amazon Web Services Viet Nam Company Limited
 
