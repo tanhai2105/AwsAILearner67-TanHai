@@ -16,7 +16,7 @@ pre: " <b> 1.7. </b> "
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Làm tiếp workshop <br>- Đọc lại proposal, đối chiếu với kiến trúc | 26/10/2026 | 26/10/2026 | |
+| 2 | - Làm tiếp workshop <br>- Đọc lại proposal, đối chiếu với kiến trúc | 26/10/2026 | 26/10/2026 | <https://tanhai2105.github.io/AwsAILearner67-TanHai/vi/2-proposal/> |
 | 3 | - Đọc cách AWS CLI hoạt động: profile, file cấu hình, định dạng output <br>- **Thực hành:** <br>&emsp; + Cài CLI, chạy aws configure cho profile của mình <br>&emsp; + Liệt kê tài nguyên đang có từ terminal | 27/10/2026 | 27/10/2026 | <https://000011.awsfcaj.com/> |
 | 4 | - **Thực hành:** <br>&emsp; + Lệnh S3: tạo bucket, upload và liệt kê object <br>&emsp; + Lệnh SNS: topic và subscription | 28/10/2026 | 28/10/2026 | <https://000011.awsfcaj.com/> |
 | 5 | - **Thực hành:** <br>&emsp; + IAM bằng lệnh: group, user, access key <br>&emsp; + Mạng bằng lệnh: VPC, subnet, internet gateway, route table | 29/10/2026 | 29/10/2026 | <https://000011.awsfcaj.com/> |

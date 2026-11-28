@@ -16,7 +16,7 @@ pre: " <b> 1.7. </b> "
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Keep working on the workshop <br>- Re-read the proposal and check the architecture against it | 10/26/2026 | 10/26/2026 | |
+| 2 | - Keep working on the workshop <br>- Re-read the proposal and check the architecture against it | 10/26/2026 | 10/26/2026 | <https://tanhai2105.github.io/AwsAILearner67-TanHai/2-proposal/> |
 | 3 | - Read how the AWS CLI works: profiles, config files, output formats <br>- **Practice:** <br>&emsp; + Install the CLI and run aws configure for my profile <br>&emsp; + List my existing resources from the terminal | 10/27/2026 | 10/27/2026 | <https://000011.awsfcaj.com/> |
 | 4 | - **Practice:** <br>&emsp; + S3 commands: create a bucket, upload and list objects <br>&emsp; + SNS commands: topic and subscription | 10/28/2026 | 10/28/2026 | <https://000011.awsfcaj.com/> |
 | 5 | - **Practice:** <br>&emsp; + IAM by command: group, user, access key <br>&emsp; + Networking by command: VPC, subnets, internet gateway, route table | 10/29/2026 | 10/29/2026 | <https://000011.awsfcaj.com/> |

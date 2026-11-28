@@ -20,7 +20,7 @@ pre: " <b> 1.4. </b> "
 | 3 | - Đọc và ghi chú bài blog ra mắt Amazon CloudWatch Omni | 06/10/2026 | 06/10/2026 | <https://aws.amazon.com/vi/blogs/aws/introducing-amazon-cloudwatch-omni-ai-powered-observability-for-generative-ai-and-agentic-workloads/> |
 | 4 | - Đọc tài liệu RDS: <br>&emsp; + Các database engine RDS hỗ trợ <br>&emsp; + Multi-AZ và Read Replica <br>&emsp; + Backup tự động và snapshot <br>&emsp; + Bảo mật bằng mã hóa, VPC và IAM | 07/10/2026 | 07/10/2026 | <https://000005.awsfcaj.com/> |
 | 5 | - **Thực hành:** <br>&emsp; + VPC, Security Group và DB subnet group <br>&emsp; + Một instance RDS MySQL <br>&emsp; + EC2 kết nối tới RDS bằng MySQL client <br>&emsp; + Tạo database, tạo bảng, thêm dữ liệu <br>&emsp; + Triển khai app dùng RDS <br>&emsp; + Snapshot và restore <br>&emsp; + Dọn dẹp | 08/10/2026 | 08/10/2026 | <https://000005.awsfcaj.com/> |
-| 6 | - Ngồi cùng nhóm brainstorm chủ đề cho proposal và workshop | 09/10/2026 | 09/10/2026 |  |
+| 6 | - Ngồi cùng nhóm brainstorm chủ đề cho proposal và workshop | 09/10/2026 | 09/10/2026 | <https://tanhai2105.github.io/AwsAILearner67-TanHai/vi/2-proposal/> |
 
 
 ### Kết quả đạt được tuần 4:

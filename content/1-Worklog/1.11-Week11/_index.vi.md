@@ -17,11 +17,11 @@ pre: " <b> 1.11. </b> "
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Thêm ảnh AWS Budgets vào 5.6, bổ sung ảnh còn thiếu và dòng "Kiểm tra" dưới mọi ảnh của 5.3–5.7 <br>- Viết lại câu chữ tiếng Việt của workshop <br>- Đổi email cảnh báo sang email nhóm (phải update stack hai lần vì budget có tên cố định) <br>- Vẽ lại sơ đồ kiến trúc trên draw.io bằng bộ icon chính thức của AWS (07/2026) | 23/11/2026 | 23/11/2026 | |
-| 3 | - Review thay đổi của bạn cùng nhóm ở Lambda Cost Meter (tính chi phí theo LaunchTime của instance) <br>- Bắt đầu test lại cả 3 lớp trên AWS | 24/11/2026 | 25/11/2026 | |
-| 4 | - Test xong end to end, so code đang deploy với template và đăng review <br>- Soạn file tổng hợp .md của nhóm và file kiến trúc .xml cho FCAJ Submission | 25/11/2026 | 25/11/2026 | |
-| 5 | - Viết các phần cá nhân: sự kiện, tự đánh giá, nhận xét góp ý | 26/11/2026 | 26/11/2026 | |
-| 6 | - Kiểm tra lần cuối toàn bộ website <br>- Viết lại worklog theo góp ý của trưởng nhóm để phần cá nhân không trùng với các bạn | 27/11/2026 | 27/11/2026 | |
+| 2 | - Thêm ảnh AWS Budgets vào 5.6, bổ sung ảnh còn thiếu và dòng "Kiểm tra" dưới mọi ảnh của 5.3–5.7 <br>- Viết lại câu chữ tiếng Việt của workshop <br>- Đổi email cảnh báo sang email nhóm (phải update stack hai lần vì budget có tên cố định) <br>- Vẽ lại sơ đồ kiến trúc trên draw.io bằng bộ icon chính thức của AWS (07/2026) | 23/11/2026 | 23/11/2026 | <https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html> <br> <https://tanhai2105.github.io/AwsAILearner67-TanHai/vi/5-workshop/5.6-layer3-backstop/> |
+| 3 | - Review thay đổi của bạn cùng nhóm ở Lambda Cost Meter (tính chi phí theo LaunchTime của instance) <br>- Bắt đầu test lại cả 3 lớp trên AWS | 24/11/2026 | 25/11/2026 | <https://tanhai2105.github.io/AwsAILearner67-TanHai/vi/5-workshop/5.5-layer2-costmeter/> |
+| 4 | - Test xong end to end, so code đang deploy với template và đăng review <br>- Soạn file tổng hợp .md của nhóm và file kiến trúc .xml cho FCAJ Submission | 25/11/2026 | 25/11/2026 | <https://tanhai2105.github.io/AwsAILearner67-TanHai/vi/5-workshop/5.5-layer2-costmeter/> <br> <https://hcm-rules.awsfcaj.com/instructions/fcaj-submission> |
+| 5 | - Viết các phần cá nhân: sự kiện, tự đánh giá, nhận xét góp ý | 26/11/2026 | 26/11/2026 | <https://hcm-rules.awsfcaj.com/project/content> |
+| 6 | - Kiểm tra lần cuối toàn bộ website <br>- Viết lại worklog theo góp ý của trưởng nhóm để phần cá nhân không trùng với các bạn | 27/11/2026 | 27/11/2026 | <https://hcm-rules.awsfcaj.com/project/content> |
 
 
 ### Kết quả đạt được tuần 11:
