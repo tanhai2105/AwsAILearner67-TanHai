@@ -19,7 +19,3 @@ A case study of how a university Microsoft platform was modernized to a cloud-na
 ### [Blog 3 - Cost Guard: Three Serverless Layers That Stop a Windows Instance to Protect AWS Free Plan Credit](3.3-Blog3/)
 
 My own post about my team's project: a scheduled stop, a 5-minute cost meter and an AWS Budgets backstop, with real test results and the monthly cost.
-
-### [Blog 4 - Amazon EventBridge Scheduler: Run Tasks on a Schedule on AWS Without a Server](3.4-Blog4/)
-
-A study summary of Amazon EventBridge Scheduler: rate, cron and one-time schedules, time zones and daylight saving time, flexible time windows, retries, execution roles and quotas.

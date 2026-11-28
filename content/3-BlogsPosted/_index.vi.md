@@ -19,7 +19,3 @@ Ví dụ thực tế về việc hiện đại hóa nền tảng Microsoft của
 ### [Blog 3 - Cost Guard: 3 lớp serverless tự tắt máy Windows để giữ credit AWS Free Plan](3.3-Blog3/)
 
 Bài mình tự viết về dự án của nhóm: tắt máy theo lịch, đồng hồ đo tiền 5 phút một lần và lưới an toàn AWS Budgets, kèm kết quả test thật và chi phí mỗi tháng.
-
-### [Blog 4 - Amazon EventBridge Scheduler: lên lịch chạy tác vụ trên AWS mà không cần server](3.4-Blog4/)
-
-Tóm tắt tìm hiểu Amazon EventBridge Scheduler: lịch rate, cron và one-time, múi giờ và giờ mùa hè, flexible time window, retry, execution role và hạn mức.
