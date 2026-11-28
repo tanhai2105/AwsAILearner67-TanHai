@@ -8,6 +8,18 @@ pre: " <b> 5. </b> "
 
 # Cost Guard: Bảo vệ credit máy lab Windows trên AWS bằng ba lớp serverless
 
+#### Nhóm thực hiện
+
+**Tên nhóm:** AwsAILearner67
+
+Các thành viên đã tham gia dự án:
+
+| Họ và tên | MSSV | Email |
+| --- | --- | --- |
+| Nguyễn Đức Bình | SE182383 | binhndse182383@fpt.edu.vn |
+| Lại Nguyễn Tấn Hải | SE193209 | tanhai21052005@gmail.com |
+| Phạm Đức Anh | SE204216 | ducanhp8082001@gmail.com |
+
 #### Tổng quan
 
 Máy Windows EC2 tính tiền theo giờ. Chỉ cần quên tắt một máy là ngân sách credit nhỏ có thể cạn sau vài ngày. Ví dụ, máy t3.small chạy liên tục 24/7 tốn khoảng $31.04 mỗi tháng, vượt ngân sách credit $20 của dự án. AWS Budgets cảnh báo được chi phí, nhưng dữ liệu hóa đơn cập nhật trễ nên tự nó không dừng máy kịp.

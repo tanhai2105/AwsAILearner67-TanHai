@@ -209,17 +209,6 @@ aws ec2 describe-addresses --query "length(Addresses)"
 
 ![CloudShell: every count is 0](../../images/5-Workshop/5.8-cleanup/116-check-cloudshell-final-sweep.png)
 
-### Step 6 – Compare the cost
+### Workshop demo video
 
-Billing data arrives with a delay, so wait one or two days.
-
-1. Open **Billing and Cost Management → Cost Explorer**.
-2. Choose the days of the workshop, group by **Service**, and compare the real EC2, EBS and other costs with the estimate in 5.7.
-3. Check that the total is under the $20 budget.
-
-An IAM user sees Cost Explorer only if the account owner has turned on IAM access to billing; otherwise ask the owner to check.
-
-### If a deletion fails
-
-- **The stack stays in `DELETE_FAILED`:** open the **Events** tab, find the resource that failed, delete it by hand in its console, then delete the stack again.
-- **A resource is left after the stack is gone:** delete it by hand. Resources of this workshop carry the tag `Project=CostGuard` where tags are supported.
+Link to the workshop demo clip: <https://drive.google.com/file/d/1NrNFPlScetGuT9zNIzrrsFm-SImVmhyQ/view?usp=sharing>

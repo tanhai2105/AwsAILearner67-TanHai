@@ -209,17 +209,6 @@ aws ec2 describe-addresses --query "length(Addresses)"
 
 ![CloudShell: mọi dòng đều bằng 0](../../../images/5-Workshop/5.8-cleanup/116-check-cloudshell-final-sweep.png)
 
-### Bước 6 – So sánh chi phí
+### Video demo workshop
 
-Dữ liệu billing đến chậm, nên hãy chờ một hoặc hai ngày.
-
-1. Mở **Billing and Cost Management → Cost Explorer**.
-2. Chọn các ngày làm workshop, nhóm theo **Service**, và so chi phí thật của EC2, EBS và các dịch vụ khác với dự toán ở 5.7.
-3. Kiểm tra tổng nằm dưới ngân sách $20.
-
-IAM user chỉ xem được Cost Explorer khi chủ tài khoản đã bật quyền IAM truy cập billing; nếu chưa thì nhờ chủ tài khoản kiểm tra.
-
-### Nếu việc xóa bị lỗi
-
-- **Stack kẹt ở `DELETE_FAILED`:** mở tab **Events**, tìm tài nguyên bị lỗi, xóa tay trong console của nó, rồi xóa stack lại.
-- **Còn tài nguyên sau khi stack đã mất:** xóa tay. Tài nguyên của workshop có tag `Project=CostGuard` ở những loại hỗ trợ tag.
+Link clip demo bài workshop: <https://drive.google.com/file/d/1NrNFPlScetGuT9zNIzrrsFm-SImVmhyQ/view?usp=sharing>

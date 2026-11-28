@@ -8,6 +8,18 @@ pre: " <b> 5. </b> "
 
 # Cost Guard: Protecting Windows Lab Credits on AWS with Three Serverless Layers
 
+#### Team
+
+**Team name:** AwsAILearner67
+
+Members who took part in the project:
+
+| Name | Student ID | Email |
+| --- | --- | --- |
+| Nguyễn Đức Bình | SE182383 | binhndse182383@fpt.edu.vn |
+| Lại Nguyễn Tấn Hải | SE193209 | tanhai21052005@gmail.com |
+| Phạm Đức Anh | SE204216 | ducanhp8082001@gmail.com |
+
 #### Overview
 
 A Windows EC2 instance is billed by the hour. A forgotten machine can use up a small credit budget in days: a t3.small left running 24/7 costs about $31.04 per month, more than the $20 credit budget of this project. AWS Budgets can warn about cost, but its billing data is delayed, so it cannot stop the machine in time on its own.
